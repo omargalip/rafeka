@@ -1,0 +1,296 @@
+<!doctype html><html><head><meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover"><style>:root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#fff;color:#000}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}</style></head><body>
+<title>ستايلات التصميم البصري</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Alexandria:wght@400;700;900&family=Readex+Pro:wght@300;400;600&family=Playfair+Display:wght@700&family=JetBrains+Mono:wght@400&display=swap">
+<style>
+/* Layout: هوية رافقة، أسود وأحمر. فهرس سريع بالأعلى، وبعدين كل ستايل بقسم كامل: عيّنة بصرية، شو هو، ليش، إيمتى، إيمتى لأ، المكوّنات، والبرومبت مع زر نسخ */
+:root{
+  --bg:#0A0909; --panel:#141212; --panel2:#1C1918; --ink:#F4EFEC; --muted:#A39894; --line:#2C2725; --red:#E00000; --red-soft:#FF4B3E;
+  --display:"Expo Arabic","Alexandria",Tahoma,sans-serif;
+  --body:"Readex Pro","Expo Arabic",Tahoma,"Segoe UI",sans-serif;
+  --mono:"JetBrains Mono",ui-monospace,Menlo,Consolas,monospace;
+  color-scheme:dark;
+}
+*{box-sizing:border-box}
+body{background:var(--bg);color:var(--ink);font-family:var(--body);font-size:16px;line-height:1.85;direction:rtl}
+a{color:inherit}
+.wrap{max-width:1080px;margin:0 auto;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+
+/* hero */
+.hero{padding-block:40px 36px;border-bottom:1px solid var(--line)}
+.brand{display:flex;align-items:center;gap:10px;color:var(--muted);font-size:14px;letter-spacing:.02em}
+.mark{font-family:var(--display);font-weight:900;color:var(--red);font-size:22px;letter-spacing:-.02em;direction:ltr}
+h1{font-family:var(--display);font-weight:900;font-size:clamp(34px,7.5vw,68px);line-height:1.15;margin:18px 0 14px;text-wrap:balance}
+h1 em{font-style:normal;color:var(--red)}
+.lede{color:var(--muted);max-width:62ch;margin:0;font-size:17px}
+.tip{margin-top:22px;display:flex;gap:12px;align-items:flex-start;background:var(--panel);border:1px solid var(--line);border-radius:10px;padding:14px 16px;max-width:760px}
+.tip b{color:var(--red-soft);white-space:nowrap}
+.tip p{margin:0;font-size:15px;color:var(--ink)}
+
+/* index */
+.index{display:grid;grid-template-columns:repeat(auto-fill,minmax(160px,1fr));gap:10px;padding-block:28px}
+.index a{display:flex;gap:10px;align-items:baseline;text-decoration:none;padding:12px 14px;border:1px solid var(--line);border-radius:10px;background:var(--panel);transition:border-color .2s}
+.index a:hover,.index a:focus-visible{border-color:var(--red);outline:none}
+.index span{font-family:var(--display);font-weight:900;color:var(--red);font-size:18px}
+.index small{font-size:14px;line-height:1.4}
+
+/* style section */
+.style{padding-block:44px;border-top:1px solid var(--line);scroll-margin-top:10px}
+.head{display:flex;align-items:flex-end;gap:16px;flex-wrap:wrap;margin-bottom:22px}
+.num{font-family:var(--display);font-weight:900;font-size:clamp(56px,10vw,96px);line-height:.85;color:var(--red)}
+.head h2{font-family:var(--display);font-weight:900;font-size:clamp(26px,4.6vw,40px);margin:0;line-height:1.2}
+.head .en{display:block;font-family:var(--mono);font-size:13px;color:var(--muted);direction:ltr;text-align:right;letter-spacing:.04em;font-weight:400}
+.oneliner{font-size:19px;margin:0 0 26px;max-width:60ch}
+
+.body{display:grid;grid-template-columns:260px 1fr;gap:28px;align-items:start}
+@media (max-width:760px){.body{grid-template-columns:1fr}.sample{max-width:280px}}
+.sample{aspect-ratio:3/4;max-width:100%;border-radius:12px;overflow:hidden;position:relative;border:1px solid var(--line)}
+.sample{aspect-ratio:auto;align-self:start}
+.sample img{display:block;width:100%;height:auto}
+.body{grid-template-columns:300px 1fr}
+@media (max-width:760px){.body{grid-template-columns:1fr}.sample{max-width:340px}}
+.sample figcaption{position:absolute;inset:auto 0 0 0;padding:6px 10px;font-size:11px;color:var(--muted);background:linear-gradient(transparent,rgba(0,0,0,.7))}
+.info{display:grid;gap:18px;min-width:0}
+.blocks{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+@media (max-width:560px){.blocks{grid-template-columns:1fr}}
+.blk{background:var(--panel);border:1px solid var(--line);border-radius:10px;padding:14px 16px;min-width:0}
+.blk h3{margin:0 0 6px;font-size:13px;letter-spacing:.06em;color:var(--red-soft);font-weight:600}
+.blk p,.blk ul{margin:0;font-size:15px}
+.blk ul{padding-inline-start:18px}
+.blk li+li{margin-top:4px}
+.blk.wide{grid-column:1/-1}
+.blk.no h3{color:var(--muted)}
+.examples{display:flex;flex-wrap:wrap;gap:8px;margin:0;padding:0;list-style:none}
+.examples li{font-size:13px;padding:3px 10px;border:1px solid var(--line);border-radius:999px;color:var(--muted)}
+
+.prompt{background:var(--panel2);border:1px solid var(--line);border-radius:10px;overflow:hidden}
+.ptop{display:flex;justify-content:space-between;align-items:center;gap:10px;padding:8px 10px 8px 14px;border-bottom:1px solid var(--line)}
+.ptop span{font-size:13px;color:var(--muted)}
+.copy{font-family:var(--body);font-size:14px;font-weight:600;background:var(--red);color:#fff;border:0;border-radius:7px;padding:6px 14px;cursor:pointer}
+.copy:focus-visible{outline:2px solid var(--ink);outline-offset:2px}
+.copy.done{background:#2E7D4F}
+pre{margin:0;padding:14px 16px;direction:ltr;text-align:left;font-family:var(--mono);font-size:13px;line-height:1.7;white-space:pre-wrap;word-break:break-word;color:#E9E1DD}
+pre mark{background:rgba(224,0,0,.22);color:#FFB3AC;border-radius:3px;padding:0 2px}
+.var{font-size:14px;color:var(--muted);margin:0}
+
+/* samples */
+.s1{background:#1a1716;display:grid;grid-template-rows:auto 1fr auto;padding:14px}
+.s1 .mast{font-family:"Playfair Display",Georgia,serif;font-size:40px;text-align:center;letter-spacing:.04em;direction:ltr;line-height:1}
+.s1 .por{margin:10px auto 0;width:62%;border-radius:50% 50% 0 0;background:radial-gradient(circle at 40% 30%,#4a403c,#141111 70%)}
+.s1 .lines{display:grid;gap:5px;direction:ltr}
+.s1 .lines i{display:block;height:3px;background:#5a504c;width:40%}
+.s1 .lines i:first-child{background:var(--red);width:28%}
+.s2{background:#000;display:grid;place-items:center;overflow:hidden}
+.s2 b{font-family:var(--display);font-weight:900;font-size:150px;color:var(--red);line-height:1;transform:rotate(-8deg);white-space:nowrap}
+.s2::after{content:"";position:absolute;inset:0;background-image:linear-gradient(rgba(255,255,255,.08) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.08) 1px,transparent 1px);background-size:33.3% 25%}
+.s3{background:#F4EDE8;display:grid;grid-template-rows:repeat(5,1fr)}
+.s3 i:nth-child(1){background:#FFD9D4}.s3 i:nth-child(2){background:#FF8F84}.s3 i:nth-child(3){background:#E00000}.s3 i:nth-child(4){background:#8F0000}.s3 i:nth-child(5){background:#3D0000}
+.s4{background:#0b0a0a;perspective:220px;overflow:hidden}
+.s4 .floor{position:absolute;inset:40% -60% -20%;background-image:linear-gradient(var(--red) 1px,transparent 1px),linear-gradient(90deg,var(--red) 1px,transparent 1px);background-size:28px 28px;transform:rotateX(62deg);opacity:.7}
+.s4 .eye{position:absolute;top:18%;left:50%;width:14px;height:14px;margin-left:-7px;border-radius:50%;background:#fff;box-shadow:0 0 30px 8px rgba(255,255,255,.35)}
+.s5{background:linear-gradient(#F6C9C2 0%,#F3E2DA 55%,#9FB4C4 56%,#D8E1E8 100%)}
+.s5 .moon{position:absolute;top:16%;right:22%;width:70px;height:70px;border-radius:50%;background:var(--red)}
+.s5 .stair{position:absolute;left:30%;bottom:44%;width:40px;height:120px;background:repeating-linear-gradient(0deg,#1a1716 0 6px,transparent 6px 14px);transform:skewX(-12deg)}
+.s5 .door{position:absolute;left:58%;bottom:44%;width:26px;height:44px;border:3px solid #1a1716;border-bottom:0;border-radius:13px 13px 0 0}
+.s6{background:#F5F1EE}
+.s6 i{position:absolute;left:50%;top:58%;width:6px;height:60px;margin-left:-3px;background:var(--red);border-radius:3px}
+.s6 i::after{content:"";position:absolute;top:60px;left:3px;width:90px;height:6px;background:linear-gradient(90deg,rgba(0,0,0,.18),transparent);border-radius:3px}
+
+.compare{padding-block:44px;border-top:1px solid var(--line)}
+.compare h2{font-family:var(--display);font-weight:900;font-size:clamp(24px,4vw,34px);margin:0 0 16px}
+.tbl{overflow-x:auto;border:1px solid var(--line);border-radius:10px}
+table{border-collapse:collapse;width:100%;min-width:620px;font-size:15px}
+th,td{padding:11px 14px;text-align:right;border-bottom:1px solid var(--line);vertical-align:top}
+th{background:var(--panel);font-weight:600;color:var(--muted);font-size:13px}
+td:first-child{font-weight:600;white-space:nowrap}
+tr:last-child td{border-bottom:0}
+
+footer{border-top:1px solid var(--line);padding-block:28px 48px;color:var(--muted);font-size:14px;display:flex;justify-content:space-between;gap:14px;flex-wrap:wrap}
+footer .mark{font-size:18px}
+@media (prefers-reduced-motion:reduce){*{transition:none!important}}
+</style>
+
+<header class="hero"><div class="wrap">
+  <div class="brand"><span class="mark">ƎK</span><span>رافقة · عمر غالب</span></div>
+  <h1>لا تصمّم قبل ما <em>تختار الأسلوب</em></h1>
+  <p class="lede">6 أساليب بصرية بيستخدمها المصممين المحترفين. لكل أسلوب رح تعرف شو هو، ليش منستخدمه، إيمتى بينفع وإيمتى لأ، وشو مكوّناته، ومعه برومبت جاهز تنسخه وتجرّبه على ChatGPT أو Nano Banana أو Midjourney أو Higgsfield.</p>
+  <div class="tip"><b>طريقة الاستخدام</b><p>انسخ البرومبت وغيّر الكلام المعلّم بالأحمر حسب موضوعك ولون هويتك. البرومبتات بالإنجليزي لأن أدوات التوليد بتفهمها أدق. ولّد الصورة بدون كتابة، وحط العنوان العربي بنفسك بالفونت تبعك.</p></div>
+</div></header>
+
+<nav class="wrap index" aria-label="الأساليب">
+  <a href="#editorial"><span>1</span><small>التصميم التحريري</small></a>
+  <a href="#typography"><span>2</span><small>التايبوغرافي الجريء</small></a>
+  <a href="#mono"><span>3</span><small>المونوكروم</small></a>
+  <a href="#perspective"><span>4</span><small>المنظور وزاوية الرؤية</small></a>
+  <a href="#surreal"><span>5</span><small>السريالية الحلمية</small></a>
+  <a href="#minimal"><span>6</span><small>المينيمال</small></a>
+</nav>
+
+<main class="wrap">
+
+<!-- 1 -->
+<section class="style" id="editorial">
+  <div class="head"><span class="num">1</span><h2>التصميم التحريري<span class="en">EDITORIAL DESIGN</span></h2></div>
+  <p class="oneliner">تصميم بيشبه غلاف مجلة فخمة. صورة قوية، عنوان كبير، وترتيب واضح للمعلومات.</p>
+  <div class="body">
+    <figure class="sample"><img src="s1.jpg" alt="غلاف مجلة RAFEKA بالأسلوب التحريري"></figure>
+    <div class="info">
+      <div class="blocks">
+        <div class="blk"><h3>شو هو؟</h3><p>أسلوب جاي من عالم المجلات متل Vogue وGQ. بيعتمد على صورة شخص أو منتج بإضاءة استوديو، فوقها اسم كبير بخط سيريف أنيق، وحواليها عناوين صغيرة مرتبة بتسلسل واضح.</p></div>
+        <div class="blk"><h3>ليش منستخدمه؟</h3><p>لأن العين بتربطه فوراً بالاحتراف والفخامة. أي علامة بتطلع بهالأسلوب بتبيّن أكبر وأغلى وأوثق من حجمها الحقيقي.</p></div>
+        <div class="blk"><h3>إيمتى بينفع؟</h3><ul><li>البراند الشخصي والبورتريه</li><li>إعلان أزياء، تجميل، عطور، ساعات</li><li>مقابلة أو قصة نجاح شخص</li><li>غلاف كتاب، كورس، أو بودكاست</li></ul></div>
+        <div class="blk no"><h3>إيمتى لأ؟</h3><ul><li>عروض الأسعار والتخفيضات السريعة</li><li>محتوى للأطفال أو مرح وعفوي</li><li>لما ما عندك صورة قوية، لأن الأسلوب كله قايم عالصورة</li></ul></div>
+        <div class="blk wide"><h3>مكوّنات الأسلوب</h3><ul class="examples"><li>خط سيريف كبير للعنوان</li><li>إضاءة رامبرانت ناعمة</li><li>هرمية واضحة</li><li>مساحات فاضية كريمة</li><li>لون أكسنت واحد</li><li>عدسة 85mm</li></ul></div>
+      </div>
+      <div class="prompt">
+        <div class="ptop"><span>البرومبت</span><button class="copy" type="button">نسخ</button></div>
+<pre>Magazine cover style portrait, 3:4. <mark>[Subject: a confident professional man in a black turtleneck]</mark> photographed in a dark studio, soft Rembrandt lighting, sharp focus, premium editorial look like Vogue or GQ. Large elegant serif masthead at the top reading "<mark>[BRAND NAME]</mark>", small cover lines on the left, clear visual hierarchy, generous negative space, subtle <mark>[red]</mark> accent. High-end fashion magazine photography, 85mm lens.</pre>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 2 -->
+<section class="style" id="typography">
+  <div class="head"><span class="num">2</span><h2>التايبوغرافي الجريء<span class="en">BOLD TYPOGRAPHY</span></h2></div>
+  <p class="oneliner">الحرف هو البطل. كلمة وحدة ضخمة بتعبّي التصميم وبتقود كل شي حواليها.</p>
+  <div class="body">
+    <figure class="sample"><img src="s2.jpg" alt="كلمة صمّم ضخمة بالأحمر حوالين بورتريه"></figure>
+    <div class="info">
+      <div class="blocks">
+        <div class="blk"><h3>شو هو؟</h3><p>تصميم بيكبّر الكلمة لدرجة إنها تصير هي الصورة. حروف عريضة وثقيلة، أحياناً مقصوصة عأطراف الإطار، والصورة بتدخل بين الحروف أو بتتداخل معها. متأثر بالتصميم السويسري وبحملات متل Spotify Wrapped.</p></div>
+        <div class="blk"><h3>ليش منستخدمه؟</h3><p>لأنه بيوقّف السكرول. بأقل من ثانية بتوصل الرسالة حتى لو الشخص ما قرأ شي غير الكلمة الكبيرة. ممتاز لما بدك تثبّت كلمة أو شعار بذاكرة الناس.</p></div>
+        <div class="blk"><h3>إيمتى بينفع؟</h3><ul><li>رسالة وحدة قوية: «خصم»، «جديد»، «صمّم»</li><li>إطلاق منتج أو حدث</li><li>اقتباس أو شعار للبراند</li><li>بوست تحفيزي أو رأي جريء</li></ul></div>
+        <div class="blk no"><h3>إيمتى لأ؟</h3><ul><li>لما عندك معلومات كتير لازم تنقرا</li><li>براند هادي وناعم (سبا، زفاف)</li><li>لما الخط ضعيف، لأن الأسلوب بيفضح أي خط عادي</li></ul></div>
+        <div class="blk wide"><h3>مكوّنات الأسلوب</h3><ul class="examples"><li>كلمة وحدة ضخمة</li><li>خط ثقيل جداً</li><li>قص الحروف عالحواف</li><li>تباين عالي</li><li>شبكة خطوط رفيعة</li><li>صورة أبيض وأسود بين الحروف</li></ul></div>
+      </div>
+      <div class="prompt">
+        <div class="ptop"><span>البرومبت</span><button class="copy" type="button">نسخ</button></div>
+<pre>Bold typographic social media poster, 3:4, pure black background. One giant word "<mark>[صمّم]</mark>" in massive heavy Arabic letters filling the whole frame in <mark>[bright red #E00000]</mark>, cropped at the edges. A black and white portrait of <mark>[a bearded man]</mark> placed between the letters, partly overlapping them. Thin white grid lines, small clean labels in the corners, Swiss design layout, high contrast, Spotify Wrapped energy.</pre>
+      </div>
+      <p class="var">ملاحظة: أدوات التوليد لسا بتغلط بالحروف العربية أحياناً. إذا طلعت الكلمة غلط، ولّد الخلفية والصورة بدون كلمة وحط الكلمة بنفسك بالفوتوشوب.</p>
+    </div>
+  </div>
+</section>
+
+<!-- 3 -->
+<section class="style" id="mono">
+  <div class="head"><span class="num">3</span><h2>المونوكروم<span class="en">MONOCHROMATIC COLOR SCHEME</span></h2></div>
+  <p class="oneliner">لون واحد بس، بكل درجاته من الفاتح للغامق. انسجام كامل بدون أي تشتيت.</p>
+  <div class="body">
+    <figure class="sample"><img src="s3.jpg" alt="بوستر بلون أحمر واحد بدرجاته"></figure>
+    <div class="info">
+      <div class="blocks">
+        <div class="blk"><h3>شو هو؟</h3><p>اختيار لون واحد وبناء التصميم كله من درجاته: فاتح للخلفية، متوسط للعناصر، غامق للظلال والتفاصيل. بيشبه الطباعة بالحرير (Screen Print) والريزوغراف، ومتأثر بأعمال Saul Bass.</p></div>
+        <div class="blk"><h3>ليش منستخدمه؟</h3><p>لأنه بيربط التصميم بلون البراند مباشرة، فالناس بتعرف إنه إلك قبل ما تشوف اللوغو. وكمان بيخلي التصميم مرتب وهادي حتى لو فيه عناصر كتير.</p></div>
+        <div class="blk"><h3>إيمتى بينفع؟</h3><ul><li>تثبيت هوية لونية للبراند</li><li>سلسلة بوستات متناسقة عالإنستغرام</li><li>بوسترات فنية ورسوم مسطحة</li><li>لما بدك جو معيّن: أزرق هادي، أحمر حماس</li></ul></div>
+        <div class="blk no"><h3>إيمتى لأ؟</h3><ul><li>منتجات ألوانها هي نقطة البيع (طعام، ورود)</li><li>محتوى أطفال بيحتاج ألوان مفرحة</li><li>لما بدك عنصر واحد يبرز بقوة عن الباقي</li></ul></div>
+        <div class="blk wide"><h3>مكوّنات الأسلوب</h3><ul class="examples"><li>لون واحد بدرجاته</li><li>ورق فاتح دافي</li><li>رسم فيكتور مسطح</li><li>حبيبات ريزوغراف</li><li>نقاط هافتون بالظلال</li><li>مساحة فاضية للعنوان</li></ul></div>
+      </div>
+      <div class="prompt">
+        <div class="ptop"><span>البرومبت</span><button class="copy" type="button">نسخ</button></div>
+<pre>Flat 2D one-color screen-print poster illustration, single <mark>[red #E00000]</mark> ink on warm off-white paper, no other colors. <mark>[A stylised hand holding a digital stylus, drawing a giant bezier curve with anchor points that flows into simple shapes: a circle, a triangle, a sparkle star.]</mark> Bold Swiss-style vector art inspired by Saul Bass, subtle risograph grain, halftone dots in the shadows, lots of negative space. Top third left empty for a headline. No text.</pre>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 4 -->
+<section class="style" id="perspective">
+  <div class="head"><span class="num">4</span><h2>المنظور وزاوية الرؤية<span class="en">PERSPECTIVE &amp; VIEWPOINT</span></h2></div>
+  <p class="oneliner">نفس الموضوع، بس من زاوية ما حدا بيشوفه منها. الزاوية الغريبة بتخلّي العادي مدهش.</p>
+  <div class="body">
+    <figure class="sample"><img src="s4.jpg" alt="يد بترسم خطوط حمرا من زاوية غير مألوفة"></figure>
+    <div class="info">
+      <div class="blocks">
+        <div class="blk"><h3>شو هو؟</h3><p>اللعب بمكان الكاميرا: من تحت لفوق، من فوق لتحت، من ورا زجاج، بعدسة عين السمكة، أو بزاوية مايلة. الموضوع نفسه ما بيتغير، بس طريقة شوفه بتتغير كلياً.</p></div>
+        <div class="blk"><h3>ليش منستخدمه؟</h3><p>العين متعودة تشوف الأشياء من مستوى النظر. أي زاوية غير متوقعة بتعمل مفاجأة وفضول، وبتخلي موضوع ممل (لابتوب، قلم، فنجان قهوة) يصير ملفت.</p></div>
+        <div class="blk"><h3>إيمتى بينفع؟</h3><ul><li>تصوير منتجات عادية بطريقة جديدة</li><li>إظهار القوة والضخامة (من تحت)</li><li>شرح أدوات أو مساحة شغل (من فوق)</li><li>محتوى تقني أو إبداعي بدك يبيّن مختلف</li></ul></div>
+        <div class="blk no"><h3>إيمتى لأ؟</h3><ul><li>لما لازم المنتج يبيّن بتفاصيله الحقيقية للبيع</li><li>صور رسمية أو هويات</li><li>لما الزاوية بتشوّه الوجه أو بتخفي الرسالة</li></ul></div>
+        <div class="blk wide"><h3>زوايا جرّبها</h3><ul class="examples"><li>Worm's-eye view (من تحت)</li><li>Bird's-eye / Top-down (من فوق)</li><li>Fisheye lens</li><li>Dutch angle (مايلة)</li><li>Through glass (من ورا زجاج)</li><li>POV (من عين الشخص)</li></ul></div>
+      </div>
+      <div class="prompt">
+        <div class="ptop"><span>البرومبت</span><button class="copy" type="button">نسخ</button></div>
+<pre>Extreme unusual camera angle: shot from directly underneath a transparent glass <mark>[drawing tablet]</mark>, looking straight up through the glass. <mark>[A designer's hand presses a stylus onto the glass right above the lens; glowing red vector lines and anchor points are drawn on the glass.]</mark> Dark ceiling with one warm light behind, cinematic lighting, black and <mark>[red]</mark> palette, shallow depth of field. Bottom 30% dark and empty for a headline. No text.</pre>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 5 -->
+<section class="style" id="surreal">
+  <div class="head"><span class="num">5</span><h2>السريالية الحلمية<span class="en">DREAMLIKE SURREALISM</span></h2></div>
+  <p class="oneliner">مشهد مستحيل بس بيبيّن حقيقي تماماً. كأنك شايفه بحلم.</p>
+  <div class="body">
+    <figure class="sample"><img src="s5.jpg" alt="درج أحمر طالع من البحر للغيوم"></figure>
+    <div class="info">
+      <div class="blocks">
+        <div class="blk"><h3>شو هو؟</h3><p>أسلوب جاي من لوحات René Magritte وحملات علامات متل Jacquemus. منحط شي مألوف بمكان أو حجم مستحيل: درج طالع من البحر، باب بنص الصحرا، قلم بحجم عمارة. بس كل شي مصوّر بواقعية وإضاءة ناعمة.</p></div>
+        <div class="blk"><h3>ليش منستخدمه؟</h3><p>لأنه بيخلّي الشخص يوقف ويفكر «شو هاد؟». بيحوّل فكرة مجردة (طموح، حرية، إبداع) لصورة بتنحفر بالذاكرة، وبيعطي البراند طابع فني وراقي.</p></div>
+        <div class="blk"><h3>إيمتى بينفع؟</h3><ul><li>التعبير عن فكرة أو شعور مجرّد</li><li>حملات إعلانية فنية أو إطلاق كبير</li><li>براندات أزياء، عطور، فن</li><li>أغلفة ألبومات وبوسترات أفلام</li></ul></div>
+        <div class="blk no"><h3>إيمتى لأ؟</h3><ul><li>رسائل مباشرة وعملية (سعر، عنوان، موعد)</li><li>جمهور بدو وضوح سريع بدون تفكير</li><li>لما الفكرة نفسها مش واضحة عندك</li></ul></div>
+        <div class="blk wide"><h3>السر</h3><p>خذ أداة من عالمك (قلم، سهم ماوس، كتالوج ألوان، كاميرا) وحطها بمكان أو حجم مستحيل. وخلي الإضاءة والانعكاسات واقعية جداً، لأن الواقعية هي اللي بتخلّي المستحيل مقنع.</p></div>
+      </div>
+      <div class="prompt">
+        <div class="ptop"><span>البرومبت</span><button class="copy" type="button">نسخ</button></div>
+<pre>Surreal fine-art advertising photograph in the style of René Magritte and Jacquemus campaigns: <mark>[a gigantic red colour swatch fan opens like a spiral staircase rising from a calm mirror-like sea into a soft pastel sky full of clouds]</mark>. A tiny lone figure climbs it, seen from behind. Dreamlike, serene, hyper-realistic, golden-hour light, perfect reflections, minimal composition. Bottom third calm and clear for a headline. No text.</pre>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 6 -->
+<section class="style" id="minimal">
+  <div class="head"><span class="num">6</span><h2>المينيمال<span class="en">MINIMALISM</span></h2></div>
+  <p class="oneliner">عنصر واحد، ومساحة فاضية كبيرة. كل شي زيادة انشال، وضل الأهم بس.</p>
+  <div class="body">
+    <figure class="sample"><img src="s6.jpg" alt="قلم أحمر واحد بمساحة فاضية"></figure>
+    <div class="info">
+      <div class="blocks">
+        <div class="blk"><h3>شو هو؟</h3><p>تصميم قايم على الحذف. عنصر واحد صغير بنص مساحة فاضية، خلفية ناعمة، ضل خفيف، وإضاءة هادية. متل إعلانات Apple. المساحة الفاضية هون مش فراغ، هي جزء من التصميم وبتحكي.</p></div>
+        <div class="blk"><h3>ليش منستخدمه؟</h3><p>لأنه بيعطي إحساس بالثقة والفخامة. البراند اللي ما بيحتاج يصرخ يعني واثق من حاله. وكمان الرسالة بتوصل بوضوح تام لأنه ما في شي يشتت العين.</p></div>
+        <div class="blk"><h3>إيمتى بينفع؟</h3><ul><li>منتجات فخمة وتقنية</li><li>إطلاق منتج واحد</li><li>براند بدك يبيّن راقي وهادي</li><li>بوست بين بوستات مزدحمة ليكسر الإيقاع</li></ul></div>
+        <div class="blk no"><h3>إيمتى لأ؟</h3><ul><li>عروض وتخفيضات فيها تفاصيل كتير</li><li>محتوى تعليمي بيحتاج شرح</li><li>جمهور بيحب الحماس والألوان الكتيرة</li></ul></div>
+        <div class="blk wide"><h3>مكوّنات الأسلوب</h3><ul class="examples"><li>عنصر واحد بس</li><li>مساحة سلبية ضخمة</li><li>خلفية سادة ناعمة</li><li>ضل واحد طويل</li><li>إضاءة منتشرة هادية</li><li>بدون كتابة ولا لوغو</li></ul></div>
+      </div>
+      <div class="prompt">
+        <div class="ptop"><span>البرومبت</span><button class="copy" type="button">نسخ</button></div>
+<pre>Ultra minimal premium product photograph in the style of Apple minimalist ads: <mark>[a single glossy red digital stylus pen balancing upright on its tip]</mark> on a seamless warm off-white surface. One soft long shadow. Huge empty negative space, subject small and centered slightly below the middle. Soft diffused studio light, calm and luxurious. No text, no logos.</pre>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="compare">
+  <h2>أي أسلوب بختار؟</h2>
+  <div class="tbl"><table>
+    <thead><tr><th>الأسلوب</th><th>إذا هدفك</th><th>الإحساس</th><th>أكتر مجال بينفع فيه</th></tr></thead>
+    <tbody>
+      <tr><td>التحريري</td><td>تبيّن محترف وفخم</td><td>ثقة، أناقة</td><td>براند شخصي، أزياء، كورسات</td></tr>
+      <tr><td>التايبوغرافي</td><td>توقّف السكرول برسالة وحدة</td><td>قوة، جرأة</td><td>إطلاقات، شعارات، عروض</td></tr>
+      <tr><td>المونوكروم</td><td>تثبّت لون هويتك</td><td>انسجام، هدوء</td><td>سلاسل بوستات، بوسترات فنية</td></tr>
+      <tr><td>المنظور</td><td>تخلّي العادي ملفت</td><td>فضول، مفاجأة</td><td>منتجات يومية، محتوى تقني</td></tr>
+      <tr><td>السريالية</td><td>تعبّر عن فكرة مجردة</td><td>دهشة، حلم</td><td>حملات فنية، عطور، فن</td></tr>
+      <tr><td>المينيمال</td><td>رسالة واضحة وراقية</td><td>فخامة، صفاء</td><td>تقنية، منتجات فاخرة</td></tr>
+    </tbody>
+  </table></div>
+</section>
+
+</main>
+
+<footer class="wrap"><span>عمر غالب · مصمم وفنان بصري</span><span class="mark">ƎK رافقة</span></footer>
+
+<script>
+document.querySelectorAll('.copy').forEach(function(btn){
+  btn.addEventListener('click',function(){
+    var pre=btn.closest('.prompt').querySelector('pre');
+    var text=pre.innerText;
+    function ok(){btn.textContent='تم النسخ ✓';btn.classList.add('done');setTimeout(function(){btn.textContent='نسخ';btn.classList.remove('done')},1800)}
+    function fallback(){var r=document.createRange();r.selectNodeContents(pre);var s=getSelection();s.removeAllRanges();s.addRange(r);btn.textContent='انسخ النص المحدد'}
+    try{navigator.clipboard.writeText(text).then(ok,fallback)}catch(e){fallback()}
+  });
+});
+</script>
+
+</body></html>
