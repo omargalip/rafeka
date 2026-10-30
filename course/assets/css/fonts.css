@@ -1,0 +1,40 @@
+/* الخطوط محفوظة جوا الموقع (بدون Google Fonts) لسرعة التحميل */
+@font-face {
+  font-family: "Camel";
+  src: url("../fonts/camel-xbold.woff2") format("woff2");
+  font-weight: 400 900;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Expo Arabic";
+  src: url("../fonts/expo-book.woff2") format("woff2");
+  font-weight: 100 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Expo Arabic";
+  src: url("../fonts/expo-medium.woff2") format("woff2");
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Expo Arabic";
+  src: url("../fonts/expo-semibold.woff2") format("woff2");
+  font-weight: 600;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Expo Arabic";
+  src: url("../fonts/expo-bold.woff2") format("woff2");
+  font-weight: 700 900;
+  font-style: normal;
+  font-display: swap;
+}
