@@ -1,0 +1,157 @@
+<!doctype html><html><head><meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover"><style>:root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#fff;color:#000}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}</style></head><body>
+<title>ملف ستايلات المونتاج</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Lalezar&family=IBM+Plex+Sans+Arabic:wght@400;500;700&family=Space+Mono:wght@700&display=swap">
+<style>
+/* Layout: a printed style catalogue — cut-paper header, then a grid of style "cards" like collage clippings, then the author page */
+:root{
+  --bg:#F6EEDF; --paper:#FFFBF2; --ink:#1E0E0D; --muted:#6B5A52; --red:#C0261D; --mustard:#E2A93B; --line:#E5D8C2; --chip:#F1E3C8;
+  --display:"Lalezar","IBM Plex Sans Arabic",system-ui,sans-serif;
+  --body:"IBM Plex Sans Arabic",system-ui,"Segoe UI",Tahoma,sans-serif;
+  --mono:"Space Mono",ui-monospace,Menlo,monospace;
+}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#171010;--paper:#221817;--ink:#F6EBDD;--muted:#B9A79C;--red:#F0473B;--mustard:#F0BC55;--line:#3A2B28;--chip:#33241F;color-scheme:dark}}
+:root[data-theme="dark"]{--bg:#171010;--paper:#221817;--ink:#F6EBDD;--muted:#B9A79C;--red:#F0473B;--mustard:#F0BC55;--line:#3A2B28;--chip:#33241F;color-scheme:dark}
+*{box-sizing:border-box}
+body{background:var(--bg);color:var(--ink);font-family:var(--body);font-size:17px;line-height:1.75;direction:rtl;padding-inline:16px;padding-block:0}
+.wrap{max-width:1080px;margin:0 auto}
+h1,h2,h3{font-family:var(--display);font-weight:400;line-height:1.15;text-wrap:balance;margin:0}
+a{color:var(--red)}
+/* header */
+.hero{padding-block:56px 28px;display:grid;grid-template-columns:1fr auto;gap:24px;align-items:end}
+.hero .kick{font-weight:700;color:var(--red);letter-spacing:.02em;font-size:15px}
+.hero h1{font-size:clamp(46px,9vw,96px);margin-top:6px}
+.hero h1 span{color:var(--red)}
+.hero p{max-width:58ch;color:var(--muted);margin:14px 0 0;font-size:18px}
+.hero img{width:min(260px,32vw);transform:rotate(-6deg);filter:drop-shadow(0 12px 14px rgba(0,0,0,.25))}
+.rule{margin-block:10px 34px;background:var(--red);color:#FFF3DA;border-radius:6px;padding:22px 24px;display:flex;flex-wrap:wrap;gap:10px 22px;align-items:center;transform:rotate(-.6deg)}
+.rule b{font-family:var(--display);font-weight:400;font-size:clamp(28px,5vw,42px);line-height:1.2}
+.rule span{opacity:.92;max-width:52ch}
+/* goal index */
+.goals h2{font-size:30px;margin-bottom:12px}
+.goal-list{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:10px;margin:0 0 44px;padding:0;list-style:none}
+.goal-list a{display:flex;justify-content:space-between;gap:12px;text-decoration:none;color:var(--ink);background:var(--paper);border:1px solid var(--line);border-radius:10px;padding:12px 16px;transition:border-color .15s}
+.goal-list a:hover,.goal-list a:focus-visible{border-color:var(--red);outline:none}
+.goal-list em{font-style:normal;color:var(--red);font-weight:700;white-space:nowrap}
+/* cards */
+.sec-title{display:flex;align-items:baseline;justify-content:space-between;gap:12px;flex-wrap:wrap;margin-bottom:18px}
+.sec-title h2{font-size:clamp(32px,5vw,48px)}
+.sec-title small{color:var(--muted)}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(310px,1fr));gap:22px}
+.card{background:var(--paper);border:1px solid var(--line);border-radius:14px;overflow:hidden;display:flex;flex-direction:column;min-width:0;scroll-margin-top:20px}
+.thumb{aspect-ratio:16/9;max-width:100%;background:var(--chip) center/cover;position:relative}
+.thumb .n{position:absolute;top:10px;right:10px;font-family:var(--mono);font-size:13px;background:var(--ink);color:var(--bg);padding:2px 8px;border-radius:4px}
+.thumb .star{position:absolute;bottom:10px;right:10px;font-size:13px;font-weight:700;background:var(--mustard);color:#1E0E0D;padding:2px 10px;border-radius:20px}
+.body{padding:18px 20px 20px;display:flex;flex-direction:column;gap:10px;flex:1}
+.body h3{font-size:30px;display:flex;flex-wrap:wrap;align-items:baseline;gap:4px 10px}
+.body h3 small{font-family:var(--mono);font-size:12px;color:var(--muted);direction:ltr;letter-spacing:.04em}
+.body p{margin:0}
+.for{display:flex;flex-wrap:wrap;gap:6px;margin:0;padding:0;list-style:none}
+.for li{background:var(--chip);border-radius:20px;padding:1px 12px;font-size:14px;font-weight:500}
+.prompt{margin-top:auto;border:1.5px dashed var(--line);border-radius:10px;padding:12px 14px;background:var(--bg)}
+.prompt .lbl{display:flex;justify-content:space-between;align-items:center;gap:8px;font-size:13px;color:var(--muted);font-weight:700}
+.prompt q{display:block;quotes:none;font-size:15px;margin-top:4px}
+.copy{font:700 13px var(--body);background:var(--ink);color:var(--bg);border:0;border-radius:6px;padding:4px 12px;cursor:pointer}
+.copy:focus-visible{outline:2px solid var(--red);outline-offset:2px}
+/* text-only swatches for styles without a still */
+.sw-impasto{background:radial-gradient(60% 80% at 30% 40%,#E9B44C 0 30%,transparent 31%),radial-gradient(50% 70% at 70% 60%,#2F5D8C 0 35%,transparent 36%),repeating-linear-gradient(120deg,#C0261D 0 18px,#A31F17 18px 30px,#E8C27A 30px 40px)}
+.sw-ink{background:radial-gradient(40% 30% at 70% 35%,rgba(20,20,20,.85),transparent 70%),radial-gradient(70% 25% at 30% 80%,rgba(20,20,20,.55),transparent 70%),#EFE9DC}
+.sw-iso{background:conic-gradient(from 30deg at 50% 55%,#6FB3A8 0 120deg,#F2C14E 0 240deg,#E2765A 0) ,#F6EEDF;background-size:120px 120px}
+.sw-data{background:linear-gradient(to top,#C0261D 0 70%,transparent 0) 12% 100%/9% 100% no-repeat,linear-gradient(to top,#E2A93B 0 45%,transparent 0) 32% 100%/9% 100% no-repeat,linear-gradient(to top,#1E0E0D 0 85%,transparent 0) 52% 100%/9% 100% no-repeat,linear-gradient(to top,#E2A93B 0 30%,transparent 0) 72% 100%/9% 100% no-repeat,linear-gradient(to top,#C0261D 0 55%,transparent 0) 92% 100%/9% 100% no-repeat,#FFF7E6}
+/* author */
+.author{margin-block:64px 40px;display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.1fr);gap:28px;align-items:center;background:var(--red);color:#FFF3DA;border-radius:18px;padding:28px;overflow:hidden}
+.author img{width:100%;max-width:420px;justify-self:center;filter:drop-shadow(0 18px 20px rgba(0,0,0,.35))}
+.author h2{font-size:clamp(40px,7vw,68px)}
+.author p{margin:8px 0 0;max-width:46ch}
+.handle{display:inline-flex;gap:10px;align-items:center;flex-wrap:wrap;margin-top:18px}
+.handle .tag{font-family:var(--mono);direction:ltr;background:#FFF3DA;color:#1E0E0D;padding:6px 14px;border-radius:8px;user-select:all}
+.handle a{color:#FFF3DA;font-weight:700}
+.handle .copy{background:#1E0E0D;color:#FFF3DA}
+footer{color:var(--muted);font-size:14px;padding-block:0 40px;text-align:center}
+@media (max-width:720px){.hero{grid-template-columns:1fr}.hero img{justify-self:start;width:180px}.author{grid-template-columns:1fr}}
+@media (prefers-reduced-motion:no-preference){.card{transition:transform .2s}.card:hover{transform:translateY(-3px)}}
+</style>
+
+<div class="wrap">
+  <header class="hero">
+    <div>
+      <div class="kick">من عمر غالب · @omarghalip</div>
+      <h1>ملف <span>ستايلات</span> المونتاج مع كلاود</h1>
+      <p>14 ستايل جاهز تقدر تطلبهم من كلاود. لكل ستايل: شو هو، لشو بينفع، وجملة جاهزة تنسخها وتعطيها لكلاود.</p>
+    </div>
+    <img src="img/clawd.png" alt="شخصية كلاود ماسكة فرشاة">
+  </header>
+
+  <div class="rule"><b>قبل ما تبلّش: لا تقول لكلاود «منتجلي فيديو»</b><span>اختار الستايل الصح حسب هدفك أول شي، وبعدين اطلب. الستايل هو اللي بيحدد إحساس الفيديو.</span></div>
+
+  <section class="goals" aria-labelledby="g">
+    <h2 id="g">شو هدفك؟</h2>
+    <ul class="goal-list">
+      <li><a href="#collage">وثائقي أو قصة أو رأي <em>كولاج بي رول</em></a></li>
+      <li><a href="#onetake">إعلان منتج أو تطبيق <em>ون تيك</em></a></li>
+      <li><a href="#clawd">محتوى قريب من القلب <em>كلاود أنيميشن</em></a></li>
+      <li><a href="#popup">قصص أطفال وألعاب <em>بيبر بوب أب</em></a></li>
+      <li><a href="#whiteboard">شرح وتعليم <em>وايت بورد</em></a></li>
+      <li><a href="#data">أرقام وتقارير <em>داتا ستوري</em></a></li>
+      <li><a href="#keynote">إطلاق تقني <em>دارك كينوت</em></a></li>
+      <li><a href="#impasto">منتج فاخر أو فن <em>إمباستو</em></a></li>
+    </ul>
+  </section>
+
+  <section aria-labelledby="st">
+    <div class="sec-title"><h2 id="st">الستايلات</h2><small>الأربعة الأولى هي يلي شرحتهم بالريل</small></div>
+    <div class="grid" id="grid"></div>
+  </section>
+
+  <section class="author" aria-labelledby="me">
+    <img src="img/omar.webp" alt="عمر غالب بستايل الكولاج ماسك فرشاة">
+    <div>
+      <h2 id="me">عمر غالب</h2>
+      <p>فنان تشكيلي ومصمم جرافيك ومدرّب ذكاء اصطناعي لصناعة المحتوى.</p>
+      <p>إذا فادك الملف، تابعني لتوصلك ستايلات وطرق جديدة لصناعة المحتوى بالذكاء الاصطناعي.</p>
+      <div class="handle">
+        <span class="tag" id="h">@omarghalip</span>
+        <button class="copy" id="copyH" type="button">انسخ</button>
+        <a href="https://www.instagram.com/omarghalip/" target="_blank" rel="noopener">افتح إنستغرام ←</a>
+      </div>
+    </div>
+  </section>
+  <footer>ملف مجاني من عمر غالب. شاركه مع صحابك.</footer>
+</div>
+
+<script>
+const S=[
+ {id:'collage',ar:'كولاج بي رول',en:'Collage B-roll',img:'s0',star:1,d:'قصاصات ورق وصور أبيض وأسود مقصوصة بأسلوب المجلات، والعناصر بتتركّب قدامك قطعة قطعة.',f:['وثائقي','قصص','آراء ومقالات'],p:'اعملي B-roll كولاج ورقي بأسلوب المجلات لهي الجملة: «…»، العناصر تتركب من الفراغ.'},
+ {id:'onetake',ar:'ون تيك',en:'Onetake',img:'s2',star:1,d:'لقطة وحدة بدون قطع. الكاميرا ما بتوقف، وكل مشهد بيطلع من يلي قبله.',f:['إعلان منتج','إطلاق تطبيق','تيزر'],p:'اعملي فيديو ون تيك لإطلاق «اسم المنتج»، لقطة وحدة بدون قطع، والواجهة مبنية من هالسكرينشوتات.'},
+ {id:'clawd',ar:'كلاود أنيميشن',en:'Clawd Animation',img:'s9',star:1,d:'شخصية كرتونية مرسومة بالفرشاة بتمثّل فكرتك وبتحكيها بحب، بمشاعر واضحة.',f:['محتوى عاطفي','شرح بسيط','قصص قصيرة'],p:'اعملي كلاود أنيميشن مرسوم باليد، الشخصية بتعيش فكرة: «…»، مدته 15 ثانية.'},
+ {id:'popup',ar:'بيبر بوب أب',en:'Paper Pop-up Book',img:'s7',star:1,d:'عالم كامل من الورق، وقصتك بتطلع منه ورقة ورقة مثل كتاب الأطفال المجسّم.',f:['قصص أطفال','إعلانات ألعاب','تعليم الصغار'],p:'اعملي فيلم قصير بستايل Paper Pop-up Book عن قصة: «…»، المشاهد ورق مقصوص بيقوم من الصفحة.'},
+ {id:'whiteboard',ar:'وايت بورد',en:'Whiteboard Explainer',img:'s3',d:'قلم بيرسم على لوح أبيض خطوة بخطوة، والفكرة بتنبني قدام المشاهد.',f:['تعليم','شرح خطوات','كورسات'],p:'اشرحلي «الموضوع» بفيديو Whiteboard Explainer، رسم بالقلم خطوة بخطوة.'},
+ {id:'hyper',ar:'هايبر فريمز',en:'HyperFrames Motion',img:'s1',d:'موشن جرافيك سريع بخطوط كبيرة وشبكة واضحة وحركة نص قوية.',f:['ريلز معلومات','عناوين','إعلانات سريعة'],p:'اعملي موشن تايبوغرافي سريع لهي النقاط: «…»، خط عريض وحركة قوية.'},
+ {id:'swiss',ar:'سويس موشن',en:'Swiss Motion',img:'s4',d:'أشكال هندسية وخطوط جريئة على شبكة صارمة، مستوحى من البوسترات السويسرية.',f:['هوية بصرية','فعاليات','محتوى ثقافي'],p:'اعملي فيديو بستايل Swiss Motion لفعالية «…»، أشكال هندسية وشبكة واضحة.'},
+ {id:'keynote',ar:'دارك كينوت',en:'Dark Tech Keynote',img:'s5',d:'خلفية غامقة وواجهات تطبيقات لامعة، مثل عروض إطلاق الشركات التقنية.',f:['إطلاق تطبيق','منتج تقني','عرض ميزات'],p:'اعملي فيديو إطلاق بستايل Dark Tech Keynote لتطبيق «…» يعرض أهم 3 ميزات.'},
+ {id:'watercolor',ar:'ألوان مائية',en:'Watercolor',img:'s6',d:'ألوان مائية ناعمة وطبقات شفافة وإحساس هادي ومريح.',f:['سفر وطبيعة','محتوى هادي','قصص'],p:'اعملي فيلم قصير بالألوان المائية عن «…»، إيقاع هادي.'},
+ {id:'riso',ar:'ريزوغراف',en:'Risograph Print',img:'s8',d:'طباعة بلونين أو تلاتة بملمس حبيبي وألوان فاقعة، شكل البوسترات المستقلة.',f:['بوسترات','موسيقى','براندات شبابية'],p:'اعملي فيديو بستايل Risograph Print لـ«…»، ألوان فاقعة وملمس طباعة.'},
+ {id:'impasto',ar:'إمباستو',en:'Impasto Oil',sw:'sw-impasto',d:'ضربات سكين ألوان زيتية سميكة، كأن اللوحة عم تنرسم قدامك.',f:['منتج فاخر','فن','عطور'],p:'اعملي فيلم بستايل Impasto Oil Painting عن «…»، ضربات سكين سميكة.'},
+ {id:'ink',ar:'حبر صيني',en:'Chinese Ink Wash',sw:'sw-ink',d:'حبر أسود على ورق، فراغ كبير وضربات فرشاة قليلة ومعبّرة.',f:['اقتباسات وحِكم','قصص تأملية','محتوى روحاني'],p:'اعملي فيلم بستايل Chinese Ink Wash لحكمة: «…».'},
+ {id:'iso',ar:'إنفوجرافيك أيزومتري',en:'Isometric Infographic',sw:'sw-iso',d:'عالم مصغّر بزاوية مايلة بيوضح كيف بتمشي العملية من أولها لآخرها.',f:['شرح مراحل','سلاسل توريد','منتجات'],p:'اشرحلي مراحل «…» بإنفوجرافيك أيزومتري متحرك.'},
+ {id:'data',ar:'داتا ستوري',en:'Data Storytelling',sw:'sw-data',d:'الأرقام بتصير قصة: رسوم بيانية بتتحرك وبتوصل فكرة وحدة واضحة.',f:['أرقام وتقارير','مقارنات','نتائج'],p:'حوّلي هالأرقام لفيديو Data Storytelling بفكرة وحدة واضحة: «…».'}
+];
+const g=document.getElementById('grid');
+S.forEach((s,i)=>{
+  const a=document.createElement('article');a.className='card';a.id=s.id;
+  a.innerHTML=`<div class="thumb ${s.sw||''}" style="${s.img?`background-image:url(img/${s.img}.jpg)`:''}" role="img" aria-label="مثال على ستايل ${s.en}"><span class="n">${String(i+1).padStart(2,'0')}</span>${s.star?'<span class="star">من الريل</span>':''}</div>
+  <div class="body"><h3>${s.ar}<small>${s.en}</small></h3><p>${s.d}</p>
+  <ul class="for">${s.f.map(x=>`<li>${x}</li>`).join('')}</ul>
+  <div class="prompt"><div class="lbl">اكتب لكلاود <button class="copy" type="button">انسخ</button></div><q>${s.p}</q></div></div>`;
+  g.appendChild(a);
+});
+function copyText(btn,text){
+  const done=()=>{const o=btn.textContent;btn.textContent='انتسخ ✓';setTimeout(()=>btn.textContent=o,1400)};
+  try{navigator.clipboard.writeText(text).then(done).catch(()=>sel(btn))}catch(e){sel(btn)}
+}
+function sel(btn){const q=btn.closest('.prompt,.handle').querySelector('q,.tag');const r=document.createRange();r.selectNodeContents(q);const s=getSelection();s.removeAllRanges();s.addRange(r)}
+g.addEventListener('click',e=>{const b=e.target.closest('.copy');if(b)copyText(b,b.closest('.prompt').querySelector('q').textContent)});
+document.getElementById('copyH').addEventListener('click',e=>copyText(e.currentTarget,'@omarghalip'));
+</script>
+
+</body></html>
