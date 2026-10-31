@@ -1,0 +1,188 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="robots" content="noindex">
+<title>اختيار صور الكورس</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Readex+Pro:wght@500;700&family=IBM+Plex+Sans+Arabic:wght@400;600&display=swap">
+<style>
+/* Layout: a contact sheet — numbered frames per section, tap to mark, picks collect in a bottom tray */
+:root{
+  --bg:#0E0C0C; --panel:#191515; --line:#2E2626; --ink:#F4EEEC; --muted:#A8999A; --red:#E3262D;
+  --display:"Readex Pro","IBM Plex Sans Arabic",system-ui,sans-serif;
+  --body:"IBM Plex Sans Arabic",system-ui,"Segoe UI",Tahoma,sans-serif;
+  color-scheme:dark;
+}
+*{box-sizing:border-box}
+html,body{margin:0}
+body{background:var(--bg);color:var(--ink);font-family:var(--body);font-size:16px;line-height:1.7;padding-bottom:110px}
+.wrap{max-width:1180px;margin:0 auto;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+header{padding-block:36px 8px}
+.eyebrow{font:700 12px var(--display);letter-spacing:.14em;color:var(--red)}
+h1{font:700 clamp(28px,6vw,44px)/1.2 var(--display);margin:6px 0 10px;text-wrap:balance}
+.lede{color:var(--muted);max-width:62ch;margin:0}
+.how{display:flex;flex-wrap:wrap;gap:8px 18px;margin:16px 0 0;padding:0;list-style:none;color:var(--muted);font-size:14px}
+.how b{color:var(--ink)}
+section{padding-block:34px 6px;border-bottom:1px solid var(--line)}
+.sh{display:flex;align-items:baseline;gap:12px;flex-wrap:wrap;margin-bottom:6px}
+.sh h2{font:700 clamp(22px,4vw,30px) var(--display);margin:0}
+.code{font:700 13px var(--display);color:var(--bg);background:var(--red);border-radius:6px;padding:2px 9px}
+.sub{color:var(--muted);margin:0 0 18px;max-width:70ch}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:14px}
+.card{position:relative;background:var(--panel);border:2px solid var(--line);border-radius:10px;overflow:hidden;cursor:pointer;display:flex;flex-direction:column;transition:border-color .15s,transform .15s;text-align:right;color:inherit;font:inherit;padding:0}
+.card:hover{border-color:#5a4646}
+.card:focus-visible{outline:3px solid var(--red);outline-offset:2px}
+.card[aria-pressed="true"]{border-color:var(--red);transform:translateY(-2px)}
+.ph{aspect-ratio:4/3;max-width:100%;background:#241e1e;display:block;width:100%;object-fit:cover}
+.num{position:absolute;top:8px;right:8px;font:700 14px var(--display);background:rgba(14,12,12,.82);color:var(--ink);border-radius:6px;padding:2px 9px}
+.tick{position:absolute;top:8px;left:8px;width:28px;height:28px;border-radius:50%;border:2px solid var(--ink);background:rgba(14,12,12,.6);display:grid;place-items:center;font-weight:700}
+.card[aria-pressed="true"] .tick{background:var(--red);border-color:var(--red)}
+.card[aria-pressed="true"] .tick::after{content:"✓";color:#fff;font-size:15px}
+.meta{padding:10px 12px 12px;display:flex;flex-direction:column;gap:2px;min-width:0}
+.meta b{font-weight:600;font-size:15px}
+.meta a{color:var(--muted);font-size:12px;text-decoration:none}
+.meta a:hover{color:var(--ink);text-decoration:underline}
+.tag{align-self:flex-start;font-size:11px;font-weight:600;color:var(--red);border:1px solid var(--red);border-radius:20px;padding:0 8px;margin-top:4px}
+.links{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:12px;margin:0;padding:0;list-style:none}
+.links a{display:block;background:var(--panel);border:1px solid var(--line);border-radius:10px;padding:14px 16px;color:var(--ink);text-decoration:none}
+.links a:hover{border-color:var(--red)}
+.links small{display:block;color:var(--muted)}
+.tray{position:fixed;inset:auto 0 0 0;background:rgba(25,21,21,.97);border-top:1px solid var(--line);padding-bottom:env(safe-area-inset-bottom,0px);z-index:5}
+.tray .wrap{display:flex;align-items:center;gap:12px;flex-wrap:wrap;padding-block:12px}
+.tray-t{flex:1;min-width:0;font-size:14px;color:var(--muted)}
+.tray-t strong{color:var(--ink);word-break:break-word}
+.btn{font:700 15px var(--display);background:var(--red);color:#fff;border:0;border-radius:8px;padding:10px 18px;cursor:pointer}
+.btn:disabled{opacity:.4;cursor:default}
+.btn.ghost{background:transparent;border:1px solid var(--line);color:var(--ink)}
+footer{color:var(--muted);font-size:13px;padding-block:24px}
+@media (prefers-reduced-motion:reduce){.card{transition:none}.card[aria-pressed="true"]{transform:none}}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <div class="eyebrow">RAFEKA · صفحة الكورس</div>
+    <h1>اختار صور قسم «ليش التصميم؟»</h1>
+    <p class="lede">كل الصور هون مجانية ومسموح نستعملها بالموقع (رخصة Unsplash). كبّس على الصور اللي بتعجبك، وبالآخر انسخ أرقامها وابعتلي ياها.</p>
+    <ul class="how"><li><b>١.</b> كبّس على الصورة لتختارها</li><li><b>٢.</b> الأرقام بتتجمّع تحت</li><li><b>٣.</b> اضغط «انسخ الأرقام» وابعتهم بالمحادثة</li></ul>
+  </header>
+
+  <section>
+    <div class="sh"><span class="code">ش</span><h2>بالشوارع والمولات</h2></div>
+    <p class="sub">لوحات إعلانية وشاشات مولات. اللوحات الفاضية (عليها علامة «موكاب») منحط عليها تصاميمك أو تصاميم طلابك، فيبيّن شغلكم معلّق بالشارع.</p>
+    <div class="grid" id="g-sh"></div>
+  </section>
+
+  <section>
+    <div class="sh"><span class="code">س</span><h2>عالسوشال ميديا</h2></div>
+    <p class="sub">موبايلات وإنستغرام. الموبايلات الفاضية منحط عليها بوستاتكم بدل الشاشة.</p>
+    <div class="grid" id="g-so"></div>
+  </section>
+
+  <section>
+    <div class="sh"><span class="code">أ</span><h2>Adobe والذكاء الاصطناعي</h2></div>
+    <p class="sub">مكاتب مصممين، شاشات برامج، وصور عن الذكاء الاصطناعي.</p>
+    <div class="grid" id="g-ad"></div>
+  </section>
+
+  <section>
+    <div class="sh"><h2>للإلهام وموكابات جاهزة</h2></div>
+    <p class="sub">مشاريع Behance إلها أصحابها، فبتنفع للإلهام بس. إذا عجبك شي منها بنعمل متلو بتصاميمنا. والموكابات المجانية منحط عليها شغلنا.</p>
+    <ul class="links">
+      <li><a href="https://www.behance.net/search/projects/billboard%20mockup" target="_blank" rel="noopener">Behance: لوحات إعلانية<small>أفكار عرض التصاميم بالشارع</small></a></li>
+      <li><a href="https://www.behance.net/search/projects/mall%20advertising" target="_blank" rel="noopener">Behance: إعلانات مولات<small>شاشات وبنرات داخل المولات</small></a></li>
+      <li><a href="https://www.behance.net/search/projects/social%20media%20design" target="_blank" rel="noopener">Behance: تصاميم سوشال ميديا<small>بوستات وكاروسيلات حديثة</small></a></li>
+      <li><a href="https://www.behance.net/search/projects/ai%20advertising%20campaign" target="_blank" rel="noopener">Behance: حملات بالذكاء الاصطناعي<small>إعلانات معمولة بأدوات AI</small></a></li>
+      <li><a href="https://pixelbuddha.net/mockups/4498-outdoor-billboard-mockup" target="_blank" rel="noopener">Pixelbuddha: موكاب لوحة شارع<small>مجاني، منحط عليه تصميمنا</small></a></li>
+      <li><a href="https://wannathis.one/mockups/billboard-mockups" target="_blank" rel="noopener">Wannathis: موكابات لوحات<small>مجموعة موكابات مجانية</small></a></li>
+    </ul>
+  </section>
+  <footer>الصور من Unsplash، وكل صورة عليها اسم المصور ورابطها.</footer>
+</div>
+
+<div class="tray" role="region" aria-label="الصور اللي اخترتها">
+  <div class="wrap">
+    <div class="tray-t" id="tray-t">ما اخترت ولا صورة لسا</div>
+    <button class="btn ghost" id="clear" type="button">امسح</button>
+    <button class="btn" id="copy" type="button" disabled>انسخ الأرقام</button>
+  </div>
+</div>
+
+<script>
+const U='https://images.unsplash.com/';
+const P='https://unsplash.com/photos/';
+const DATA={
+ sh:[
+  ['photo-1513757378314-e46255f6ed16','لوحة فاضية بالشارع','rectangular-blank-billboard-Dnkr_lmdKi8','Kate Trysh',1],
+  ['photo-1691480189419-b0c138c00c10','لوحة فاضية بنص المدينة','an-empty-billboard-in-the-middle-of-a-city-t0lLGHhnh8w','personalgraphic.com',1],
+  ['photo-1699480114704-ac153307d2a0','لوحة عطرف الطريق','a-billboard-on-the-side-of-the-road-r2Pmvr_7Dec','Mykyta Kravčenko',1],
+  ['photo-1790427650933-82d90dd4b58f','بنر طويل بنص المول','vertical-banner-in-shopping-mall-atrium-seqWbBvpWMk','Unsplash',1],
+  ['photo-1767580737456-ccaa37023040','شاشة إعلان عملاقة على برج','modern-skyscraper-with-large-digital-advertising-screen-k3Lw3QUBPLc','Unsplash',0],
+  ['photo-1783165348561-59cad221ab2c','شاشات تايمز سكوير','vibrant-digital-billboards-illuminate-times-square-buildings-qF4pz2hqWAI','Unsplash',0],
+  ['photo-1579027974112-70eb878806c7','شاشة مضوية على عمارة','turned-on-high-rise-building-monitor-LloBOTq1gMo','Unsplash',0],
+  ['photo-1567365875478-39ac6a071e20','مول بالليل','mall-of-berlin-at-night-cGNjdVLDAik','Unsplash',0],
+  ['photo-1572013343881-32685fe74c53','جوّا المول والناس عالدرج','people-riding-escalators-inside-building-pXYe6-LL2QI','Unsplash',0],
+  ['photo-1592572717955-53ce216717b4','شارع مضوي بالليل','cars-on-road-between-high-rise-buildings-during-night-time-03qBeQiAdUI','Unsplash',0],
+  ['photo-1785310106283-80d0e95f0bbc','بضاعة ملونة بالمول','a-colorful-food-product-display-inside-a-busy-shopping-mall-JJ-no0EQTbQ','Unsplash',0],
+  ['photo-1553542793-0efb6b7382cc','ناس قدام إعلانات المدينة','group-of-people-standing-near-building-BLfL1ulJHnQ','Unsplash',0]
+ ],
+ so:[
+  ['photo-1622532832487-b18b9c7f23d3','إيد ماسكة موبايل','person-holding-white-android-smartphone-rncny1536Xs','Unsplash',1],
+  ['photo-1585250003309-694ff34512d7','موبايل أسود بالإيد','person-holding-black-android-smartphone-vj3nOtiX85Y','Unsplash',1],
+  ['photo-1562147458-0c12e8d29f50','موبايل أبيض لحالو','white-android-smartphone-bmUa09zy2ZQ','Unsplash',1],
+  ['photo-1611262588024-d12430b98920','لوغو إنستغرام ثلاثي الأبعاد','instagram-icon-with-gradient-lighting-71Qk8ODIBko','Unsplash',0],
+  ['photo-1611162616305-c69b3fa7fbe0','أيقونة إنستغرام بتدرّج','instagram-logo-icon-with-gradient-_tF3vug2FhQ','Unsplash',0],
+  ['photo-1505156868547-9b49f4df4e04','موبايل عليه إنستغرام','smartphone-showing-instagram-icon-z3kBG5xIhjo','Unsplash',0],
+  ['photo-1675352161918-2dc701738691','آيفون عليه لوغو إنستغرام','the-instagram-logo-is-displayed-on-an-iphone-9OeW6Thad0Q','Unsplash',0],
+  ['photo-1595039838779-f3780873afdd','موبايل بالإيد على إنستغرام','smartphone-displaying-instagram-login-page-KWZa42a1kds','Unsplash',0],
+  ['photo-1774978611460-187c75449896','شباب عم يتفرجوا عموبايلاتهم','two-men-looking-at-their-phones-in-a-store-TSjcHFGuDvA','Unsplash',0]
+ ],
+ ad:[
+  ['photo-1626785774625-ddcddc3445e9','شاشة وتابلت عليهم برامج Adobe','workspace-with-computer-monitor-and-tablet-BM3U_D2lygo','Unsplash',0],
+  ['photo-1626785774573-4b799315345d','مكتب مصمم مع iMac','silver-imac-and-apple-keyboard-v9vII5gV8Lw','Unsplash',0],
+  ['photo-1572044162444-ad60f128bdea','مصمم عم يرسم مع ألوان','designer-using-tablet-and-laptop-workspace-CGpifH3FjOA','Unsplash',0],
+  ['photo-1611241893603-3c359704e0ee','رسم بالقلم عالتابلت','person-drawing-on-tablet-at-workspace-Dx1b5ucschA','Unsplash',0],
+  ['photo-1611532736597-de2d4265fba3','سكتش حرف عالتابلت','tablet-with-sketch-and-orange-book-IkHwu5xLXxs','Unsplash',0],
+  ['photo-1558655146-d09347e92766','شاشة عليها نظام تصميم','computer-monitor-displaying-design-system-_x335IZXxfc','Unsplash',0],
+  ['photo-1561070791-2526d30994b5','كتالوج ألوان','color-code-book-LPWl2pEVGKc','Unsplash',0],
+  ['photo-1613909207039-6b173b755cc1','مصمم قدام الكمبيوتر','man-in-black-shirt-sitting-in-front-of-computer-pHPzdEHN6Os','Unsplash',0],
+  ['photo-1677442136019-21780ecad995','كلمة AI مضوية','3d-rendered-ai-text-on-dark-digital-background-ZPOoDQc8yMw','Unsplash',0],
+  ['photo-1633311905139-7b6088a69e33','حروف AI صفرا','yellow-ai-letters-with-teal-light-TQ3SgrW9lkM','Unsplash',0],
+  ['photo-1516110833967-0b5716ca1387','روبوت عم يعزف بيانو','robot-playing-piano-U3sOwViXhkY','Unsplash',0],
+  ['photo-1711723774084-df734aaae53e','بنت قدام حيط كلو صور','a-woman-standing-in-front-of-a-wall-covered-in-pictures-XUleys_6nwM','Unsplash',0]
+ ]
+};
+const PREFIX={sh:'ش',so:'س',ad:'أ'};
+const picked=new Set();
+const tray=document.getElementById('tray-t'), copyB=document.getElementById('copy');
+function paint(){
+  const list=[...picked];
+  copyB.disabled=!list.length;
+  tray.innerHTML=list.length?'اخترت '+list.length+': <strong>'+list.join('، ')+'</strong>':'ما اخترت ولا صورة لسا';
+  try{localStorage.setItem('rafeka-picks',JSON.stringify(list));}catch(e){}
+}
+for(const k of Object.keys(DATA)){
+  const g=document.getElementById('g-'+k);
+  DATA[k].forEach((d,i)=>{
+    const code=PREFIX[k]+(i+1);
+    const b=document.createElement('button'); b.type='button'; b.className='card'; b.setAttribute('aria-pressed','false'); b.dataset.code=code;
+    b.innerHTML='<img class="ph" loading="lazy" alt="'+d[1]+'" src="'+U+d[0]+'?w=640&q=70&auto=format&fit=crop">'+
+      '<span class="num">'+code+'</span><span class="tick" aria-hidden="true"></span>'+
+      '<span class="meta"><b>'+d[1]+'</b><a href="'+P+d[2]+'" target="_blank" rel="noopener">تصوير '+d[3]+' · افتح بحجم كبير</a>'+(d[4]?'<span class="tag">موكاب: منحط عليها تصميمنا</span>':'')+'</span>';
+    b.addEventListener('click',e=>{ if(e.target.closest('a')) return; const on=b.getAttribute('aria-pressed')!=='true'; b.setAttribute('aria-pressed',on?'true':'false'); on?picked.add(code):picked.delete(code); paint(); });
+    g.appendChild(b);
+  });
+}
+try{(JSON.parse(localStorage.getItem('rafeka-picks')||'[]')).forEach(c=>{const b=document.querySelector('[data-code="'+c+'"]'); if(b){b.setAttribute('aria-pressed','true');picked.add(c);}});}catch(e){}
+paint();
+document.getElementById('clear').addEventListener('click',()=>{picked.clear();document.querySelectorAll('.card').forEach(b=>b.setAttribute('aria-pressed','false'));paint();});
+copyB.addEventListener('click',()=>{
+  const txt='الصور اللي اخترتها: '+[...picked].join('، ');
+  const done=()=>{const o=copyB.textContent;copyB.textContent='انتسخ ✓';setTimeout(()=>copyB.textContent=o,1500);};
+  if(navigator.clipboard){navigator.clipboard.writeText(txt).then(done).catch(()=>{prompt('انسخ:',txt);});}
+});
+</script>
+</body>
+</html>
