@@ -1,0 +1,599 @@
+<!doctype html><html><head><meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover"><style>:root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#fff;color:#000}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}</style></head><body>
+<title>مبادئ المونتاج الإعلاني</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;800&display=swap">
+<style>
+/* Layout: same lesson-stage system as lesson 1 (one view at a time, chapter chips, live status badge),
+   with time as the new axis: every lab is a 15-second reel timeline. Dark single theme, Omar Ghaleb identity. */
+@font-face{font-family:'Camel';src:url('fonts/camel-xb.otf') format('opentype');font-weight:800;font-display:swap}
+@font-face{font-family:'Expo';src:url('fonts/expo-book.ttf') format('truetype');font-weight:400;font-display:swap}
+@font-face{font-family:'Expo';src:url('fonts/expo-medium.ttf') format('truetype');font-weight:500;font-display:swap}
+@font-face{font-family:'Expo';src:url('fonts/expo-bold.otf') format('opentype');font-weight:700;font-display:swap}
+:root{
+  --bg:#0B0B0C; --bg2:#121214; --panel:#18181B; --line:#2A2A2F; --line2:#3A3A41;
+  --fg:#F5F1EE; --muted:#C4BCB4; --dim:#8C857F;
+  --red:#E3262D; --red2:#A8201A; --gold:#E3B23C; --teal:#2A8C85; --sky:#5BA7D6; --violet:#7A6CF5;
+  --ok:#3CB371; --warn:#E3B23C; --bad:#E3262D;
+  --display:'Camel','Cairo',system-ui,sans-serif; --body:'Expo','Cairo',system-ui,sans-serif;
+  color-scheme:dark;
+}
+*{box-sizing:border-box}
+html,body{height:100%}
+body{margin:0;background:var(--bg);color:var(--fg);font-family:var(--body);font-size:17px;line-height:1.7;direction:rtl;
+  padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));padding-block:0}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);z-index:10;background:var(--bg)}
+button,input,select{font-family:inherit;font-size:inherit}
+button{cursor:pointer}
+h1,h2,h3{font-family:var(--display);font-weight:800;line-height:1.25;margin:0;text-wrap:balance}
+p{margin:0}
+.wrap{max-width:1120px;margin:0 auto}
+.top{position:sticky;top:env(safe-area-inset-top,0px);z-index:9;background:var(--bg);border-bottom:1px solid var(--line)}
+.top .wrap{display:flex;align-items:center;justify-content:space-between;gap:12px;padding-block:10px;flex-wrap:wrap}
+.brand{display:flex;align-items:center;gap:10px}
+.brand b{font-family:var(--display);font-size:1.05rem}
+.brand small{color:var(--dim);font-size:.8rem}
+.mark{width:34px;height:34px;border-radius:8px;background:var(--red);display:grid;place-items:center;font-family:var(--display);font-size:1.1rem;color:#fff}
+.counter{color:var(--muted);font-size:.9rem;font-variant-numeric:tabular-nums}
+.chapters{display:flex;gap:8px;overflow-x:auto;padding-block:8px 12px;scrollbar-width:thin}
+.chapters button{flex:0 0 auto;border:1px solid var(--line);background:var(--bg2);color:var(--muted);border-radius:999px;padding:6px 14px;font-size:.88rem;font-weight:500}
+.chapters button.on{background:var(--red);border-color:var(--red);color:#fff}
+.chapters button.done{border-color:var(--line2);color:var(--fg)}
+main{padding-block:28px 40px}
+.view{display:none;animation:fade .35s ease}
+.view.on{display:block}
+@keyframes fade{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
+@media (prefers-reduced-motion:reduce){.view{animation:none}*{transition:none!important;animation:none!important}}
+.eyebrow{color:var(--red);font-weight:700;font-size:.85rem}
+.view h1{font-size:clamp(2rem,5vw,3.4rem);margin-top:6px}
+.view h1 span{display:block;font-family:var(--body);font-weight:400;color:var(--dim);font-size:clamp(.95rem,2vw,1.15rem);direction:ltr;text-align:right;margin-top:4px}
+.lead{max-width:68ch;color:var(--muted);font-size:1.08rem;margin-top:14px}
+.lead b{color:var(--fg);font-weight:700}
+.grid2{display:grid;grid-template-columns:1.35fr .65fr;gap:22px;margin-top:26px;align-items:start}
+@media (max-width:860px){.grid2{grid-template-columns:1fr}}
+.lab{background:var(--panel);border:1px solid var(--line);border-radius:14px;overflow:hidden;min-width:0}
+.lab-head{display:flex;align-items:center;justify-content:space-between;gap:10px;padding:12px 16px;border-bottom:1px solid var(--line);flex-wrap:wrap}
+.lab-head h3{font-family:var(--body);font-weight:700;font-size:1rem;color:var(--muted)}
+.status{display:inline-flex;align-items:center;gap:8px;padding:6px 14px;border-radius:999px;font-weight:700;font-size:.95rem;border:1px solid var(--line2);background:var(--bg2);transition:all .3s;max-width:100%}
+.status i{width:10px;height:10px;border-radius:50%;background:var(--dim);flex:none}
+.status.ok{border-color:var(--ok);color:#CFF5DD}.status.ok i{background:var(--ok)}
+.status.warn{border-color:var(--warn);color:#FFE9B5}.status.warn i{background:var(--warn)}
+.status.bad{border-color:var(--bad);color:#FFD2D4}.status.bad i{background:var(--bad)}
+.stage{position:relative;background:var(--bg2);min-width:0}
+.stage svg{display:block;width:100%;height:auto;touch-action:none;user-select:none}
+.controls{display:flex;flex-wrap:wrap;gap:8px;padding:12px 16px;border-top:1px solid var(--line);align-items:center}
+.controls .sep{flex-basis:100%;height:0}
+.btn{border:1px solid var(--line2);background:var(--bg2);color:var(--fg);border-radius:8px;padding:7px 13px;font-weight:500;font-size:.9rem;transition:background .2s}
+.btn:hover{background:var(--line)}
+.btn.on{background:var(--red);border-color:var(--red);color:#fff}
+.btn.ghost{border-style:dashed;color:var(--muted)}
+.btn:focus-visible,.chapters button:focus-visible,input:focus-visible{outline:2px solid var(--gold);outline-offset:2px}
+label.ctl{display:inline-flex;align-items:center;gap:8px;color:var(--muted);font-size:.88rem}
+input[type=range]{accent-color:var(--red);width:150px;max-width:40vw}
+.side{display:grid;gap:14px;min-width:0}
+.card{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:16px 18px}
+.card h3{font-family:var(--body);font-size:.85rem;font-weight:700;color:var(--red);margin-bottom:8px}
+.card p,.card li{color:var(--muted);font-size:.97rem}
+.card ul,.card ol{margin:0;padding-right:18px;display:grid;gap:4px}
+.card.key{border-color:var(--red2);background:linear-gradient(180deg,rgba(227,38,45,.08),transparent)}
+.card.key p{color:var(--fg);font-weight:500;font-size:1.02rem}
+.readout{font-variant-numeric:tabular-nums;color:var(--fg);font-weight:700}
+.navbar{display:flex;justify-content:space-between;align-items:center;gap:10px;margin-top:30px;padding-top:18px;border-top:1px solid var(--line)}
+.navbar .btn{padding:10px 20px}
+.navbar .btn.primary{background:var(--red);border-color:var(--red);color:#fff;font-weight:700}
+.hint{color:var(--dim);font-size:.82rem;text-align:center}
+.hero{padding-block:30px 10px}
+.hero h1{font-size:clamp(2.6rem,8vw,5.2rem);line-height:1.1}
+.hero h1 em{font-style:normal;color:var(--red)}
+.hero .lead{font-size:1.2rem}
+.menu{display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:10px;margin-top:28px}
+.menu button{text-align:right;background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:14px 16px;color:var(--fg);display:grid;gap:4px;transition:border-color .2s,transform .2s}
+.menu button:hover{border-color:var(--red);transform:translateY(-2px)}
+.menu button small{color:var(--dim);font-size:.8rem;direction:ltr;text-align:right}
+.menu button b{font-family:var(--display);font-size:1.15rem}
+.menu button .n{color:var(--red);font-size:.75rem;font-weight:700}
+.thesis{margin-top:30px;border-right:4px solid var(--red);padding:6px 18px;color:var(--muted);font-size:1.15rem;max-width:60ch}
+.thesis b{color:var(--fg)}
+.qbig{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:22px}
+@media (max-width:700px){.qbig{grid-template-columns:1fr}}
+.q{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:22px}
+.q .n{font-family:var(--display);color:var(--red);font-size:2.2rem;line-height:1}
+.q h2{font-size:clamp(1.3rem,3vw,1.9rem);margin-top:6px}
+.q p{color:var(--muted);margin-top:8px}
+.chips{display:flex;flex-wrap:wrap;gap:8px}
+/* timeline */
+.tl{padding:18px 16px 6px}
+.tl .ruler{display:flex;justify-content:space-between;color:var(--dim);font-size:.75rem;font-variant-numeric:tabular-nums;direction:ltr;padding:0 2px}
+.tl .track{display:flex;height:64px;border-radius:8px;overflow:hidden;direction:ltr;margin-top:4px;border:1px solid var(--line2)}
+.tl .seg{display:grid;place-items:center;text-align:center;font-size:.82rem;font-weight:700;color:#fff;transition:flex .4s;padding:4px;overflow:hidden;white-space:nowrap;position:relative}
+.tl .seg small{display:block;font-weight:400;opacity:.85;font-size:.72rem}
+.tl .seg.prod{background:var(--red);outline:2px solid #fff;outline-offset:-3px}
+.segctl{display:grid;gap:8px;padding:12px 16px;border-top:1px solid var(--line)}
+.segrow{display:flex;gap:8px;align-items:center;flex-wrap:wrap;font-size:.88rem;color:var(--muted)}
+.segrow .chips .btn{padding:4px 10px;font-size:.82rem}
+/* frames */
+.frames{display:flex;gap:10px;padding:18px;align-items:center;justify-content:center;flex-wrap:wrap}
+.frame{width:min(280px,42vw);aspect-ratio:16/9;border-radius:8px;position:relative;overflow:hidden;background:#1B2A44;display:grid;place-items:center;transition:all .3s}
+.frame .p{position:absolute;bottom:14%;width:22%;aspect-ratio:1/2.2;max-height:62%;border-radius:30% 30% 10% 10%;transition:all .35s}
+.frame .lbl{z-index:2}
+.frame .p.a{background:#5BA7D6;left:14%}.frame .p.b{background:#E3B23C;right:14%}
+.frame .p::after{content:"";position:absolute;top:28%;width:60%;height:3px;background:#fff;left:70%;border-radius:2px}
+.frame .p.b::after{left:auto;right:70%}
+.frame .lbl{position:absolute;top:8px;right:10px;font-size:.75rem;color:#fff;background:rgba(0,0,0,.5);padding:2px 8px;border-radius:4px}
+.frame .lbl2{position:absolute;bottom:4%;font-size:.72rem;color:#fff;font-weight:700}
+/* transitions */
+.tstage{position:relative;height:220px;margin:18px;border-radius:10px;overflow:hidden;background:#000}
+.tstage .fr{position:absolute;inset:0;display:grid;place-items:center;transition:none}
+.tstage .fr.A{background:#1B2A44}.tstage .fr.B{background:var(--red)}
+.tstage .fr .shape{width:90px;height:90px;border-radius:50%;background:#F5F1EE;transition:none}
+.tstage .fr.B .shape{border-radius:12px}
+.tstage .fr.B.match .shape{border-radius:50%;background:#F5F1EE}
+.tstage .black{position:absolute;inset:0;background:#000;opacity:0}
+.tstage .audio{position:absolute;left:0;right:0;bottom:0;height:34px;background:rgba(0,0,0,.45);display:flex;align-items:center;gap:8px;padding:0 10px;font-size:.75rem;color:#fff;direction:ltr}
+.tstage .audio i{flex:1;height:10px;border-radius:5px;background:#5BA7D6;transition:background .2s}
+.tstage .audio i.red{background:var(--red)}
+.tstage .ph{position:absolute;top:0;bottom:0;width:2px;background:#fff;left:0;opacity:.9}
+/* beat grid */
+.beats{position:relative;height:120px;margin:18px;border-radius:10px;background:var(--bg2);border:1px solid var(--line);direction:ltr;overflow:hidden}
+.beats .beat{position:absolute;top:0;bottom:0;width:1px;background:var(--line2)}
+.beats .beat.strong{background:var(--muted);width:2px}
+.beats .cut{position:absolute;top:30%;bottom:30%;width:4px;border-radius:2px;background:var(--red);transition:left .3s}
+.beats .cut.off{background:var(--gold)}
+.beats .ph{position:absolute;top:0;bottom:0;width:2px;background:#fff}
+.beats .flash{position:absolute;inset:0;background:#fff;opacity:0;pointer-events:none}
+.layers{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:8px;padding:0 16px 14px}
+.layers button{text-align:right;background:var(--bg2);border:1px solid var(--line2);border-radius:10px;padding:10px 12px;color:var(--muted);font-size:.88rem;display:grid;gap:2px}
+.layers button b{color:var(--fg)}
+.layers button.on{border-color:var(--red);color:var(--fg)}
+.layers button.on b{color:var(--red)}
+/* summary / quiz / author */
+.sum{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:12px;margin-top:22px}
+.sum .card b{display:block;font-family:var(--display);font-size:1.3rem;margin-bottom:4px}
+.sum .card small{color:var(--dim);direction:ltr;display:block;text-align:right}
+.check{display:grid;gap:8px;margin-top:18px}
+.check label{display:flex;gap:10px;align-items:flex-start;background:var(--panel);border:1px solid var(--line);border-radius:10px;padding:10px 14px;cursor:pointer;color:var(--muted)}
+.check input{accent-color:var(--red);margin-top:6px}
+.check label.on{border-color:var(--ok);color:var(--fg)}
+.quiz{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:22px;margin-top:22px;max-width:760px}
+.quiz .qn{color:var(--dim);font-size:.85rem}
+.quiz h2{font-size:1.4rem;margin-top:6px;font-family:var(--body);font-weight:700}
+.opts{display:grid;gap:8px;margin-top:16px}
+.opts button{text-align:right;background:var(--bg2);border:1px solid var(--line2);color:var(--fg);border-radius:10px;padding:12px 14px;transition:all .2s}
+.opts button.right{background:rgba(60,179,113,.15);border-color:var(--ok)}
+.opts button.wrong{background:rgba(227,38,45,.15);border-color:var(--bad)}
+.opts button:disabled{cursor:default}
+.expl{margin-top:14px;padding:12px 14px;border-radius:10px;background:var(--bg2);color:var(--muted);display:none}
+.expl.on{display:block}
+.qbar{height:6px;background:var(--line);border-radius:3px;overflow:hidden;margin-top:14px}
+.qbar i{display:block;height:100%;background:var(--red);transition:width .3s}
+.score{font-family:var(--display);font-size:3rem;color:var(--red)}
+.author{margin-top:40px;border-top:1px solid var(--line);padding-block:26px;display:flex;gap:18px;align-items:center;flex-wrap:wrap}
+.author .av{width:70px;height:70px;border-radius:50%;background:var(--red);display:grid;place-items:center;font-family:var(--display);font-size:1.6rem;color:#fff;flex:none}
+.author b{font-family:var(--display);font-size:1.3rem;display:block}
+.author p{color:var(--muted);font-size:.95rem}
+.author .ig{direction:ltr;display:inline-block;color:var(--fg);font-weight:700;text-decoration:none;border-bottom:1px solid var(--red)}
+</style>
+
+<header class="top"><div class="wrap">
+  <div class="brand"><div class="mark">ع</div><div><b>مبادئ المونتاج الإعلاني</b><br><small>الدرس الثاني · الريل الإعلاني</small></div></div>
+  <div class="counter" id="counter"></div>
+</div><div class="wrap"><nav class="chapters" id="chapters" aria-label="أقسام الدرس"></nav></div></header>
+
+<main class="wrap">
+
+<section class="view hero" data-id="start">
+  <p class="eyebrow">دورة التصميم والمونتاج · الدرس الثاني</p>
+  <h1>الصورة تنظّم <em>الانتباه</em>.<br>المونتاج ينظّم <em>الزمن</em>.</h1>
+  <p class="lead">في الدرس الأول تعلّمنا كيف تُقرأ لقطة واحدة. الآن نضيف إليها البُعد الرابع: الزمن. متى يظهر الشيء، وكم يبقى، وماذا يسبقه وماذا يليه. هذا ما يجعل ريلًا مدته ١٥ ثانية يبيع، وآخر بالصور نفسها يُسحب فورًا.</p>
+  <div class="thesis">المونتاج ليس قصًّا ولصقًا. <b>المونتاج هو قرار: ماذا يشعر المشاهد في كل ثانية</b>، ومتى يكون جاهزًا ليرى المنتج.</div>
+  <div class="menu" id="menu"></div>
+</section>
+
+<section class="view" data-id="questions">
+  <p class="eyebrow">قبل أي قطع</p>
+  <h1>السؤالان، ثم القرار الأول<span>The Brief & Product Placement</span></h1>
+  <p class="lead">نبدأ كما بدأنا في الصورة: ما الرسالة؟ وما الشعور؟ لكن في الفيديو يولد من هذين السؤالين قرار ثالث هو أهم قرار في الريل الإعلاني: <b>متى يظهر المنتج؟</b> أول ثانيتين؟ في المنتصف؟ أم في آخر ثانيتين؟ كل خيار استراتيجية مختلفة، ولا يوجد خيار صحيح بلا سياق.</p>
+  <div class="qbig">
+    <div class="q"><div class="n">١</div><h2>ما الرسالة؟</h2><p>جملة واحدة يخرج بها المشاهد بعد ١٥ ثانية. إن لم تستطع كتابتها فلا تفتح برنامج المونتاج.</p></div>
+    <div class="q"><div class="n">٢</div><h2>ما الشعور؟</h2><p>الشعور يقرّر الإيقاع والموسيقى والانتقالات، ويقرّر أيضًا متى يظهر المنتج: هل نبدأ به أم نبني الشعور ثم نكشفه.</p></div>
+  </div>
+  <div class="grid2">
+    <div class="lab">
+      <div class="lab-head"><h3>مخطّط الريل (١٥ ثانية): حرّك المنتج وغيّر الشعور</h3><span class="status" id="st-q"><i></i><span></span></span></div>
+      <div class="tl"><div class="ruler"><span>0s</span><span>3s</span><span>6s</span><span>9s</span><span>12s</span><span>15s</span></div><div class="track" id="track"></div></div>
+      <div class="controls">
+        <label class="ctl">موضع المنتج:</label>
+        <button class="btn" data-pp="first">أول شيء</button><button class="btn" data-pp="mid">في المنتصف</button><button class="btn on" data-pp="end">آخر شيء</button>
+        <span class="sep"></span>
+        <label class="ctl">طول الهوك <input type="range" id="qHook" min="1" max="6" value="3"> <span class="readout" id="qHookV">3s</span></label>
+        <label class="ctl">طول بناء الشعور <input type="range" id="qBuild" min="0" max="9" value="7"> <span class="readout" id="qBuildV">7s</span></label>
+      </div>
+      <div class="segctl" id="segctl"></div>
+    </div>
+    <div class="side">
+      <div class="card"><h3>ثلاث استراتيجيات لموضع المنتج</h3><ul><li><b>أول شيء:</b> المنتج معروف ومحبوب، أو ضارب ترند، أو الريل عن مسابقة وعرض. نكشف فورًا ثم نبرّر.</li><li><b>في المنتصف:</b> كشف مبكر نسبيًا ثم إثبات (قبل/بعد، تجربة، شهادة). يناسب الخصومات والمنتجات العملية.</li><li><b>آخر شيء:</b> نبني شعورًا (غموض، رغبة، توتر) ثم نكشف في آخر ثانيتين. يناسب المنتج الجديد والفاخر والعاطفي.</li></ul></div>
+      <div class="card"><h3>الثواني الثلاث الأولى</h3><p>المشاهد يقرّر البقاء أو المغادرة خلال ٣ ثوانٍ. الهوك ليس جملة؛ هو سؤال بصري لا يستطيع المشاهد تركه بلا جواب.</p></div>
+      <div class="card key"><h3>الخلاصة</h3><p>ابدأ من الشعور، ثم اختر توقيت المنتج بحيث يظهر عندما يكون المشاهد في أعلى استعداد للاستقبال.</p></div>
+    </div>
+  </div>
+</section>
+
+<section class="view" data-id="rhythm">
+  <p class="eyebrow">المبدأ ١ من ٦</p>
+  <h1>الإيقاع<span>Pacing / Cutting Rhythm</span></h1>
+  <p class="lead">إيقاع الفيديو هو طول اللقطات والمسافة بين القطعات. <b>الإيقاع السريع</b> (لقطات أقل من ثانية) يصنع طاقة وإلحاحًا وحماسًا. <b>الإيقاع البطيء</b> (لقطات ٣ ثوانٍ فأكثر) يصنع فخامة وعاطفة وتأمّلًا. والإيقاع ليس ثابتًا داخل الريل: يتسارع نحو الذروة ثم يتوقف فجأة في لحظة الكشف.</p>
+  <div class="grid2">
+    <div class="lab">
+      <div class="lab-head"><h3>إيقاع القطع على خط ١٥ ثانية</h3><span class="status" id="st-r"><i></i><span></span></span></div>
+      <div class="stage"><svg id="rsvg" viewBox="0 0 800 200"></svg></div>
+      <div class="controls">
+        <label class="ctl">متوسط طول اللقطة <input type="range" id="rLen" min="4" max="40" value="14"> <span class="readout" id="rLenV">1.4s</span></label>
+        <span class="sep"></span>
+        <button class="btn on" data-rmode="flat">ثابت</button><button class="btn" data-rmode="accel">يتسارع</button><button class="btn" data-rmode="decel">يتباطأ</button>
+        <button class="btn" id="rHold">⏸ توقّف الكشف</button>
+        <button class="btn" id="rPlay">▶ شغّل</button>
+      </div>
+    </div>
+    <div class="side">
+      <div class="card"><h3>جدول الإيقاع والشعور</h3><ul><li><b>٠٫٣ – ٠٫٨ ث:</b> انفجار، رياضة، خصم، ترند.</li><li><b>١ – ٢ ث:</b> إيقاع إعلاني عادي، واضح وحيوي.</li><li><b>٢ – ٤ ث:</b> فخامة، عاطفة، قصة.</li><li><b>٥ ث فأكثر:</b> تأمل، غموض، ثقل درامي.</li></ul></div>
+      <div class="card"><h3>التسارع ثم التوقف</h3><p>أقوى بنية للريل الإعلاني: لقطات تقصر تدريجيًا (التوتر يرتفع) ثم لقطة طويلة واحدة فجأة. هذا التوقف هو كسر الإيقاع الذي تعلمناه في الصورة؛ وهنا يظهر المنتج.</p></div>
+      <div class="card key"><h3>الخلاصة</h3><p>الإيقاع هو الشعور مترجمًا إلى زمن. اختر الشعور أولًا، فيخرج طول اللقطة وحده.</p></div>
+    </div>
+  </div>
+</section>
+
+<section class="view" data-id="timing">
+  <p class="eyebrow">المبدأ ٢ من ٦</p>
+  <h1>التوقيت<span>Timing</span></h1>
+  <p class="lead">التوقيت هو اختيار اللحظة التي يكون فيها المشاهد <b>جاهزًا للاستقبال</b>. انتباه المشاهد ليس خطًا مستقيمًا: يرتفع مع الهوك، يهبط إن لم نُطعمه، ثم يصعد إلى ذروة إن بنينا الشعور جيدًا، ثم ينهار إن تأخّرنا. المنتج الذي يظهر قبل الذروة يُنسى، والذي يظهر بعدها يُشاهد بعين متعبة.</p>
+  <div class="grid2">
+    <div class="lab">
+      <div class="lab-head"><h3>منحنى الانتباه: اسحب لحظة ظهور المنتج</h3><span class="status" id="st-t"><i></i><span></span></span></div>
+      <div class="stage"><svg id="tsvg" viewBox="0 0 800 300"></svg></div>
+      <div class="controls">
+        <button class="btn on" id="tHook">هوك قوي في أول ٣ ثوانٍ</button>
+        <label class="ctl">قوة بناء الشعور <input type="range" id="tBuild" min="0" max="100" value="70"></label>
+        <label class="ctl">ذروة الشعور عند <input type="range" id="tPeak" min="40" max="135" value="110"> <span class="readout" id="tPeakV">11.0s</span></label>
+      </div>
+    </div>
+    <div class="side">
+      <div class="card"><h3>كيف تقرأ المنحنى</h3><ul><li><b>الخط الأبيض:</b> انتباه المشاهد عبر ١٥ ثانية.</li><li><b>المنطقة الخضراء:</b> نافذة الاستقبال: ٨٠٪ من الذروة فأكثر.</li><li><b>العلامة الحمراء:</b> لحظة ظهور المنتج. اسحبها حتى تدخل النافذة.</li></ul></div>
+      <div class="card"><h3>قاعدة الطُّعم</h3><p>كل ٣ إلى ٤ ثوانٍ أعطِ المشاهد شيئًا جديدًا (معلومة، لقطة، صوت) وإلا هبط الانتباه. بناء الشعور ليس انتظارًا؛ هو إطعام متدرّج.</p></div>
+      <div class="card key"><h3>الخلاصة</h3><p>التوقيت ليس «متى أريد أنا» بل «متى يكون المشاهد مستعدًا». ابنِ الذروة، ثم ضع المنتج فيها.</p></div>
+    </div>
+  </div>
+</section>
+
+<section class="view" data-id="continuity">
+  <p class="eyebrow">المبدأ ٣ من ٦</p>
+  <h1>الاستمرارية<span>Continuity</span></h1>
+  <p class="lead">الاستمرارية هي الترابط المنطقي والبصري بين اللقطات: من زاوية إلى زاوية ومن كاميرا إلى كاميرا، يجب أن يبقى الاتجاه والمكان والحركة ثابتة في ذهن المشاهد. أشهر قاعدة فيها <b>قاعدة الـ١٨٠ درجة</b>: خط وهمي يصل بين الشخصين، كل الكاميرات على جهة واحدة منه. إن قفزت الكاميرا إلى الجهة الأخرى انعكس كل شيء وارتبك المشاهد دون أن يعرف لماذا.</p>
+  <div class="grid2">
+    <div class="lab">
+      <div class="lab-head"><h3>قاعدة الـ١٨٠ درجة: اختر الكاميرا التالية</h3><span class="status" id="st-c"><i></i><span></span></span></div>
+      <div class="stage"><svg id="csvg" viewBox="0 0 800 300"></svg></div>
+      <div class="frames"><div class="frame" id="fPrev"><span class="lbl">اللقطة السابقة</span><div class="p a"></div><div class="p b"></div><span class="lbl2" style="left:14%">أ</span><span class="lbl2" style="right:14%">ب</span></div><div class="frame" id="fCur"><span class="lbl">اللقطة الحالية</span><div class="p a"></div><div class="p b"></div><span class="lbl2" style="left:14%">أ</span><span class="lbl2" style="right:14%">ب</span></div></div>
+      <div class="controls"><label class="ctl">الكاميرات مرقّمة على الرسم؛ اضغط على أي كاميرا لتقطع إليها.</label><button class="btn ghost" id="cReset">إعادة</button></div>
+    </div>
+    <div class="side">
+      <div class="card"><h3>أربعة أنواع من الراكورد</h3><ul><li><b>الاتجاه:</b> من ينظر يمينًا يبقى يمينًا (قاعدة ١٨٠°).</li><li><b>الحركة:</b> اليد التي ارتفعت في لقطة تُكمل في التالية من الموضع نفسه.</li><li><b>الإضاءة واللون:</b> لا تتغير الشمس بين لقطتين متتاليتين.</li><li><b>الأشياء:</b> الكوب الممتلئ لا يصبح فارغًا بلا سبب.</li></ul></div>
+      <div class="card"><h3>قاعدة الـ٣٠ درجة</h3><p>عند القطع بين لقطتين للموضوع نفسه غيّر الزاوية ٣٠ درجة على الأقل أو غيّر حجم اللقطة بوضوح، وإلا حدث «قطع قافز» يبدو خطأ تقنيًا. (القطع القافز يُستخدم عمدًا في الريلز السريعة لصناعة طاقة؛ المهم أن يكون قرارًا).</p></div>
+      <div class="card key"><h3>الخلاصة</h3><p>المشاهد يبني خريطة ذهنية للمكان. كل قطع يجب أن يحترمها أو يكسرها بقصد.</p></div>
+    </div>
+  </div>
+</section>
+
+<section class="view" data-id="transitions">
+  <p class="eyebrow">المبدأ ٤ من ٦</p>
+  <h1>الانتقالات<span>Transitions</span></h1>
+  <p class="lead">الانتقال هو الطريقة التي تنتهي بها لقطة وتبدأ الأخرى. <b>القطع الحاد</b> يصنع ٩٥٪ من المونتاج الجيد وهو الأقل لفتًا للانتباه. كل انتقال آخر يحمل معنى: الذوبان يقول «مرّ زمن»، التلاشي للأسود يقول «انتهى فصل»، والقطع المتطابق يقول «هذان الشيئان واحد». الانتقال الذي لا يحمل معنى هو زينة تشتّت.</p>
+  <div class="grid2">
+    <div class="lab">
+      <div class="lab-head"><h3>شاهد كل انتقال وما يقوله</h3><span class="status" id="st-x"><i></i><span>اختر انتقالًا</span></span></div>
+      <div class="tstage" id="tstage"><div class="fr A" id="frA"><div class="shape"></div></div><div class="fr B" id="frB" style="opacity:0"><div class="shape"></div></div><div class="black" id="blk"></div><div class="audio" id="aud"><span>الصوت</span><i id="audA"></i><i id="audB" class="red"></i></div></div>
+      <div class="controls">
+        <button class="btn" data-tr="cut">قطع حاد</button><button class="btn" data-tr="dissolve">ذوبان</button><button class="btn" data-tr="fade">تلاشي للأسود</button><button class="btn" data-tr="wipe">مسح</button><button class="btn" data-tr="match">قطع متطابق</button><button class="btn" data-tr="jcut">قطع J</button><button class="btn" data-tr="lcut">قطع L</button><button class="btn" data-tr="whip">قطع سريع</button>
+      </div>
+    </div>
+    <div class="side">
+      <div class="card"><h3>متى تستخدم ماذا</h3><ul><li><b>قطع حاد Cut:</b> الافتراضي. طاقة ووضوح.</li><li><b>ذوبان Dissolve:</b> مرور زمن، حلم، نعومة. نادر في الريلز.</li><li><b>تلاشي Fade:</b> بداية أو نهاية. مرة واحدة في الريل كحد أقصى.</li><li><b>مسح Wipe:</b> قديم أو كوميدي. تجنّبه إلا بقصد.</li><li><b>متطابق Match cut:</b> شكل أو حركة في لقطة تكمل في أخرى. إبهار وربط فكرتين.</li><li><b>J و L:</b> الصوت يسبق الصورة (J) أو يتأخر عنها (L). أكثر الانتقالات طبيعية ونعومة.</li><li><b>سريع Whip:</b> حركة كاميرا مطموسة تربط لقطتين. طاقة وترند.</li></ul></div>
+      <div class="card key"><h3>الخلاصة</h3><p>أفضل انتقال هو الذي لا يلاحظه أحد. إن لاحظه المشاهد فليكن لأنك تريد أن يقول شيئًا.</p></div>
+    </div>
+  </div>
+</section>
+
+<section class="view" data-id="sound">
+  <p class="eyebrow">المبدأ ٥ من ٦</p>
+  <h1>الصوت والإيقاع<span>Sound & Beat</span></h1>
+  <p class="lead">نصف تجربة الفيديو صوت. الموسيقى تحدّد الإيقاع قبل أن تقص أي لقطة؛ لذلك يبدأ المحترف بالصوت ثم يقطع عليه. <b>القطع على النبضة</b> يجعل الريل «محسوسًا» في الجسد. و<b>الصمت</b> قبل الكشف أقوى من أي مؤثر: عندما تتوقف الموسيقى فجأة يرفع المشاهد رأسه.</p>
+  <div class="grid2">
+    <div class="lab">
+      <div class="lab-head"><h3>شبكة النبض: اضبط القطعات على الموسيقى</h3><span class="status" id="st-s"><i></i><span></span></span></div>
+      <div class="beats" id="beats"></div>
+      <div class="controls">
+        <label class="ctl">السرعة <input type="range" id="sBpm" min="60" max="180" value="120"> <span class="readout" id="sBpmV">120 BPM</span></label>
+        <button class="btn" id="sSnap">🧲 القطع على النبض</button>
+        <button class="btn" id="sPlay">▶ شغّل النبض</button>
+        <button class="btn ghost" id="sShuffle">قطعات عشوائية</button>
+      </div>
+      <div class="lab-head" style="border-top:1px solid var(--line)"><h3>طبقات الصوت: شغّل طبقة لتعرف ماذا تضيف</h3><span class="status" id="st-l"><i></i><span>لا صوت</span></span></div>
+      <div class="layers" id="layers"></div>
+    </div>
+    <div class="side">
+      <div class="card"><h3>ترجمة السرعة إلى شعور</h3><ul><li><b>٦٠–٩٠ BPM:</b> هدوء، فخامة، عاطفة. لقطات طويلة.</li><li><b>٩٠–١٢٠:</b> إعلاني عادي، واثق.</li><li><b>١٢٠–١٥٠:</b> طاقة، شباب، رياضة.</li><li><b>١٥٠+:</b> انفجار، ترند، كوميديا سريعة.</li></ul></div>
+      <div class="card"><h3>قاعدة الصمت</h3><p>اقطع الموسيقى نصف ثانية قبل ظهور المنتج. الصمت يخلق فراغًا سمعيًا، والفراغ كما تعلمنا يرفع قيمة ما يأتي بعده.</p></div>
+      <div class="card key"><h3>الخلاصة</h3><p>ابدأ بالصوت. اقطع على النبضة. واصمت قبل الكشف.</p></div>
+    </div>
+  </div>
+</section>
+
+<section class="view" data-id="emotion">
+  <p class="eyebrow">المبدأ ٦ من ٦</p>
+  <h1>بناء الشعور والغموض<span>Emotion & Suspense</span></h1>
+  <p class="lead">الغموض هو <b>حجب معلومة</b> يريدها المشاهد. الريل الذي يقول كل شيء في الثانية الأولى لا يُكمله أحد، والذي يحجب كل شيء حتى النهاية يُترك قبلها. الفن هو الجرعة: تلميح، ثم تلميح أوضح، ثم تصعيد، ثم كشف، ثم دعوة. كل مرحلة تطعم العين شيئًا وتحجب شيئًا.</p>
+  <div class="grid2">
+    <div class="lab">
+      <div class="lab-head"><h3>جرعة الكشف: متى يعرف المشاهد ما هذا؟</h3><span class="status" id="st-e"><i></i><span></span></span></div>
+      <div class="stage"><svg id="esvg" viewBox="0 0 800 300"></svg></div>
+      <div class="controls">
+        <label class="ctl">لحظة الكشف الكامل <input type="range" id="eReveal" min="10" max="145" value="110"> <span class="readout" id="eRevealV">11.0s</span></label>
+        <label class="ctl">عدد التلميحات قبله <input type="range" id="eHints" min="0" max="5" value="3"> <span class="readout" id="eHintsV">3</span></label>
+      </div>
+    </div>
+    <div class="side">
+      <div class="card"><h3>بنية الريل الإعلاني في ٥ مراحل</h3><ol><li><b>الهوك (٠–٣ ث):</b> سؤال بصري لا يمكن تركه.</li><li><b>التلميح (٣–٦):</b> تفصيل من المنتج دون كشفه: ملمس، صوت، ظل.</li><li><b>التصعيد (٦–١٠):</b> لقطات تقصر، موسيقى تعلو، تلميحات أوضح.</li><li><b>الكشف (١٠–١٣):</b> صمت، لقطة طويلة، المنتج كاملًا.</li><li><b>الدعوة (١٣–١٥):</b> اسم، سعر أو عرض، فعل واحد: «اطلب».</li></ol></div>
+      <div class="card"><h3>الغموض ليس إخفاءً</h3><p>المشاهد يجب أن يعرف أن هناك شيئًا يستحق الانتظار. أعطه ٣ تلميحات على الأقل قبل الكشف؛ بلا تلميحات لا يوجد ترقّب، بل ملل.</p></div>
+      <div class="card key"><h3>الخلاصة</h3><p>الشعور يُبنى على مراحل، والغموض جرعات. اكشف عندما يبلغ الترقّب ذروته، لا قبل ولا بعد.</p></div>
+    </div>
+  </div>
+</section>
+
+<section class="view" data-id="summary">
+  <p class="eyebrow">خريطة الدرس</p>
+  <h1>الريل الإعلاني في صفحة واحدة<span>The Map</span></h1>
+  <p class="lead">هذه قائمة الفحص قبل تصدير أي ريل. إن أجبت بـ«نعم» على كلها فالريل جاهز ليقول عنه الناس «واو».</p>
+  <div class="sum" id="sum"></div>
+  <div class="check" id="check"></div>
+</section>
+
+<section class="view" data-id="quiz">
+  <p class="eyebrow">الاختبار</p>
+  <h1>هل تسمع الإيقاع؟<span>10 Questions</span></h1>
+  <p class="lead">١٠ أسئلة. اختر، ثم اقرأ لماذا.</p>
+  <div class="quiz" id="quiz"></div>
+</section>
+
+<div class="navbar"><button class="btn" id="prevBtn">السابق →</button><span class="hint">استخدم أسهم لوحة المفاتيح للتنقّل</span><button class="btn primary" id="nextBtn">← التالي</button></div>
+
+<footer class="author"><div class="av">ع</div><div><b>عمر غالب</b><p>فنان تشكيلي ومدرّب صناعة المحتوى بالذكاء الاصطناعي وأدوات Adobe</p><a class="ig" href="https://instagram.com/omarghalip" target="_blank" rel="noopener">@omarghalip</a></div></footer>
+</main>
+
+<script>
+(function(){
+'use strict';
+const $=s=>document.querySelector(s),$$=s=>Array.from(document.querySelectorAll(s));
+const clamp=(v,a,b)=>Math.max(a,Math.min(b,v));
+function setStatus(id,kind,text){const el=$(id);el.className='status '+kind;el.lastElementChild.textContent=text;}
+const reduced=matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+/* nav */
+const views=$$('.view'),ids=views.map(v=>v.dataset.id);
+const names={start:'البداية',questions:'السؤالان والمنتج',rhythm:'الإيقاع',timing:'التوقيت',continuity:'الاستمرارية',transitions:'الانتقالات',sound:'الصوت والإيقاع',emotion:'بناء الشعور',summary:'الخريطة',quiz:'الاختبار'};
+const en={questions:'Brief & Placement',rhythm:'Pacing',timing:'Timing',continuity:'Continuity',transitions:'Transitions',sound:'Sound & Beat',emotion:'Emotion & Suspense',summary:'Checklist',quiz:'Quiz'};
+let cur=0;const seen=new Set();const chapters=$('#chapters');
+ids.forEach((id,i)=>{const b=document.createElement('button');b.textContent=names[id];b.onclick=()=>go(i);chapters.appendChild(b);});
+ids.slice(1).forEach((id,i)=>{const b=document.createElement('button');b.innerHTML=`<span class="n">${i===0?'قبل البدء':i<=6?'المبدأ '+i:''}</span><b>${names[id]}</b><small>${en[id]||''}</small>`;b.onclick=()=>go(i+1);$('#menu').appendChild(b);});
+function go(i){cur=clamp(i,0,views.length-1);seen.add(cur);views.forEach((v,k)=>v.classList.toggle('on',k===cur));
+  Array.from(chapters.children).forEach((b,k)=>{b.classList.toggle('on',k===cur);b.classList.toggle('done',seen.has(k)&&k!==cur);if(k===cur)b.scrollIntoView({inline:'center',block:'nearest',behavior:'smooth'});});
+  $('#counter').textContent=cur===0?'':`${cur} / ${views.length-1}`;$('#prevBtn').style.visibility=cur===0?'hidden':'visible';$('#nextBtn').textContent=cur===views.length-1?'العودة للبداية':'← التالي';
+  if(location.hash!=='#'+ids[cur])history.replaceState(null,'','#'+ids[cur]);window.scrollTo({top:0,behavior:'smooth'});if(ids[cur]==='sound')drawBeats();}
+$('#prevBtn').onclick=()=>go(cur-1);$('#nextBtn').onclick=()=>go(cur===views.length-1?0:cur+1);
+document.addEventListener('keydown',e=>{if(['INPUT','TEXTAREA','SELECT'].includes(document.activeElement.tagName))return;if(e.key==='ArrowLeft'||e.key==='PageDown'||e.key===' '){e.preventDefault();go(cur+1);}if(e.key==='ArrowRight'||e.key==='PageUp'){e.preventDefault();go(cur-1);}if(e.key==='Home')go(0);});
+window.addEventListener('hashchange',()=>{const k=ids.indexOf(location.hash.slice(1));if(k>=0&&k!==cur)go(k);});
+const h0=ids.indexOf(location.hash.slice(1));go(h0>=0?h0:0);
+
+/* ---------- 1. reel planner ---------- */
+const FEELS=['غموض','رغبة','توتر','فرح','ثقة','فخامة','طاقة'];
+const FCOL={'غموض':'#3A3D6B','رغبة':'#8C2F5B','توتر':'#7A3A1E','فرح':'#C98A1E','ثقة':'#1F4F7A','فخامة':'#4A4036','طاقة':'#B23A2E'};
+let pp='end',hook=3,build=7,segFeel={hook:'غموض',build:'رغبة',proof:'ثقة'};
+function renderPlan(){
+  const T=15;let segs=[];
+  if(pp==='first'){segs=[{n:'المنتج + الهوك',d:Math.min(hook,4),prod:true},{n:'لماذا هو مميز',f:segFeel.build,d:Math.max(1,T-Math.min(hook,4)-3)},{n:'الدعوة',f:'ثقة',d:3}];}
+  else if(pp==='mid'){const b=Math.min(build,T-hook-5);segs=[{n:'الهوك',f:segFeel.hook,d:hook},{n:'المنتج',d:2,prod:true},{n:'إثبات: قبل/بعد',f:segFeel.proof,d:Math.max(1,T-hook-2-2)},{n:'الدعوة',f:'ثقة',d:2}];}
+  else{const b=Math.min(build,T-hook-3);segs=[{n:'الهوك',f:segFeel.hook,d:hook},{n:'بناء الشعور',f:segFeel.build,d:b},{n:'الكشف',d:Math.max(1,T-hook-b-1),prod:true},{n:'الدعوة',f:'ثقة',d:1}];}
+  const tot=segs.reduce((a,s)=>a+s.d,0);
+  $('#track').innerHTML=segs.map(s=>`<div class="seg${s.prod?' prod':''}" style="flex:${s.d/tot};background:${s.prod?'':FCOL[s.f]}">${s.n}<small>${s.d}ث${s.f?' · '+s.f:''}</small></div>`).join('');
+  const ctl=$('#segctl');ctl.innerHTML='';
+  [['hook','شعور الهوك'],['build','شعور بناء الشعور / التبرير'],['proof','شعور الإثبات']].forEach(([k,l])=>{if(pp==='first'&&k!=='build')return;if(pp==='mid'&&k==='build')return;if(pp==='end'&&k==='proof')return;const row=document.createElement('div');row.className='segrow';row.innerHTML=`<span>${l}:</span><div class="chips">${FEELS.map(f=>`<button class="btn${segFeel[k]===f?' on':''}" data-sf="${k}" data-f="${f}">${f}</button>`).join('')}</div>`;ctl.appendChild(row);});
+  ctl.querySelectorAll('[data-sf]').forEach(b=>b.onclick=()=>{segFeel[b.dataset.sf]=b.dataset.f;renderPlan();});
+  if(hook>3)setStatus('#st-q','bad',`الهوك ${hook} ثوانٍ: طويل، المشاهد يغادر بعد ٣`);
+  else if(pp==='first')setStatus('#st-q','ok','كشف فوري: يناسب منتجًا معروفًا أو ترند أو مسابقة، ثم تبرير');
+  else if(pp==='mid')setStatus('#st-q','ok','كشف ثم إثبات: يناسب الخصومات والمنتجات العملية (قبل/بعد)');
+  else if(build<4)setStatus('#st-q','warn','بناء الشعور قصير: الكشف يأتي قبل أن يتكوّن الترقّب');
+  else setStatus('#st-q','ok',`بناء ${segFeel.build} ${build} ثوانٍ ثم كشف: يناسب المنتج الجديد والفاخر`);
+}
+$$('[data-pp]').forEach(b=>b.onclick=()=>{pp=b.dataset.pp;$$('[data-pp]').forEach(x=>x.classList.toggle('on',x===b));renderPlan();});
+$('#qHook').oninput=e=>{hook=+e.target.value;$('#qHookV').textContent=hook+'s';renderPlan();};
+$('#qBuild').oninput=e=>{build=+e.target.value;$('#qBuildV').textContent=build+'s';renderPlan();};
+renderPlan();
+
+/* ---------- 2. pacing ---------- */
+const rsvg=$('#rsvg');let rLen=1.4,rMode='flat',rHold=false,rPlay=false,rPos=0,rTimer=null;
+function cutsFor(){const cuts=[];let t=0,i=0;while(t<15){let L=rLen;const f=t/15;if(rMode==='accel')L=rLen*(1.8-1.5*f);if(rMode==='decel')L=rLen*(0.4+1.5*f);L=Math.max(.25,L);if(rHold&&t>9.5&&t<13){L=3.2;}cuts.push({t,L});t+=L;i++;}return cuts;}
+function drawR(){
+  const cuts=cutsFor();const avg=15/cuts.length;
+  let h='<rect width="800" height="200" fill="#121214"/>';
+  for(let s=0;s<=15;s+=3)h+=`<text x="${20+s/15*760}" y="22" fill="#8C857F" font-size="12" text-anchor="middle" font-family="Expo,Cairo,sans-serif">${s}s</text>`;
+  const pal=['#2A3A5C','#3B5A7A','#2A8C85','#4A4036','#5B4E7A','#1F4F7A'];
+  cuts.forEach((c,i)=>{const x=20+c.t/15*760,w=Math.max(2,c.L/15*760-2);const hold=rHold&&c.L>3;const lit=rPlay&&rPos>=c.t&&rPos<c.t+c.L;h+=`<rect x="${x}" y="40" width="${w}" height="110" rx="4" fill="${hold?'#E3262D':pal[i%pal.length]}" ${lit?'stroke="#fff" stroke-width="3"':''}/>`;if(hold)h+=`<text x="${x+w/2}" y="100" fill="#fff" font-size="14" text-anchor="middle" font-family="Expo,Cairo,sans-serif">الكشف</text>`;});
+  if(rPlay)h+=`<line x1="${20+rPos/15*760}" y1="32" x2="${20+rPos/15*760}" y2="160" stroke="#fff" stroke-width="2"/>`;
+  h+=`<text x="780" y="188" fill="#C4BCB4" font-size="13" text-anchor="end" font-family="Expo,Cairo,sans-serif">${cuts.length} لقطة · متوسط ${avg.toFixed(1)} ث</text>`;
+  rsvg.innerHTML=h;
+  let feel,k='ok';if(avg<0.8){feel='انفجار وطاقة: رياضة، خصم، ترند';}else if(avg<2){feel='إيقاع إعلاني حيوي وواضح';}else if(avg<4){feel='فخامة وعاطفة وقصة';}else{feel='تأمل وغموض وثقل';k='warn';}
+  if(rHold)setStatus('#st-r','bad','كسر الإيقاع: لقطة طويلة بعد التسارع، هنا يظهر المنتج');
+  else setStatus('#st-r',k,feel+(rMode==='accel'?' · يتسارع نحو ذروة':rMode==='decel'?' · يهدأ نحو النهاية':''));
+}
+$('#rLen').oninput=e=>{rLen=e.target.value/10;$('#rLenV').textContent=rLen.toFixed(1)+'s';drawR();};
+$$('[data-rmode]').forEach(b=>b.onclick=()=>{rMode=b.dataset.rmode;$$('[data-rmode]').forEach(x=>x.classList.toggle('on',x===b));drawR();});
+$('#rHold').onclick=()=>{rHold=!rHold;$('#rHold').classList.toggle('on',rHold);drawR();};
+$('#rPlay').onclick=()=>{rPlay=!rPlay;$('#rPlay').classList.toggle('on',rPlay);$('#rPlay').textContent=rPlay?'⏸ أوقف':'▶ شغّل';clearInterval(rTimer);rPos=0;if(rPlay)rTimer=setInterval(()=>{rPos+=.1;if(rPos>15)rPos=0;drawR();},100);else drawR();};
+drawR();
+
+/* ---------- 3. timing / attention ---------- */
+const tsvg=$('#tsvg');let tHook=true,tBuild=.7,tPeak=11,tProd=13,tdrag=false;
+function att(t){const base=.25+(tHook?.55:.15)*Math.exp(-Math.pow(t-.8,2)/2.2);const b=tBuild*Math.exp(-Math.pow(t-tPeak,2)/(2*2.2*2.2));const decay=1-Math.max(0,(t-tPeak-1.5))*.12;return clamp((base+b*1.1)*Math.min(1,decay)*(tHook?1:.75),0.05,1);}
+function drawT(){
+  const X=t=>30+t/15*740,Y=a=>260-a*220;
+  let h='<rect width="800" height="300" fill="#121214"/>';
+  for(let s=0;s<=15;s+=3)h+=`<text x="${X(s)}" y="290" fill="#8C857F" font-size="12" text-anchor="middle" font-family="Expo,Cairo,sans-serif">${s}s</text><line x1="${X(s)}" y1="30" x2="${X(s)}" y2="265" stroke="#2A2A2F"/>`;
+  let peak=0,pt=0;for(let t=0;t<=15;t+=.1){const a=att(t);if(a>peak){peak=a;pt=t;}}
+  const win=[];for(let t=0;t<=15;t+=.1)if(att(t)>=peak*.8)win.push(t);
+  if(win.length)h+=`<rect x="${X(win[0])}" y="30" width="${X(win[win.length-1])-X(win[0])}" height="235" fill="#3CB371" fill-opacity=".14"/><text x="${X((win[0]+win[win.length-1])/2)}" y="48" fill="#3CB371" font-size="12" text-anchor="middle" font-family="Expo,Cairo,sans-serif">نافذة الاستقبال</text>`;
+  let d='';for(let t=0;t<=15;t+=.1)d+=(t?'L':'M')+X(t).toFixed(1)+' '+Y(att(t)).toFixed(1)+' ';
+  h+=`<path d="${d}" fill="none" stroke="#F5F1EE" stroke-width="2.5"/><path d="${d} L${X(15)} 260 L${X(0)} 260Z" fill="#F5F1EE" fill-opacity=".06"/>`;
+  h+=`<line x1="${X(3)}" y1="30" x2="${X(3)}" y2="265" stroke="#E3B23C" stroke-dasharray="4 4"/><text x="${X(3)+4}" y="262" fill="#E3B23C" font-size="11" font-family="Expo,Cairo,sans-serif">حدّ الهوك</text>`;
+  const ax=X(tProd),ay=Y(att(tProd));
+  h+=`<line x1="${ax}" y1="${ay}" x2="${ax}" y2="265" stroke="#E3262D" stroke-width="2"/><circle id="tH" cx="${ax}" cy="${ay}" r="16" fill="#E3262D" style="cursor:grab"/><text x="${ax}" y="${ay+5}" fill="#fff" font-size="12" text-anchor="middle" font-family="Expo,Cairo,sans-serif" pointer-events="none">منتج</text>`;
+  tsvg.innerHTML=h;
+  const a=att(tProd);const inWin=a>=peak*.8;
+  if(!tHook&&tProd>3)setStatus('#st-t','bad','بلا هوك: نصف المشاهدين غادروا قبل أن يصل المنتج');
+  else if(inWin)setStatus('#st-t','ok',`المشاهد جاهز للاستقبال: الانتباه ${Math.round(a*100)}٪ من الذروة`);
+  else if(tProd<pt)setStatus('#st-t','warn',`مبكر: الشعور لم يكتمل بعد (${Math.round(a/peak*100)}٪ من الذروة)`);
+  else setStatus('#st-t','bad',`متأخر: الانتباه هبط إلى ${Math.round(a/peak*100)}٪ من الذروة`);
+}
+tsvg.addEventListener('pointerdown',e=>{if(e.target.id==='tH'){tdrag=true;tsvg.setPointerCapture(e.pointerId);}});
+tsvg.addEventListener('pointermove',e=>{if(!tdrag)return;const r=tsvg.getBoundingClientRect();const x=(e.clientX-r.left)/r.width*800;tProd=clamp((x-30)/740*15,0,15);drawT();});
+tsvg.addEventListener('pointerup',()=>tdrag=false);tsvg.addEventListener('pointercancel',()=>tdrag=false);
+$('#tHook').onclick=()=>{tHook=!tHook;$('#tHook').classList.toggle('on',tHook);drawT();};
+$('#tBuild').oninput=e=>{tBuild=e.target.value/100;drawT();};
+$('#tPeak').oninput=e=>{tPeak=e.target.value/10;$('#tPeakV').textContent=tPeak.toFixed(1)+'s';drawT();};
+drawT();
+
+/* ---------- 4. continuity / 180 rule ---------- */
+const csvg=$('#csvg');
+const cams=[{id:1,x:160,y:250,side:'S',ang:200,name:'عامة'},{id:2,x:330,y:265,side:'S',ang:230,name:'فوق كتف أ'},{id:3,x:470,y:265,side:'S',ang:310,name:'فوق كتف ب'},{id:4,x:640,y:235,side:'S',ang:340,name:'قريبة ب'},{id:5,x:400,y:45,side:'N',ang:90,name:'خلف الخط'},{id:6,x:350,y:262,side:'S',ang:240,name:'قريبة من ٢'}];
+let prevCam=1,curCam=2;
+function drawC(){
+  let h='<rect width="800" height="300" fill="#121214"/><line x1="60" y1="150" x2="740" y2="150" stroke="#E3262D" stroke-dasharray="8 6" stroke-width="2"/><text x="740" y="140" fill="#E3262D" font-size="12" text-anchor="end" font-family="Expo,Cairo,sans-serif">خط الـ١٨٠°</text>';
+  h+='<circle cx="300" cy="150" r="24" fill="#5BA7D6"/><text x="300" y="156" fill="#fff" font-size="16" text-anchor="middle" font-weight="700" font-family="Expo,Cairo,sans-serif">أ</text><circle cx="500" cy="150" r="24" fill="#E3B23C"/><text x="500" y="156" fill="#000" font-size="16" text-anchor="middle" font-weight="700" font-family="Expo,Cairo,sans-serif">ب</text>';
+  h+='<rect x="60" y="165" width="680" height="120" fill="#3CB371" fill-opacity=".05"/><text x="70" y="285" fill="#3CB371" font-size="11" font-family="Expo,Cairo,sans-serif">الجهة الآمنة</text>';
+  cams.forEach(c=>{const on=c.id===curCam,pv=c.id===prevCam;h+=`<g data-cam="${c.id}" style="cursor:pointer"><line x1="${c.x}" y1="${c.y}" x2="400" y2="150" stroke="${on?'#fff':'#3A3A41'}" stroke-width="${on?2:1}" stroke-dasharray="${on?'0':'3 4'}"/><circle cx="${c.x}" cy="${c.y}" r="18" fill="${on?'#E3262D':pv?'#4A4036':'#1B1B1E'}" stroke="${on?'#fff':pv?'#C4BCB4':'#3A3A41'}" stroke-width="2"/><text x="${c.x}" y="${c.y+5}" fill="#fff" font-size="13" text-anchor="middle" font-weight="700" font-family="Expo,Cairo,sans-serif">${c.id}</text><text x="${c.x}" y="${c.y+(c.side==='N'?-26:32)}" fill="#8C857F" font-size="11" text-anchor="middle" font-family="Expo,Cairo,sans-serif">${c.name}</text></g>`;});
+  csvg.innerHTML=h;
+  const P=cams.find(c=>c.id===prevCam),C=cams.find(c=>c.id===curCam);
+  applyFrame('#fPrev',P);applyFrame('#fCur',C);
+  const flip=P.side!==C.side;const ang=Math.abs(P.ang-C.ang);
+  if(flip)setStatus('#st-c','bad','قفزة المحور: أ انتقل من يسار الكادر إلى يمينه، المشاهد يرتبك');
+  else if(ang<30)setStatus('#st-c','warn',`زاويتان متقاربتان (${ang}°): قطع قافز يبدو كخطأ، إلا إن قصدته للطاقة`);
+  else setStatus('#st-c','ok','الاتجاهات ثابتة: أ يسارًا وب يمينًا، استمرارية سليمة');
+}
+function applyFrame(sel,c){const f=$(sel);const flip=c.side==='N';f.querySelector('.p.a').style.left=flip?'auto':'14%';f.querySelector('.p.a').style.right=flip?'14%':'auto';f.querySelector('.p.b').style.right=flip?'auto':'14%';f.querySelector('.p.b').style.left=flip?'14%':'auto';
+  const la=f.querySelectorAll('.lbl2');la[0].style.left=flip?'auto':'14%';la[0].style.right=flip?'14%':'auto';la[1].style.right=flip?'auto':'14%';la[1].style.left=flip?'14%':'auto';
+  f.querySelector('.p.a').style.transform=flip?'scaleX(-1)':'none';f.querySelector('.p.b').style.transform=flip?'scaleX(-1)':'none';
+  const sc=c.id===4?1.6:c.id===2||c.id===3||c.id===6?1.25:1;f.querySelectorAll('.p').forEach(p=>p.style.width=22*sc+'%');}
+csvg.addEventListener('click',e=>{const g=e.target.closest('[data-cam]');if(!g)return;const id=+g.dataset.cam;if(id===curCam)return;prevCam=curCam;curCam=id;drawC();});
+$('#cReset').onclick=()=>{prevCam=1;curCam=2;drawC();};
+drawC();
+
+/* ---------- 5. transitions ---------- */
+const TR={cut:{k:'ok',t:'قطع حاد: الافتراضي، لا يُلاحظ، طاقة ووضوح'},dissolve:{k:'warn',t:'ذوبان: «مرّ زمن» أو حلم، نعومة، نادر في الريلز'},fade:{k:'warn',t:'تلاشي للأسود: نهاية فصل أو بداية، مرة واحدة كحد أقصى'},wipe:{k:'bad',t:'مسح: يبدو قديمًا أو كوميديًا، تجنّبه إلا بقصد'},match:{k:'ok',t:'قطع متطابق: الشكل نفسه في الموضع نفسه، يربط فكرتين ويُبهر'},jcut:{k:'ok',t:'قطع J: صوت اللقطة التالية يسبق صورتها، أنعم الانتقالات'},lcut:{k:'ok',t:'قطع L: صوت اللقطة السابقة يستمر تحت التالية، طبيعي'},whip:{k:'ok',t:'قطع سريع: حركة مطموسة تربط لقطتين، طاقة وترند'}};
+let trTimer=[];
+function runTr(k){
+  trTimer.forEach(clearTimeout);trTimer=[];const A=$('#frA'),B=$('#frB'),blk=$('#blk'),aA=$('#audA'),aB=$('#audB');
+  A.style.transition='none';B.style.transition='none';blk.style.transition='none';A.style.opacity=1;A.style.clipPath='none';A.style.filter='none';B.style.opacity=0;B.style.clipPath='none';B.style.filter='none';B.classList.toggle('match',k==='match');blk.style.opacity=0;aA.classList.remove('red');aB.classList.add('red');aA.style.background='#5BA7D6';aB.style.background='#E3262D';
+  $$('[data-tr]').forEach(x=>x.classList.toggle('on',x.dataset.tr===k));
+  const at=(ms,fn)=>trTimer.push(setTimeout(fn,ms));
+  const D=reduced?0:1;
+  at(700,()=>{
+    if(k==='cut'||k==='match'){B.style.opacity=1;}
+    if(k==='dissolve'){B.style.transition=`opacity ${900*D}ms`;B.style.opacity=1;}
+    if(k==='fade'){blk.style.transition=`opacity ${500*D}ms`;blk.style.opacity=1;at(600,()=>{B.style.opacity=1;blk.style.opacity=0;});}
+    if(k==='wipe'){B.style.clipPath='inset(0 100% 0 0)';B.style.opacity=1;requestAnimationFrame(()=>{B.style.transition=`clip-path ${700*D}ms linear`;B.style.clipPath='inset(0 0 0 0)';});}
+    if(k==='whip'){A.style.transition=`filter ${250*D}ms`;A.style.filter='blur(14px)';at(250,()=>{B.style.filter='blur(14px)';B.style.opacity=1;requestAnimationFrame(()=>{B.style.transition=`filter ${300*D}ms`;B.style.filter='blur(0)';});});}
+    if(k==='jcut'){aA.style.background='#E3262D';at(700,()=>B.style.opacity=1);}
+    if(k==='lcut'){B.style.opacity=1;aB.style.background='#5BA7D6';at(700,()=>aB.style.background='#E3262D');}
+  });
+  setStatus('#st-x',TR[k].k,TR[k].t);
+}
+$$('[data-tr]').forEach(b=>b.onclick=()=>runTr(b.dataset.tr));
+
+/* ---------- 6. sound ---------- */
+const beats=$('#beats');let bpm=120,snap=false,sPlay=false,sTimer=null,sPos=0,cutsS=[2.3,4.1,5.2,7.9,9.6,11.1,13.4];let audioCtx=null;
+function beatInt(){return 60/bpm;}
+function drawBeats(){
+  const W=beats.clientWidth||600;const T=15;let h='';const bi=beatInt();
+  for(let i=0,t=0;t<=T;i++,t=i*bi)h+=`<div class="beat${i%4===0?' strong':''}" style="left:${t/T*W}px"></div>`;
+  let onBeat=0;
+  cutsS.forEach(c=>{let t=c;if(snap)t=Math.round(c/bi)*bi;const near=Math.abs(t/bi-Math.round(t/bi))<0.08;if(near)onBeat++;h+=`<div class="cut${near?'':' off'}" style="left:${t/T*W}px"></div>`;});
+  if(sPlay)h+=`<div class="ph" style="left:${sPos/T*W}px"></div>`;
+  h+='<div class="flash" id="flash"></div>';beats.innerHTML=h;
+  let feel=bpm<90?'هدوء وفخامة: لقطات طويلة':bpm<120?'إعلاني واثق':bpm<150?'طاقة وشباب':'انفجار وترند';
+  if(onBeat===cutsS.length)setStatus('#st-s','ok',`كل القطعات على النبض · ${feel}`);else setStatus('#st-s',onBeat<3?'bad':'warn',`${cutsS.length-onBeat} قطعات خارج النبض: شيء غير مريح لا يعرف المشاهد سببه · ${feel}`);
+}
+function click(strong){try{audioCtx=audioCtx||new (window.AudioContext||window.webkitAudioContext)();const o=audioCtx.createOscillator(),g=audioCtx.createGain();o.frequency.value=strong?1200:800;g.gain.value=.15;o.connect(g);g.connect(audioCtx.destination);o.start();g.gain.exponentialRampToValueAtTime(.001,audioCtx.currentTime+.08);o.stop(audioCtx.currentTime+.09);}catch(e){}}
+$('#sBpm').oninput=e=>{bpm=+e.target.value;$('#sBpmV').textContent=bpm+' BPM';drawBeats();if(sPlay)startBeat();};
+$('#sSnap').onclick=()=>{snap=!snap;$('#sSnap').classList.toggle('on',snap);drawBeats();};
+$('#sShuffle').onclick=()=>{cutsS=Array.from({length:7},()=>+(Math.random()*14.5).toFixed(2)).sort((a,b)=>a-b);drawBeats();};
+function startBeat(){clearInterval(sTimer);let n=0;sPos=0;sTimer=setInterval(()=>{sPos+=beatInt();if(sPos>15){sPos=0;n=0;}click(n%4===0);n++;drawBeats();const f=$('#flash');if(f){f.style.opacity=.25;setTimeout(()=>f.style.opacity=0,60);}},beatInt()*1000);}
+$('#sPlay').onclick=()=>{sPlay=!sPlay;$('#sPlay').classList.toggle('on',sPlay);$('#sPlay').textContent=sPlay?'⏸ أوقف':'▶ شغّل النبض';if(sPlay)startBeat();else{clearInterval(sTimer);drawBeats();}};
+window.addEventListener('resize',drawBeats);drawBeats();
+const LAY=[['music','الموسيقى','تحدّد الإيقاع والشعور قبل أي لقطة'],['vo','التعليق الصوتي','يحمل الرسالة؛ جملة واحدة واضحة'],['sfx','المؤثرات','تُجسّد الملمس: صوت الفتح، الصبّ، النقر'],['silence','الصمت قبل الكشف','فراغ سمعي يضاعف أثر ما بعده']];
+let lay=new Set();
+$('#layers').innerHTML=LAY.map(l=>`<button data-l="${l[0]}"><b>${l[1]}</b><span>${l[2]}</span></button>`).join('');
+$$('#layers button').forEach(b=>b.onclick=()=>{const k=b.dataset.l;lay.has(k)?lay.delete(k):lay.add(k);b.classList.toggle('on',lay.has(k));
+  const n=lay.size;let t,k2='ok';if(!n){t='لا صوت: نصف التجربة مفقود';k2='bad';}else if(lay.has('silence')&&lay.has('music'))t='موسيقى تتوقف قبل الكشف: أقوى تركيبة للريل الإعلاني';else if(n===1)t=lay.has('music')?'موسيقى فقط: إيقاع بلا رسالة':lay.has('vo')?'تعليق فقط: رسالة بلا شعور':lay.has('sfx')?'مؤثرات فقط: ملمس بلا سياق':'صمت وحده: لا يعمل بلا ما يسبقه';else t=`${n} طبقات: التجربة تكتمل، احرص ألا تتزاحم`;setStatus('#st-l',k2,t);});
+
+/* ---------- 7. emotion / suspense ---------- */
+const esvg=$('#esvg');let eRev=11,eHints=3;
+function drawE(){
+  const X=t=>30+t/15*740,Y=v=>260-v*220;
+  let h='<rect width="800" height="300" fill="#121214"/>';
+  for(let s=0;s<=15;s+=3)h+=`<text x="${X(s)}" y="290" fill="#8C857F" font-size="12" text-anchor="middle" font-family="Expo,Cairo,sans-serif">${s}s</text><line x1="${X(s)}" y1="30" x2="${X(s)}" y2="265" stroke="#2A2A2F"/>`;
+  // knowledge curve (what the viewer knows) and suspense curve
+  const hints=[];for(let i=1;i<=eHints;i++)hints.push(3+(eRev-3)*i/(eHints+1));
+  let know=t=>{let k=.05;hints.forEach((ht,i)=>{if(t>=ht)k=.15+.5*(i+1)/(eHints+1);});if(t>=eRev)k=1;return k;};
+  let sus=t=>{if(t>=eRev)return Math.max(0,1-(t-eRev)*.5);const kk=know(t);return clamp(kk*1.6*(1-kk*.4)+(t>3&&eHints===0?-.3:0),0,1)*(t<3?.5:1);};
+  let d1='',d2='';for(let t=0;t<=15;t+=.1){d1+=(t?'L':'M')+X(t).toFixed(1)+' '+Y(know(t)).toFixed(1)+' ';d2+=(t?'L':'M')+X(t).toFixed(1)+' '+Y(sus(t)).toFixed(1)+' ';}
+  h+=`<path d="${d2} L${X(15)} 260 L${X(0)} 260Z" fill="#E3262D" fill-opacity=".12"/><path d="${d2}" fill="none" stroke="#E3262D" stroke-width="2.5"/><path d="${d1}" fill="none" stroke="#C4BCB4" stroke-width="2" stroke-dasharray="6 4"/>`;
+  hints.forEach((ht,i)=>h+=`<circle cx="${X(ht)}" cy="${Y(know(ht))}" r="7" fill="#E3B23C"/><text x="${X(ht)}" y="${Y(know(ht))-12}" fill="#E3B23C" font-size="11" text-anchor="middle" font-family="Expo,Cairo,sans-serif">تلميح ${i+1}</text>`);
+  h+=`<line x1="${X(eRev)}" y1="30" x2="${X(eRev)}" y2="265" stroke="#fff" stroke-width="2"/><text x="${X(eRev)}" y="46" fill="#fff" font-size="12" text-anchor="middle" font-family="Expo,Cairo,sans-serif">الكشف</text>`;
+  h+=`<text x="40" y="50" fill="#E3262D" font-size="12" font-family="Expo,Cairo,sans-serif">— الترقّب</text><text x="40" y="68" fill="#C4BCB4" font-size="12" font-family="Expo,Cairo,sans-serif">- - ما يعرفه المشاهد</text>`;
+  esvg.innerHTML=h;
+  if(eRev<4)setStatus('#st-e','warn','كشف مبكر: لا غموض، يصلح فقط لمنتج معروف أو ترند');
+  else if(eRev>13)setStatus('#st-e','bad','كشف متأخر جدًا: المشاهد غادر قبل أن يرى المنتج، ولا وقت للدعوة');
+  else if(eHints===0)setStatus('#st-e','bad','بلا تلميحات: لا ترقّب بل ملل، المشاهد لا يعرف أن هناك ما ينتظره');
+  else if(eHints>=4&&eRev<8)setStatus('#st-e','warn','تلميحات كثيرة في وقت قصير: المشاهد عرف قبل الكشف');
+  else setStatus('#st-e','ok',`تشويق مضبوط: ${eHints} تلميحات ثم كشف عند ${eRev.toFixed(1)} ث والترقّب في ذروته`);
+}
+$('#eReveal').oninput=e=>{eRev=e.target.value/10;$('#eRevealV').textContent=eRev.toFixed(1)+'s';drawE();};
+$('#eHints').oninput=e=>{eHints=+e.target.value;$('#eHintsV').textContent=eHints;drawE();};
+drawE();
+
+/* ---------- summary ---------- */
+const sumData=[['السؤالان والمنتج','Brief & Placement','الرسالة والشعور أولًا، ثم موضع المنتج: أول، وسط، أو آخر.'],['الإيقاع','Pacing','طول اللقطة = الشعور. يتسارع نحو الذروة ثم يتوقف.'],['التوقيت','Timing','المنتج يظهر في نافذة الاستقبال، لا قبل الذروة ولا بعدها.'],['الاستمرارية','Continuity','قاعدة ١٨٠° و٣٠°، وراكورد الحركة والإضاءة والأشياء.'],['الانتقالات','Transitions','القطع الحاد افتراضي. كل انتقال آخر يحمل معنى.'],['الصوت والإيقاع','Sound & Beat','ابدأ بالصوت، اقطع على النبضة، اصمت قبل الكشف.'],['بناء الشعور','Emotion & Suspense','هوك، تلميح، تصعيد، كشف، دعوة. الغموض جرعات.']];
+$('#sum').innerHTML=sumData.map(d=>`<div class="card"><b>${d[0]}</b><small>${d[1]}</small><p>${d[2]}</p></div>`).join('');
+const CK=['كتبتُ الرسالة في جملة واحدة والشعور في كلمة واحدة','الثواني الثلاث الأولى سؤال بصري لا يُترك','قرّرتُ موضع المنتج عن قصد (أول/وسط/آخر) ولماذا','طول اللقطات يناسب الشعور، ويتسارع نحو الذروة','المنتج يظهر في ذروة الانتباه مع لقطة طويلة وصمت','لا قفزة محور ولا قطع قافز غير مقصود','٩٠٪ من الانتقالات قطع حاد، والباقي له معنى','القطعات على نبض الموسيقى','٣ تلميحات على الأقل قبل الكشف','آخر ثانيتين: اسم + عرض + فعل واحد'];
+$('#check').innerHTML=CK.map((c,i)=>`<label><input type="checkbox" id="ck${i}"><span>${c}</span></label>`).join('');
+$$('#check input').forEach(i=>i.onchange=()=>i.parentElement.classList.toggle('on',i.checked));
+
+/* ---------- quiz ---------- */
+const Q=[
+ {q:'منتج معروف ومحبوب وضارب ترند. متى يظهر في الريل؟',o:['آخر ثانيتين بعد بناء شعور','أول شيء، ثم نبرّر','في المنتصف بعد قبل/بعد','لا يظهر، نكتفي بالاسم'],a:1,e:'الكشف الفوري يناسب ما يعرفه الناس ويحبونه؛ لا حاجة لبناء ترقّب لشيء محبوب أصلًا.'},
+ {q:'ريل لعطر جديد فاخر. ما الإيقاع المناسب؟',o:['لقطات ٠٫٥ ثانية','لقطات ١ ثانية','لقطات ٢–٤ ثوانٍ','لا فرق'],a:2,e:'الفخامة تحتاج زمنًا لتُحسّ. اللقطات الطويلة تمنح الهيبة، والسريعة تمنح الطاقة.'},
+ {q:'أقوى بنية إيقاعية للريل الإعلاني:',o:['ثابت من البداية للنهاية','يتسارع ثم يتوقف فجأة عند الكشف','يتباطأ تدريجيًا','عشوائي'],a:1,e:'التسارع يرفع التوتر، والتوقف المفاجئ هو كسر الإيقاع الذي يوقظ العين؛ هناك يظهر المنتج.'},
+ {q:'المشاهد يقرّر البقاء أو المغادرة خلال:',o:['أول ثانية','أول ٣ ثوانٍ','أول ٧ ثوانٍ','منتصف الريل'],a:1,e:'لذلك الهوك سؤال بصري في أول ٣ ثوانٍ، لا جملة ترحيب.'},
+ {q:'كاميرا قفزت إلى الجهة الأخرى من خط الـ١٨٠°. ماذا يحدث؟',o:['لا شيء','الشخصان يتبادلان جهتي الكادر ويرتبك المشاهد','تتحسن الإضاءة','يصبح القطع أنعم'],a:1,e:'المشاهد بنى خريطة ذهنية: أ يسارًا وب يمينًا. القفز يعكسها بلا سبب فيشعر بخطأ لا يعرفه.'},
+ {q:'قطعتَ بين لقطتين للموضوع نفسه بفرق ١٠ درجات فقط. النتيجة:',o:['قطع متطابق','قطع قافز يبدو خطأ','ذوبان','لا شيء'],a:1,e:'قاعدة الـ٣٠ درجة: غيّر الزاوية ٣٠° على الأقل أو حجم اللقطة بوضوح، إلا إن قصدت القطع القافز للطاقة.'},
+ {q:'أي انتقال يُستخدم في ٩٥٪ من المونتاج الجيد؟',o:['الذوبان','المسح','القطع الحاد','التلاشي للأسود'],a:2,e:'القطع الحاد لا يُلاحظ ويحمل الطاقة. كل انتقال آخر زينة إلا إن حمل معنى.'},
+ {q:'صوت اللقطة التالية يبدأ قبل ظهور صورتها. هذا:',o:['قطع L','قطع J','قطع متطابق','خطأ تقني'],a:1,e:'في قطع J يسبق الصوت الصورة (شكل الحرف J). في قطع L يستمر الصوت السابق تحت الصورة الجديدة.'},
+ {q:'لماذا نقطع الموسيقى نصف ثانية قبل ظهور المنتج؟',o:['لتوفير الوقت','الصمت فراغ سمعي يرفع قيمة ما بعده','لأن الموسيقى مزعجة','لا نفعل ذلك'],a:1,e:'الصمت هو الفراغ في الصوت، والفراغ كما تعلمنا في الصورة يرفع قيمة ما يجاوره.'},
+ {q:'ريل بلا أي تلميح عن المنتج حتى الثانية ١٤. المشكلة:',o:['لا مشكلة، هذا غموض','لا ترقّب بل ملل، والمشاهد غادر قبل الكشف','قصير جدًا','الموسيقى غير مناسبة'],a:1,e:'الغموض جرعات: ٣ تلميحات على الأقل تُخبر المشاهد أن هناك ما يستحق الانتظار.'}
+];
+let qi=0,qScore=0,qAns=false;const quiz=$('#quiz');
+function renderQ(){if(qi>=Q.length){quiz.innerHTML=`<div class="qn">النتيجة</div><div class="score">${qScore} / ${Q.length}</div><p style="color:var(--muted)">${qScore>=9?'أنت تسمع الإيقاع. ابدأ ريلك الأول.':qScore>=6?'جيد جدًا. راجع قائمة الفحص قبل التصدير.':'عُد إلى المختبرات وحرّك المنحنيات بيدك.'}</p><div class="controls" style="padding:14px 0 0;border:0"><button class="btn" id="qRestart" style="background:var(--red);border-color:var(--red);color:#fff">أعد الاختبار</button><button class="btn" id="qMap">إلى الخريطة</button></div>`;$('#qRestart').onclick=()=>{qi=0;qScore=0;renderQ();};$('#qMap').onclick=()=>go(ids.indexOf('summary'));return;}
+  const q=Q[qi];qAns=false;quiz.innerHTML=`<div class="qn">السؤال ${qi+1} من ${Q.length}</div><h2>${q.q}</h2><div class="opts">${q.o.map((o,i)=>`<button data-o="${i}">${o}</button>`).join('')}</div><div class="expl" id="expl"></div><div class="qbar"><i style="width:${qi/Q.length*100}%"></i></div><div class="controls" style="padding:14px 0 0;border:0;justify-content:space-between"><button class="btn ghost" id="qShow">أظهر الإجابة</button><button class="btn" id="qNext" style="background:var(--red);border-color:var(--red);color:#fff;visibility:hidden">التالي</button></div>`;
+  quiz.querySelectorAll('[data-o]').forEach(b=>b.onclick=()=>answer(+b.dataset.o));$('#qShow').onclick=()=>answer(-1);$('#qNext').onclick=()=>{qi++;renderQ();};}
+function answer(i){if(qAns)return;qAns=true;const q=Q[qi];quiz.querySelectorAll('[data-o]').forEach((b,k)=>{b.disabled=true;if(k===q.a)b.classList.add('right');else if(k===i)b.classList.add('wrong');});if(i===q.a)qScore++;const ex=$('#expl');ex.textContent=(i===q.a?'صحيح. ':i<0?'':'ليس تمامًا. ')+q.e;ex.classList.add('on');$('#qNext').style.visibility='visible';}
+renderQ();
+})();
+</script>
+
+</body></html>
