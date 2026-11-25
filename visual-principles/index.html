@@ -1,0 +1,848 @@
+<!doctype html><html><head><meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover"><style>:root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#fff;color:#000}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}</style></head><body>
+<title>مبادئ المشهد البصري</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;800&display=swap">
+<style>
+/* Layout: one lesson stage at a time (slide-like), chapter chips on top, lab in the middle, status badge that
+   reacts to every move. Dark projection-friendly single theme in Omar Ghaleb's personal identity. */
+@font-face{font-family:'Camel';src:url('fonts/camel-xb.otf') format('opentype');font-weight:800;font-display:swap}
+@font-face{font-family:'Expo';src:url('fonts/expo-book.ttf') format('truetype');font-weight:400;font-display:swap}
+@font-face{font-family:'Expo';src:url('fonts/expo-medium.ttf') format('truetype');font-weight:500;font-display:swap}
+@font-face{font-family:'Expo';src:url('fonts/expo-bold.otf') format('opentype');font-weight:700;font-display:swap}
+:root{
+  --bg:#0B0B0C; --bg2:#121214; --panel:#18181B; --line:#2A2A2F; --line2:#3A3A41;
+  --fg:#F5F1EE; --muted:#C4BCB4; --dim:#8C857F;
+  --red:#E3262D; --red2:#A8201A; --gold:#E3B23C; --teal:#2A8C85; --sky:#5BA7D6; --violet:#7A6CF5;
+  --ok:#3CB371; --warn:#E3B23C; --bad:#E3262D;
+  --display:'Camel','Cairo',system-ui,sans-serif;
+  --body:'Expo','Cairo',system-ui,sans-serif;
+  color-scheme:dark;
+}
+*{box-sizing:border-box}
+html,body{height:100%}
+body{margin:0;background:var(--bg);color:var(--fg);font-family:var(--body);font-size:17px;line-height:1.7;direction:rtl;
+  padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));padding-block:0}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);z-index:10;background:var(--bg)}
+button,input,select{font-family:inherit;font-size:inherit}
+button{cursor:pointer}
+h1,h2,h3{font-family:var(--display);font-weight:800;line-height:1.25;margin:0;text-wrap:balance}
+p{margin:0}
+.wrap{max-width:1120px;margin:0 auto}
+/* top bar */
+.top{position:sticky;top:env(safe-area-inset-top,0px);z-index:9;background:var(--bg);border-bottom:1px solid var(--line)}
+.top .wrap{display:flex;align-items:center;justify-content:space-between;gap:12px;padding-block:10px;flex-wrap:wrap}
+.brand{display:flex;align-items:center;gap:10px}
+.brand b{font-family:var(--display);font-size:1.05rem}
+.brand small{color:var(--dim);font-size:.8rem}
+.mark{width:34px;height:34px;border-radius:8px;background:var(--red);display:grid;place-items:center;font-family:var(--display);font-size:1.1rem;color:#fff}
+.counter{color:var(--muted);font-size:.9rem;font-variant-numeric:tabular-nums}
+.chapters{display:flex;gap:8px;overflow-x:auto;padding-block:8px 12px;scrollbar-width:thin}
+.chapters button{flex:0 0 auto;border:1px solid var(--line);background:var(--bg2);color:var(--muted);border-radius:999px;padding:6px 14px;font-size:.88rem;font-weight:500}
+.chapters button.on{background:var(--red);border-color:var(--red);color:#fff}
+.chapters button.done{border-color:var(--line2);color:var(--fg)}
+/* stage */
+main{padding-block:28px 40px}
+.view{display:none;animation:fade .35s ease}
+.view.on{display:block}
+@keyframes fade{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
+@media (prefers-reduced-motion:reduce){.view{animation:none}*{transition:none!important}}
+.eyebrow{color:var(--red);font-weight:700;font-size:.85rem;letter-spacing:.02em}
+.view h1{font-size:clamp(2rem,5vw,3.4rem);margin-top:6px}
+.view h1 span{display:block;font-family:var(--body);font-weight:400;color:var(--dim);font-size:clamp(.95rem,2vw,1.15rem);direction:ltr;text-align:right;margin-top:4px}
+.lead{max-width:68ch;color:var(--muted);font-size:1.08rem;margin-top:14px}
+.lead b{color:var(--fg);font-weight:700}
+.grid2{display:grid;grid-template-columns:1.35fr .65fr;gap:22px;margin-top:26px;align-items:start}
+@media (max-width:860px){.grid2{grid-template-columns:1fr}}
+.lab{background:var(--panel);border:1px solid var(--line);border-radius:14px;overflow:hidden;min-width:0}
+.lab-head{display:flex;align-items:center;justify-content:space-between;gap:10px;padding:12px 16px;border-bottom:1px solid var(--line);flex-wrap:wrap}
+.lab-head h3{font-family:var(--body);font-weight:700;font-size:1rem;color:var(--muted)}
+.status{display:inline-flex;align-items:center;gap:8px;padding:6px 14px;border-radius:999px;font-weight:700;font-size:.95rem;border:1px solid var(--line2);background:var(--bg2);transition:background .3s,color .3s,border-color .3s}
+.status i{width:10px;height:10px;border-radius:50%;background:var(--dim);flex:none}
+.status.ok{border-color:var(--ok);color:#CFF5DD}.status.ok i{background:var(--ok)}
+.status.warn{border-color:var(--warn);color:#FFE9B5}.status.warn i{background:var(--warn)}
+.status.bad{border-color:var(--bad);color:#FFD2D4}.status.bad i{background:var(--bad)}
+.stage{position:relative;background:var(--bg2);min-width:0}
+.stage svg{display:block;width:100%;height:auto;touch-action:none;user-select:none}
+.controls{display:flex;flex-wrap:wrap;gap:8px;padding:12px 16px;border-top:1px solid var(--line);align-items:center}
+.controls .sep{flex-basis:100%;height:0}
+.btn{border:1px solid var(--line2);background:var(--bg2);color:var(--fg);border-radius:8px;padding:7px 13px;font-weight:500;font-size:.9rem;transition:background .2s}
+.btn:hover{background:var(--line)}
+.btn.on{background:var(--red);border-color:var(--red);color:#fff}
+.btn.ghost{border-style:dashed;color:var(--muted)}
+.btn:focus-visible,.chapters button:focus-visible,input:focus-visible{outline:2px solid var(--gold);outline-offset:2px}
+label.ctl{display:inline-flex;align-items:center;gap:8px;color:var(--muted);font-size:.88rem}
+input[type=range]{accent-color:var(--red);width:150px;max-width:40vw}
+.side{display:grid;gap:14px;min-width:0}
+.card{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:16px 18px}
+.card h3{font-family:var(--body);font-size:.85rem;font-weight:700;color:var(--red);margin-bottom:8px}
+.card p,.card li{color:var(--muted);font-size:.97rem}
+.card ul{margin:0;padding-right:18px;display:grid;gap:4px}
+.card.key{border-color:var(--red2);background:linear-gradient(180deg,rgba(227,38,45,.08),transparent)}
+.card.key p{color:var(--fg);font-weight:500;font-size:1.02rem}
+.readout{font-variant-numeric:tabular-nums;color:var(--fg);font-weight:700}
+.navbar{display:flex;justify-content:space-between;align-items:center;gap:10px;margin-top:30px;padding-top:18px;border-top:1px solid var(--line)}
+.navbar .btn{padding:10px 20px}
+.navbar .btn.primary{background:var(--red);border-color:var(--red);color:#fff;font-weight:700}
+.hint{color:var(--dim);font-size:.82rem;text-align:center}
+/* start view */
+.hero{padding-block:30px 10px}
+.hero h1{font-size:clamp(2.6rem,8vw,5.2rem);line-height:1.1}
+.hero h1 em{font-style:normal;color:var(--red)}
+.hero .lead{font-size:1.2rem}
+.menu{display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:10px;margin-top:28px}
+.menu button{text-align:right;background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:14px 16px;color:var(--fg);display:grid;gap:4px;transition:border-color .2s,transform .2s}
+.menu button:hover{border-color:var(--red);transform:translateY(-2px)}
+.menu button small{color:var(--dim);font-size:.8rem;direction:ltr;text-align:right}
+.menu button b{font-family:var(--display);font-size:1.15rem;font-weight:800}
+.menu button .n{color:var(--red);font-size:.75rem;font-weight:700}
+.thesis{margin-top:30px;border-right:4px solid var(--red);padding:6px 18px;color:var(--muted);font-size:1.15rem;max-width:60ch}
+.thesis b{color:var(--fg)}
+/* questions lab */
+.qbig{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:22px}
+@media (max-width:700px){.qbig{grid-template-columns:1fr}}
+.q{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:22px}
+.q .n{font-family:var(--display);color:var(--red);font-size:2.2rem;line-height:1}
+.q h2{font-size:clamp(1.3rem,3vw,1.9rem);margin-top:6px}
+.q p{color:var(--muted);margin-top:8px}
+.chips{display:flex;flex-wrap:wrap;gap:8px}
+.poster{position:relative;width:100%;max-width:420px;aspect-ratio:4/5;margin:0 auto;border-radius:10px;overflow:hidden;display:flex;flex-direction:column;justify-content:flex-end;transition:background .5s,color .5s;padding:28px;gap:10px;box-shadow:0 20px 50px rgba(0,0,0,.45)}
+.poster .deco{position:absolute;inset:0;pointer-events:none;transition:all .5s}
+.poster .kicker{position:relative;font-size:.78rem;letter-spacing:.15em;font-weight:700;text-transform:uppercase;opacity:.8}
+.poster .hl{position:relative;font-family:var(--display);line-height:1.1;transition:all .5s}
+.poster .sub{position:relative;transition:all .5s}
+.poster .cta{position:relative;align-self:flex-start;padding:10px 22px;border-radius:999px;font-weight:700;transition:all .5s}
+.decis{width:100%;border-collapse:collapse;font-size:.92rem;margin-top:10px}
+.decis th,.decis td{text-align:right;padding:8px 10px;border-bottom:1px solid var(--line)}
+.decis th{color:var(--dim);font-weight:500;width:34%}
+.decis td{color:var(--fg)}
+/* color wheel */
+.wheelwrap{display:grid;grid-template-columns:auto 1fr;gap:22px;padding:20px;align-items:center}
+@media (max-width:700px){.wheelwrap{grid-template-columns:1fr;justify-items:center}}
+.wheel{position:relative;width:min(300px,78vw);aspect-ratio:1;max-width:100%;border-radius:50%;touch-action:none;user-select:none;
+  background:conic-gradient(from 0deg,#ff0000,#ff8000,#ffff00,#80ff00,#00ff00,#00ff80,#00ffff,#0080ff,#0000ff,#8000ff,#ff00ff,#ff0080,#ff0000);
+  box-shadow:0 0 0 6px var(--panel),0 0 0 7px var(--line2)}
+.wheel::after{content:"";position:absolute;inset:30%;border-radius:50%;background:var(--panel);border:1px solid var(--line2)}
+.wheel .pin{position:absolute;width:22px;height:22px;border-radius:50%;border:3px solid #fff;box-shadow:0 2px 8px rgba(0,0,0,.6);transform:translate(-50%,-50%);transition:left .15s,top .15s;pointer-events:none}
+.wheel .pin.main{width:28px;height:28px;border-color:#fff;z-index:2}
+.wheel .pin.sec{border-color:rgba(255,255,255,.75)}
+.wheel .center{position:absolute;inset:0;display:grid;place-items:center;text-align:center;font-size:.8rem;color:var(--muted);pointer-events:none;z-index:1}
+.wheel .center b{font-size:1.3rem;color:var(--fg);font-variant-numeric:tabular-nums;font-family:var(--display)}
+.swatches{display:flex;gap:8px;flex-wrap:wrap}
+.sw{flex:1 1 60px;min-width:60px;height:64px;border-radius:8px;display:flex;align-items:flex-end;justify-content:center;padding:4px;font-size:.72rem;font-family:monospace;direction:ltr;transition:background .3s}
+.cposter{margin-top:14px;border-radius:10px;padding:22px;min-height:150px;display:grid;gap:6px;transition:background .4s,color .4s}
+.cposter b{font-family:var(--display);font-size:1.7rem;line-height:1.1}
+.cposter .tag{align-self:start;justify-self:start;padding:5px 12px;border-radius:999px;font-weight:700;font-size:.85rem;transition:background .4s}
+.cposter small{opacity:.85}
+.ctypes{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;padding:0 16px 16px}
+@media (max-width:600px){.ctypes{grid-template-columns:1fr}}
+.ct{background:var(--bg2);border:1px solid var(--line);border-radius:10px;padding:12px;display:grid;gap:8px;justify-items:center}
+.ct .demo{height:70px;display:flex;align-items:center;justify-content:center;gap:10px;width:100%}
+.ct .demo i{display:block;background:var(--muted);border-radius:50%;transition:all .3s}
+.ct .demo span{font-weight:400;transition:all .3s}
+.ct.on .demo i:last-child{background:var(--red);border-radius:4px}
+.ct .btn{font-size:.82rem;padding:5px 10px}
+/* hierarchy */
+.hposter{background:#F5F1EE;color:#111;border-radius:10px;margin:18px;padding:28px;min-height:360px;position:relative;display:grid;align-content:start;gap:14px;overflow:hidden}
+.hposter .el{position:relative;transition:font-size .3s,color .3s,font-weight .3s;line-height:1.2;max-width:100%;overflow-wrap:anywhere}
+.hposter .el .rank{position:absolute;right:-14px;top:-10px;width:26px;height:26px;border-radius:50%;background:#111;color:#fff;font-size:.8rem;display:grid;place-items:center;font-weight:700;font-family:var(--body);transition:background .3s}
+.hposter .el.r1 .rank{background:var(--red)}
+.hposter .el.cta{display:inline-block;padding:.5em 1.4em;border-radius:999px;background:#111;color:#fff;justify-self:start}
+.hposter .el.cta.red{background:var(--red)}
+.hposter svg.eye{position:absolute;inset:0;width:100%;height:100%;pointer-events:none}
+.hctl{display:grid;gap:10px;padding:12px 16px;border-top:1px solid var(--line)}
+.hrow{display:grid;grid-template-columns:110px 1fr auto auto;gap:10px;align-items:center;font-size:.88rem;color:var(--muted)}
+@media (max-width:600px){.hrow{grid-template-columns:1fr 1fr;}.hrow label{grid-column:1/-1}}
+.hrow .btn{padding:4px 10px;font-size:.8rem}
+/* alignment */
+.aboard{position:relative;height:380px;background:#F5F1EE;margin:18px;border-radius:10px;overflow:hidden;touch-action:none}
+.aboard .blk{position:absolute;background:#111;border-radius:4px;cursor:grab;transition:left .35s,top .35s;user-select:none}
+.aboard .blk.title{height:34px;width:46%;background:#111}
+.aboard .blk.line{height:12px;background:#9a948e}
+.aboard .blk.img{height:110px;width:40%;background:#C4BCB4;border-radius:8px}
+.aboard .blk.btn2{height:38px;width:30%;background:var(--red);border-radius:999px}
+.aboard .blk.dragging{transition:none;cursor:grabbing;box-shadow:0 10px 24px rgba(0,0,0,.3)}
+.aboard .guide{position:absolute;top:0;bottom:0;width:0;border-right:1px dashed var(--red);opacity:0;transition:opacity .3s;pointer-events:none}
+.aboard.guides .guide{opacity:.8}
+.aboard .gridc{position:absolute;inset:0;pointer-events:none;opacity:0;transition:opacity .3s;background:repeating-linear-gradient(90deg,transparent 0 calc(100%/12 - 1px),rgba(227,38,45,.18) calc(100%/12 - 1px) calc(100%/12))}
+.aboard.grid .gridc{opacity:1}
+/* repetition */
+.rgrid{display:grid;gap:14px;padding:22px;justify-items:center}
+.rgrid .m{width:100%;aspect-ratio:1;max-width:72px;display:grid;place-items:center}
+.rgrid .m i{display:block;width:70%;height:70%;border-radius:50%;background:var(--muted);transition:all .35s}
+.rgrid .m.brk i{background:var(--red)}
+.rgrid .m.brk.shape i{border-radius:6px}
+.rgrid .m.brk.size i{width:100%;height:100%}
+.rgrid .m.brk.dir i{border-radius:50% 50% 50% 0;transform:rotate(-45deg)}
+.rgrid .m.brk.color i{background:var(--red)}
+.rgrid .m.brk.gap{transform:translateY(16px)}
+/* space */
+.sposter{background:#F5F1EE;color:#111;margin:18px;border-radius:10px;position:relative;overflow:hidden;display:flex;flex-direction:column;gap:var(--g,10px);padding:var(--p,20px);min-height:380px;transition:padding .3s,gap .3s}
+.sposter .box{position:relative;transition:all .3s}
+.sposter h2{font-size:var(--hs,2rem);line-height:1.15}
+.sposter p{line-height:var(--lh,1.4);color:#333;max-width:var(--mw,100%)}
+.sposter .extra{display:flex;flex-wrap:wrap;gap:6px}
+.sposter .extra span{background:#111;color:#fff;padding:3px 10px;border-radius:999px;font-size:.78rem}
+.sposter .cta{align-self:flex-start;background:var(--red);color:#fff;padding:8px 20px;border-radius:999px;font-weight:700}
+.sposter.neg{background:repeating-linear-gradient(45deg,#f3d4d5 0 6px,#F5F1EE 6px 12px)}
+.sposter.neg .box{background:#F5F1EE;outline:2px solid #111;outline-offset:4px}
+/* summary */
+.sum{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:12px;margin-top:22px}
+.sum .card b{display:block;font-family:var(--display);font-size:1.3rem;margin-bottom:4px}
+.sum .card small{color:var(--dim);direction:ltr;display:block;text-align:right}
+/* quiz */
+.quiz{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:22px;margin-top:22px;max-width:760px}
+.quiz .qn{color:var(--dim);font-size:.85rem}
+.quiz h2{font-size:1.4rem;margin-top:6px;font-family:var(--body);font-weight:700}
+.opts{display:grid;gap:8px;margin-top:16px}
+.opts button{text-align:right;background:var(--bg2);border:1px solid var(--line2);color:var(--fg);border-radius:10px;padding:12px 14px;transition:all .2s}
+.opts button:hover{border-color:var(--muted)}
+.opts button.right{background:rgba(60,179,113,.15);border-color:var(--ok)}
+.opts button.wrong{background:rgba(227,38,45,.15);border-color:var(--bad)}
+.opts button:disabled{cursor:default}
+.expl{margin-top:14px;padding:12px 14px;border-radius:10px;background:var(--bg2);color:var(--muted);display:none}
+.expl.on{display:block}
+.qbar{height:6px;background:var(--line);border-radius:3px;overflow:hidden;margin-top:14px}
+.qbar i{display:block;height:100%;background:var(--red);transition:width .3s}
+.score{font-family:var(--display);font-size:3rem;color:var(--red)}
+/* footer / author */
+.author{margin-top:40px;border-top:1px solid var(--line);padding-block:26px;display:flex;gap:18px;align-items:center;flex-wrap:wrap}
+.author .av{width:70px;height:70px;border-radius:50%;background:var(--red);display:grid;place-items:center;font-family:var(--display);font-size:1.6rem;color:#fff;flex:none}
+.author b{font-family:var(--display);font-size:1.3rem;display:block}
+.author p{color:var(--muted);font-size:.95rem}
+.author .ig{direction:ltr;display:inline-block;color:var(--fg);font-weight:700;text-decoration:none;border-bottom:1px solid var(--red)}
+</style>
+
+<header class="top"><div class="wrap">
+  <div class="brand"><div class="mark">ع</div><div><b>مبادئ المشهد البصري</b><br><small>الدرس الأول · التصميم (اللقطة الواحدة)</small></div></div>
+  <div class="counter" id="counter"></div>
+</div>
+<div class="wrap"><nav class="chapters" id="chapters" aria-label="أقسام الدرس"></nav></div>
+</header>
+
+<main class="wrap">
+
+<!-- ========== 0 START ========== -->
+<section class="view hero" data-id="start">
+  <p class="eyebrow">دورة التصميم والمونتاج · الدرس الأول</p>
+  <h1>كيف تجعل العين <em>تتوقّف</em>،<br>ثم تفهم، ثم تشعر؟</h1>
+  <p class="lead">كل صورة ناجحة، وكل إعلان يجعلك تقول «واو»، مبنيّ على تسعة مبادئ لا تتغيّر. في هذا الدرس نراها تتحرّك أمامنا، ونكسرها بأيدينا، ونعرف لماذا تعمل.</p>
+  <div class="thesis">التصميم ليس تزيينًا. <b>التصميم هو تنظيم الانتباه</b>: أنت تقرّر أين تنظر العين أولًا، وماذا تشعر بعدها.</div>
+  <div class="menu" id="menu"></div>
+</section>
+
+<!-- ========== 1 QUESTIONS ========== -->
+<section class="view" data-id="questions">
+  <p class="eyebrow">قبل أي مبدأ</p>
+  <h1>السؤالان قبل أي مشهد بصري<span>The Brief: Message & Feeling</span></h1>
+  <p class="lead">قبل أن تفتح أي برنامج، وقبل أن تختار لونًا أو خطًا، هناك سؤالان يحدّدان كل قرار سيأتي بعدهما. المصمم الذي يتجاوزهما يصنع شيئًا «حلوًا» لكنه فارغ.</p>
+  <div class="qbig">
+    <div class="q"><div class="n">١</div><h2>ما الرسالة التي أريد إيصالها؟</h2><p>جملة واحدة يخرج بها المشاهد. إن احتجت جملتين فأنت تصنع تصميمين. الرسالة تحدّد <b>ماذا</b> يُكتب، وماذا يكبر، وماذا يُحذف.</p></div>
+    <div class="q"><div class="n">٢</div><h2>ما الشعور الذي أريد أن يحسّه المشاهد؟</h2><p>فخامة؟ طاقة؟ طمأنينة؟ غموض؟ الشعور يحدّد <b>كيف</b> يُقال: اللون، الفراغ، الوزن، الإيقاع. الرسالة نفسها تُقال بألف شعور مختلف.</p></div>
+  </div>
+  <div class="grid2">
+    <div class="lab">
+      <div class="lab-head"><h3>مختبر النيّة: الرسالة نفسها، شعور مختلف</h3><span class="status" id="st-q"><i></i><span>اختر رسالة وشعورًا</span></span></div>
+      <div class="controls"><label class="ctl">الرسالة:</label><div class="chips" id="msgChips"></div></div>
+      <div class="controls" style="border-top:0;padding-top:0"><label class="ctl">الشعور:</label><div class="chips" id="feelChips"></div></div>
+      <div class="stage" style="padding:22px">
+        <div class="poster" id="poster"><div class="deco" id="pdeco"></div><div class="kicker" id="pk"></div><div class="hl" id="phl"></div><div class="sub" id="psub"></div><div class="cta" id="pcta"></div></div>
+      </div>
+    </div>
+    <div class="side">
+      <div class="card"><h3>كيف تُرجم الشعور إلى قرارات؟</h3><table class="decis" id="decis"></table></div>
+      <div class="card key"><h3>الخلاصة</h3><p>الرسالة تقرّر <b>ماذا</b> يُقال. الشعور يقرّر <b>كيف</b> يُقال. وكل المبادئ التالية هي أدوات «الكيف».</p></div>
+      <div class="card"><h3>تمرين سريع</h3><p>اختر منتجًا تعرفه. اكتب رسالته في جملة واحدة، وشعوره في كلمة واحدة. ثم غيّر الكلمة فقط، ولاحظ كم تغيّر التصميم في رأسك.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- ========== 2 BALANCE ========== -->
+<section class="view" data-id="balance">
+  <p class="eyebrow">المبدأ ١ من ٩</p>
+  <h1>التوازن<span>Balance</span></h1>
+  <p class="lead">العين تزن العناصر كما تزن اليد الأشياء: الكبير أثقل، والقريب من الحافة أثقل، والأحمر أثقل من الرمادي. <b>المتوازن</b> يُطمئن، و<b>المختل</b> يُقلق، وكلاهما قرار، لا صدفة. التوازن نوعان: <b>متماثل</b> (مرآة حول المحور) و<b>غير متماثل</b> (أوزان مختلفة تتعادل).</p>
+  <div class="grid2">
+    <div class="lab">
+      <div class="lab-head"><h3>ميزان الأوزان البصرية: اسحب الأشكال</h3><span class="status" id="st-b"><i></i><span></span></span></div>
+      <div class="stage"><svg id="bsvg" viewBox="0 0 800 420" aria-label="ميزان بصري"></svg></div>
+      <div class="controls">
+        <button class="btn" data-bp="sym">متماثل</button>
+        <button class="btn" data-bp="asym">غير متماثل متوازن</button>
+        <button class="btn" data-bp="radial">شعاعي</button>
+        <button class="btn" data-bp="off">مختل عمدًا</button>
+        <span class="sep"></span>
+        <button class="btn" id="bMirror">🔁 وضع المرآة</button>
+        <button class="btn" id="bAddC">+ دائرة</button>
+        <button class="btn" id="bAddS">+ مربع</button>
+        <button class="btn" id="bRed">تلوين المحدد بالأحمر</button>
+        <label class="ctl">حجم المحدد <input type="range" id="bSize" min="14" max="110" value="40"></label>
+        <button class="btn ghost" id="bDel">حذف المحدد</button>
+      </div>
+    </div>
+    <div class="side">
+      <div class="card"><h3>كيف تقرأ الميزان</h3><ul><li><b>الوزن</b> = المساحة × البعد عن المحور (كالرافعة). الشكل الصغير البعيد يعادل الكبير القريب.</li><li><b>اللون الأحمر</b> يزيد الوزن نحو ٤٠٪ لأنه يجذب العين.</li><li>عندما يتعادل الوزنان يستقيم الميزان: توازن.</li></ul></div>
+      <div class="card"><h3>متى أستخدم كل نوع؟</h3><ul><li><b>متماثل:</b> فخامة، رسمية، ثقة (مؤسسات، عطور، مجوهرات).</li><li><b>غير متماثل:</b> حركة، حداثة، طاقة (رياضة، تقنية، شباب).</li><li><b>شعاعي:</b> التركيز على مركز واحد (منتج بطل).</li><li><b>مختل عمدًا:</b> توتر وقلق (أفلام رعب، تحذير).</li></ul></div>
+      <div class="card key"><h3>الخلاصة</h3><p>التوازن لا يعني التماثل. يعني أن الأوزان تتعادل حول المحور، سواء بالمرآة أو بالتعويض.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- ========== 3 COLOR ========== -->
+<section class="view" data-id="color">
+  <p class="eyebrow">المبدأ ٢ من ٩</p>
+  <h1>التباين والانسجام<span>Contrast & Harmony</span></h1>
+  <p class="lead">على عجلة الألوان، <b>اللونان المتقابلان</b> يصنعان أقصى تباين (مكمّلان): صراخ، طاقة، وضوح. و<b>اللونان المتجاوران</b> يصنعان انسجامًا: هدوء، وحدة، رقيّ. التباين يجعل العين تتوقف، والانسجام يجعلها ترتاح، والمحترف يستخدم الاثنين معًا: انسجام في الخلفية وتباين في النقطة التي يريدها.</p>
+  <div class="grid2">
+    <div class="lab">
+      <div class="lab-head"><h3>عجلة الألوان: اسحب المؤشر</h3><span class="status" id="st-c"><i></i><span></span></span></div>
+      <div class="controls">
+        <button class="btn on" data-scheme="comp">مكمّل (تباين)</button>
+        <button class="btn" data-scheme="ana">متجاور (انسجام)</button>
+        <button class="btn" data-scheme="split">مكمّل منقسم</button>
+        <button class="btn" data-scheme="tri">ثلاثي</button>
+        <button class="btn" data-scheme="mono">أحادي</button>
+      </div>
+      <div class="wheelwrap">
+        <div class="wheel" id="wheel"><div class="center"><div><b id="hueVal">0°</b><br>الدرجة</div></div></div>
+        <div style="min-width:0">
+          <div class="swatches" id="swatches"></div>
+          <div class="cposter" id="cposter"><span class="tag" id="cptag">عرض خاص</span><b>قهوة الصباح الأولى</b><small>تباين النص على الخلفية: <span id="cratio" class="readout"></span></small></div>
+        </div>
+      </div>
+      <div class="lab-head" style="border-top:1px solid var(--line)"><h3>التباين ليس لونًا فقط</h3><span class="status" id="st-ct"><i></i><span>جرّب كل نوع</span></span></div>
+      <div class="ctypes">
+        <div class="ct" data-ct="size"><div class="demo"><i style="width:22px;height:22px"></i><i style="width:22px;height:22px"></i></div><button class="btn">تباين الحجم</button></div>
+        <div class="ct" data-ct="weight"><div class="demo"><span style="font-size:1.4rem">خفيف</span><span style="font-size:1.4rem">خفيف</span></div><button class="btn">تباين الوزن</button></div>
+        <div class="ct" data-ct="shape"><div class="demo"><i style="width:26px;height:26px"></i><i style="width:26px;height:26px"></i><i style="width:26px;height:26px"></i></div><button class="btn">تباين الشكل</button></div>
+      </div>
+    </div>
+    <div class="side">
+      <div class="card"><h3>قاعدة ٦٠ / ٣٠ / ١٠</h3><p>٦٠٪ لون مسيطر، ٣٠٪ لون ثانوي منسجم معه، ١٠٪ لون تباين للنقطة الأهم (الزر، السعر، الاسم). هذه هي الطريقة التي يجتمع بها الانسجام والتباين في تصميم واحد.</p></div>
+      <div class="card"><h3>مقروئية النص</h3><p>التباين بين النص وخلفيته يُقاس بنسبة. أقل من <b>4.5 : 1</b> يعني أن القارئ سيتعب أو لن يقرأ. راقب الرقم في اللوحة وأنت تحرّك العجلة.</p></div>
+      <div class="card key"><h3>الخلاصة</h3><p>متقابلان = تباين = توقّف. متجاوران = انسجام = راحة. اختر التباين لما تريد أن يُرى أولًا، والانسجام لكل ما حوله.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- ========== 4 HIERARCHY ========== -->
+<section class="view" data-id="hierarchy">
+  <p class="eyebrow">المبدأ ٣ من ٩</p>
+  <h1>الهرم البصري<span>Visual Hierarchy</span></h1>
+  <p class="lead">العين لا تقرأ كل شيء دفعة واحدة؛ تقرأ بالترتيب الذي يفرضه عليها التصميم. الهرم البصري هو هذا الترتيب: <b>شيء واحد يُقرأ أولًا</b>، ثم الثاني، ثم الثالث. ونصنعه بالحجم، والوزن، واللون، والموضع. عندما يصرخ كل شيء، لا يُسمع شيء.</p>
+  <div class="grid2">
+    <div class="lab">
+      <div class="lab-head"><h3>اصنع الهرم: الأرقام تظهر ترتيب القراءة</h3><span class="status" id="st-h"><i></i><span></span></span></div>
+      <div class="stage"><div class="hposter" id="hposter">
+        <svg class="eye" id="eyePath" viewBox="0 0 100 100" preserveAspectRatio="none"></svg>
+        <div class="el" data-i="0"><span class="rank"></span><span class="t">خصم ٥٠٪</span></div>
+        <div class="el" data-i="1"><span class="rank"></span><span class="t">على كل منتجات العناية بالبشرة</span></div>
+        <div class="el" data-i="2"><span class="rank"></span><span class="t">العرض ساري حتى نهاية الأسبوع في جميع الفروع والمتجر الإلكتروني</span></div>
+        <div class="el cta" data-i="3"><span class="rank"></span><span class="t">تسوّق الآن</span></div>
+      </div></div>
+      <div class="hctl" id="hctl"></div>
+      <div class="controls"><button class="btn" data-hp="good">هرم سليم</button><button class="btn" data-hp="flat">الكل يصرخ</button><button class="btn" data-hp="inv">هرم مقلوب</button><button class="btn" id="hEye">👁 مسار العين</button></div>
+    </div>
+    <div class="side">
+      <div class="card"><h3>أدوات الهرم بالترتيب الأقوى</h3><ul><li><b>الحجم:</b> الأكبر يُقرأ أولًا.</li><li><b>اللون:</b> نقطة اللون الوحيدة تسبق الكبير أحيانًا.</li><li><b>الوزن:</b> الثقيل قبل الخفيف.</li><li><b>الموضع:</b> الأعلى واليمين (في العربية) أولًا.</li><li><b>الفراغ:</b> ما حوله فراغ يُرى أولًا.</li></ul></div>
+      <div class="card"><h3>قاعدة الثلاثة</h3><p>أي مشهد بصري ناجح فيه ثلاثة مستويات فقط: بطل، مساعد، تفاصيل. أربعة مستويات تصبح ضجيجًا.</p></div>
+      <div class="card key"><h3>الخلاصة</h3><p>اسأل عن أي تصميم: ماذا أرى أولًا؟ إن احتجت ثانية للإجابة، فالهرم مكسور.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- ========== 5 ALIGNMENT ========== -->
+<section class="view" data-id="alignment">
+  <p class="eyebrow">المبدأ ٤ من ٩</p>
+  <h1>المحاذاة<span>Alignment</span></h1>
+  <p class="lead">كل عنصر في التصميم يجب أن يكون له <b>صلة بصرية</b> بعنصر آخر: حافته على حافة، مركزه على مركز. المحاذاة خط غير مرئي يربط العناصر فيبدو التصميم مقصودًا ومرتّبًا، حتى لو كان بسيطًا. العين تلتقط الانحراف بمقدار بكسلات قليلة وإن لم تعرف ماذا يزعجها.</p>
+  <div class="grid2">
+    <div class="lab">
+      <div class="lab-head"><h3>لوحة المحاذاة: اسحب الكتل أو اضغط على محاذاة</h3><span class="status" id="st-a"><i></i><span></span></span></div>
+      <div class="stage"><div class="aboard" id="aboard">
+        <div class="gridc"></div>
+        <div class="guide" style="right:6%"></div><div class="guide" style="right:50%"></div><div class="guide" style="right:94%"></div>
+        <div class="blk title" data-w="46" style="top:30px"></div>
+        <div class="blk line" data-w="62" style="top:84px"></div>
+        <div class="blk line" data-w="52" style="top:106px"></div>
+        <div class="blk img" data-w="40" style="top:140px"></div>
+        <div class="blk btn2" data-w="30" style="top:280px"></div>
+      </div></div>
+      <div class="controls">
+        <button class="btn" data-al="right">محاذاة يمين</button>
+        <button class="btn" data-al="center">توسيط</button>
+        <button class="btn" data-al="left">محاذاة يسار</button>
+        <button class="btn ghost" id="aScatter">بعثرة</button>
+        <span class="sep"></span>
+        <button class="btn" id="aGuides">الخطوط الإرشادية</button>
+        <button class="btn" id="aGrid">شبكة ١٢ عمودًا</button>
+        <button class="btn" id="aMagnet">🧲 مغناطيس أثناء السحب</button>
+      </div>
+    </div>
+    <div class="side">
+      <div class="card"><h3>قواعد سريعة</h3><ul><li>اختر محاذاة واحدة للكتلة الواحدة والتزم بها. المزج بين يمين ووسط في المساحة نفسها أكثر الأخطاء شيوعًا.</li><li>التوسيط يبدو «رسميًا» لكنه أضعف خطًا؛ محاذاة الحافة (اليمين في العربية) أقوى وأوضح.</li><li>الشبكة ليست قيدًا؛ هي ما يجعل ٢٠ عنصرًا يبدون كأسرة واحدة.</li></ul></div>
+      <div class="card"><h3>في الفيديو أيضًا</h3><p>عناوين الريلز تثبت على خط واحد بين اللقطات. إن قفز العنوان بكسلات بين لقطة وأخرى شعر المشاهد بالارتباك دون أن يعرف السبب.</p></div>
+      <div class="card key"><h3>الخلاصة</h3><p>لا تضع شيئًا في مكان عشوائي. كل حافة تلتقي بحافة.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- ========== 6 RHYTHM ========== -->
+<section class="view" data-id="rhythm">
+  <p class="eyebrow">المبدأ ٥ من ٩</p>
+  <h1>الإيقاع<span>Rhythm</span></h1>
+  <p class="lead">الإيقاع هو <b>نبض</b> التصميم: تكرار العناصر مع فواصل بينها تصنع إحساسًا بالحركة والزمن، تمامًا كالموسيقى. الإيقاع المنتظم يُهدّئ، والمتدرّج يقود العين في اتجاه، والمتدفّق يُشعر بالطبيعة والمرونة. وأقوى لحظة في أي إيقاع هي لحظة <b>كسره</b>: هناك تتوقف العين.</p>
+  <div class="grid2">
+    <div class="lab">
+      <div class="lab-head"><h3>آلة الإيقاع</h3><span class="status" id="st-r"><i></i><span></span></span></div>
+      <div class="stage"><svg id="rsvg" viewBox="0 0 800 240"></svg></div>
+      <div class="controls">
+        <button class="btn on" data-rm="reg">منتظم</button>
+        <button class="btn" data-rm="prog">متدرّج</button>
+        <button class="btn" data-rm="flow">متدفّق</button>
+        <button class="btn" data-rm="rand">عشوائي</button>
+        <span class="sep"></span>
+        <label class="ctl">السرعة (المسافة) <input type="range" id="rGap" min="20" max="90" value="55"></label>
+        <button class="btn" id="rBreak">⚡ اكسر الإيقاع</button>
+        <button class="btn" id="rPlay">▶ شغّل النبض</button>
+      </div>
+    </div>
+    <div class="side">
+      <div class="card"><h3>أنواع الإيقاع ومعناها</h3><ul><li><b>منتظم:</b> مسافات متساوية: نظام، ثبات، أحيانًا ملل.</li><li><b>متدرّج:</b> يكبر أو يصغر تدريجيًا: اتجاه، نمو، عدّ تنازلي.</li><li><b>متدفّق:</b> موجة ناعمة: طبيعة، أناقة، موسيقى.</li><li><b>عشوائي:</b> طاقة وفوضى مقصودة، أو ضجيج إن لم يكن مقصودًا.</li></ul></div>
+      <div class="card"><h3>جسر إلى المونتاج</h3><p>المسافة بين العناصر في الصورة هي المسافة بين القطعات في الفيديو. الفواصل القصيرة = إيقاع سريع = طاقة. الطويلة = إيقاع بطيء = فخامة أو حزن. سنُكمل هذا في درس المونتاج.</p></div>
+      <div class="card key"><h3>الخلاصة</h3><p>الإيقاع يُنوّم العين في مسار، والكسر يوقظها. ضع ما تريد أن يُرى في نقطة الكسر.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- ========== 7 REPETITION ========== -->
+<section class="view" data-id="repetition">
+  <p class="eyebrow">المبدأ ٦ من ٩</p>
+  <h1>التكرار<span>Repetition</span></h1>
+  <p class="lead">التكرار هو ما يصنع <b>الهوية</b>: اللون نفسه، الخط نفسه، الشكل نفسه، يتكرر حتى يصبح مألوفًا ويُعرف من بعيد. والتكرار يصنع أيضًا <b>التركيز</b>: عندما يتكرر كل شيء ويخرج عنصر واحد عن النمط، تذهب العين إليه فورًا. التكرار يُعلّم العين القاعدة، والاستثناء يستغلّها.</p>
+  <div class="grid2">
+    <div class="lab">
+      <div class="lab-head"><h3>النمط والاستثناء</h3><span class="status" id="st-p"><i></i><span></span></span></div>
+      <div class="stage"><div class="rgrid" id="rgrid"></div></div>
+      <div class="controls">
+        <label class="ctl">عدد الأعمدة <input type="range" id="pCols" min="4" max="9" value="7"></label>
+        <span class="sep"></span>
+        <label class="ctl">اكسر النمط بـ:</label>
+        <button class="btn on" data-brk="none">لا شيء</button>
+        <button class="btn" data-brk="color">اللون</button>
+        <button class="btn" data-brk="shape">الشكل</button>
+        <button class="btn" data-brk="size">الحجم</button>
+        <button class="btn" data-brk="dir">الاتجاه</button>
+        <button class="btn" data-brk="gap">الموضع</button>
+        <button class="btn ghost" id="pMove">غيّر مكان الاستثناء</button>
+      </div>
+    </div>
+    <div class="side">
+      <div class="card"><h3>التكرار في الهوية البصرية</h3><ul><li>لون واحد يتكرر في كل منشور = الناس تعرفك قبل أن تقرأ اسمك.</li><li>خط واحد للعناوين في كل الحملة. خطان على الأكثر في التصميم الواحد.</li><li>موضع ثابت للشعار، وزاوية ثابتة للصورة.</li></ul></div>
+      <div class="card"><h3>الاستثناء الواحد</h3><p>اكسر النمط مرة واحدة فقط. استثناءان يتنافسان، وثلاثة تعيد الفوضى. ولاحظ أن كسر <b>اللون</b> أسرع ما تلتقطه العين، ثم الحجم، ثم الشكل.</p></div>
+      <div class="card key"><h3>الخلاصة</h3><p>كرّر لتبني الثقة والهوية. اكسر مرة واحدة لتوجّه العين.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- ========== 8 PROPORTION ========== -->
+<section class="view" data-id="proportion">
+  <p class="eyebrow">المبدأ ٧ من ٩</p>
+  <h1>التناسب والنسبة<span>Proportion, Scale & Vanishing Point</span></h1>
+  <p class="lead">التناسب هو علاقة الحجم بين العناصر: ما الذي يكبر، وبكم. والعين تقرأ الحجم على أنه <b>أهمية</b> أو <b>مسافة</b>: الكبير مهم أو قريب، والصغير ثانوي أو بعيد. ومن هنا يأتي المنظور: كل الخطوط المتوازية في المشهد تتقارب نحو <b>نقطة التلاشي</b> على خط الأفق، والبعيد يصغر دائمًا عن القريب.</p>
+  <div class="grid2">
+    <div class="lab">
+      <div class="lab-head"><h3>المنظور: اسحب نقطة التلاشي، وحرّك الشخص في العمق</h3><span class="status" id="st-v"><i></i><span></span></span></div>
+      <div class="stage"><svg id="vsvg" viewBox="0 0 800 440"></svg></div>
+      <div class="controls">
+        <label class="ctl">عمق الشخص <input type="range" id="vDepth" min="0" max="100" value="20"></label>
+        <button class="btn on" id="vLines">خطوط التقارب</button>
+        <button class="btn" id="vThirds">قاعدة الأثلاث</button>
+        <button class="btn" id="vGolden">النسبة الذهبية</button>
+        <button class="btn ghost" id="vReset">إعادة النقطة للمنتصف</button>
+      </div>
+    </div>
+    <div class="side">
+      <div class="card"><h3>ثلاث نسب يجب أن تحفظها</h3><ul><li><b>قاعدة الأثلاث:</b> قسّم الإطار ٣×٣، وضع البطل على أحد خطوط التقاطع لا في المنتصف.</li><li><b>النسبة الذهبية 1 : 1.618:</b> نسبة الطبيعة والفن الكلاسيكي؛ استخدمها لحجم العنوان مقابل النص (مثلًا 26 / 16).</li><li><b>التدرّج الحجمي:</b> اجعل الفرق بين المستويات واضحًا (٢× على الأقل) لا ١٠٪ فقط.</li></ul></div>
+      <div class="card"><h3>نقطة التلاشي تحكي</h3><p>نقطة تلاشي منخفضة = نظرة من الأسفل = عظمة وقوة. نقطة مرتفعة = نظرة من الأعلى = هيمنة أو ضعف الموضوع. المصوّر يختارها قبل أن يضغط الزر.</p></div>
+      <div class="card key"><h3>الخلاصة</h3><p>الحجم لغة. الكبير يقول «أنا مهم» أو «أنا قريب». لا تجعل شيئين بالحجم نفسه إلا إن كانا بالأهمية نفسها.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- ========== 9 SPACE ========== -->
+<section class="view" data-id="space">
+  <p class="eyebrow">المبدأ ٨ من ٩</p>
+  <h1>الفراغ<span>Negative / White Space</span></h1>
+  <p class="lead">الفراغ ليس «مساحة ضائعة»؛ هو العنصر الذي يجعل كل العناصر الأخرى تُقرأ. حول العنوان يصنع الهيبة، وبين السطور يصنع الراحة، وحول المنتج يصنع الفخامة. العلامات الرخيصة تملأ، والعلامات الفاخرة تُفرغ. الفراغ نوعان: <b>كبير</b> (بين الكتل) و<b>صغير</b> (بين الحروف والسطور).</p>
+  <div class="grid2">
+    <div class="lab">
+      <div class="lab-head"><h3>مقياس التنفّس</h3><span class="status" id="st-s"><i></i><span></span></span></div>
+      <div class="stage"><div class="sposter" id="sposter">
+        <div class="box"><span class="kicker" style="font-size:.75rem;letter-spacing:.15em;font-weight:700">مجموعة الشتاء</span></div>
+        <div class="box"><h2 id="sTitle">معطف الصوف الكشميري</h2></div>
+        <div class="box"><p id="sText">مصنوع يدويًا من صوف الكشمير المنغولي، بقصّة تحتفي بالخطوط الطويلة والهدوء. يناسب المساء البارد والمدينة التي لا تنام.</p></div>
+        <div class="box extra" id="sExtra"><span>شحن مجاني</span><span>إرجاع ٣٠ يومًا</span><span>الأكثر مبيعًا</span><span>جديد</span><span>تقسيط</span><span>ضمان سنتين</span></div>
+        <div class="box"><span class="cta">اكتشف المجموعة</span></div>
+      </div></div>
+      <div class="controls">
+        <label class="ctl">كمية الفراغ <input type="range" id="sAmt" min="0" max="100" value="55" style="width:220px"></label>
+        <button class="btn" id="sNeg">أظهر الفراغ السلبي</button>
+        <span class="readout" style="color:var(--muted);font-weight:400;font-size:.88rem">نسبة الفراغ التقريبية: <span id="sPct" class="readout">—</span></span>
+      </div>
+    </div>
+    <div class="side">
+      <div class="card"><h3>كيف تقرأ المقياس</h3><ul><li><b>٠–٣٠٪:</b> مزدحم. كل شيء يتنافس، العين تتعب. يناسب أسواق الخصومات فقط.</li><li><b>٣٠–٦٠٪:</b> متوازن. محتوى واضح مع راحة. أغلب الإعلانات هنا.</li><li><b>٦٠–١٠٠٪:</b> يتنفّس. فخامة، تركيز على شيء واحد. العطور، الساعات، الفن.</li></ul></div>
+      <div class="card"><h3>الفراغ الصغير</h3><p>المسافة بين السطور (1.4–1.6 من حجم الخط للنصوص) وبين الحروف أهم مما تظن؛ هي الفرق بين نص يُقرأ ونص يُتجاهل.</p></div>
+      <div class="card key"><h3>الخلاصة</h3><p>عندما تشك، احذف. الفراغ يرفع قيمة ما يبقى.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- ========== 10 SUMMARY ========== -->
+<section class="view" data-id="summary">
+  <p class="eyebrow">خريطة الدرس</p>
+  <h1>التسعة في صفحة واحدة<span>The Map</span></h1>
+  <p class="lead">هذه هي أدواتك عندما تنظر إلى أي صورة أو إعلان. اسأل عن كل واحدة: هل هي موجودة؟ وهل هي مقصودة؟</p>
+  <div class="sum" id="sum"></div>
+  <div class="card key" style="margin-top:18px"><h3>كيف تحلّل أي إعلان في ٦٠ ثانية</h3><p>١) ما الرسالة؟ ٢) ما الشعور؟ ٣) ماذا رأيت أولًا ولماذا (هرم)؟ ٤) أين التباين وأين الانسجام؟ ٥) هل الأوزان متعادلة؟ ٦) هل هناك نمط وكُسر مرة؟ ٧) كم يتنفّس؟</p></div>
+</section>
+
+<!-- ========== 11 QUIZ ========== -->
+<section class="view" data-id="quiz">
+  <p class="eyebrow">الاختبار</p>
+  <h1>هل تستطيع أن ترى؟<span>12 Questions</span></h1>
+  <p class="lead">١٢ سؤالًا. اختر الإجابة، ثم اقرأ لماذا. لا تُحسب لك النتيجة في أي مكان؛ هي لك وحدك.</p>
+  <div class="quiz" id="quiz"></div>
+</section>
+
+<div class="navbar"><button class="btn" id="prevBtn">السابق →</button><span class="hint" id="hint">استخدم أسهم لوحة المفاتيح للتنقّل</span><button class="btn primary" id="nextBtn">← التالي</button></div>
+
+<footer class="author">
+  <div class="av">ع</div>
+  <div><b>عمر غالب</b><p>فنان تشكيلي ومدرّب صناعة المحتوى بالذكاء الاصطناعي وأدوات Adobe</p><a class="ig" href="https://instagram.com/omarghalip" target="_blank" rel="noopener">@omarghalip</a></div>
+</footer>
+</main>
+
+<script>
+(function(){
+'use strict';
+const $=s=>document.querySelector(s), $$=s=>Array.from(document.querySelectorAll(s));
+const clamp=(v,a,b)=>Math.max(a,Math.min(b,v));
+function setStatus(id,kind,text){const el=$(id);el.className='status '+kind;el.lastElementChild.textContent=text;}
+
+/* ---------------- navigation ---------------- */
+const views=$$('.view'); const ids=views.map(v=>v.dataset.id);
+const names={start:'البداية',questions:'السؤالان',balance:'التوازن',color:'التباين والانسجام',hierarchy:'الهرم البصري',alignment:'المحاذاة',rhythm:'الإيقاع',repetition:'التكرار',proportion:'التناسب',space:'الفراغ',summary:'الخريطة',quiz:'الاختبار'};
+const en={balance:'Balance',color:'Contrast & Harmony',hierarchy:'Hierarchy',alignment:'Alignment',rhythm:'Rhythm',repetition:'Repetition',proportion:'Proportion',space:'Space',questions:'The Brief',summary:'Map',quiz:'Quiz'};
+let cur=0; const seen=new Set();
+const chapters=$('#chapters');
+ids.forEach((id,i)=>{const b=document.createElement('button');b.textContent=names[id];b.onclick=()=>go(i);chapters.appendChild(b);});
+const menu=$('#menu');
+ids.slice(1).forEach((id,i)=>{const b=document.createElement('button');b.innerHTML=`<span class="n">${i===0?'قبل البدء':i<=9?'المبدأ '+i:''}</span><b>${names[id]}</b><small>${en[id]||''}</small>`;b.onclick=()=>go(i+1);menu.appendChild(b);});
+function go(i){
+  cur=clamp(i,0,views.length-1); seen.add(cur);
+  views.forEach((v,k)=>v.classList.toggle('on',k===cur));
+  Array.from(chapters.children).forEach((b,k)=>{b.classList.toggle('on',k===cur);b.classList.toggle('done',seen.has(k)&&k!==cur);b.classList.contains('on')&&b.scrollIntoView({inline:'center',block:'nearest',behavior:'smooth'});});
+  $('#counter').textContent=cur===0?'':`${cur} / ${views.length-1}`;
+  $('#prevBtn').style.visibility=cur===0?'hidden':'visible';
+  $('#nextBtn').textContent=cur===views.length-1?'العودة للبداية':'← التالي';
+  if(location.hash!=='#'+ids[cur]) history.replaceState(null,'','#'+ids[cur]);
+  window.scrollTo({top:0,behavior:'smooth'});
+  if(ids[cur]==='space') setTimeout(spaceUpdate,60);
+}
+$('#prevBtn').onclick=()=>go(cur-1); $('#nextBtn').onclick=()=>go(cur===views.length-1?0:cur+1);
+document.addEventListener('keydown',e=>{if(['INPUT','TEXTAREA','SELECT'].includes(document.activeElement.tagName))return; if(e.key==='ArrowLeft'||e.key==='PageDown'||e.key===' '){e.preventDefault();go(cur+1);} if(e.key==='ArrowRight'||e.key==='PageUp'){e.preventDefault();go(cur-1);} if(e.key==='Home')go(0);});
+window.addEventListener('hashchange',()=>{const k=ids.indexOf(location.hash.slice(1));if(k>=0&&k!==cur)go(k);});
+const h0=ids.indexOf(location.hash.slice(1)); go(h0>=0?h0:0);
+
+/* ---------------- 1. intent lab ---------------- */
+const msgs={launch:{k:'إطلاق',h:'وصل أخيرًا',s:'الجيل الجديد من سَكَن',c:'اكتشفه'},offer:{k:'لفترة محدودة',h:'خصم ٤٠٪',s:'ثلاثة أيام فقط',c:'اطلب الآن'},trust:{k:'منذ ٢٠١٢',h:'١٢ عامًا من الخبرة',s:'نصنعها كما لو كانت لنا',c:'تعرّف علينا'},event:{k:'دعوة',h:'ليلة الافتتاح',s:'الخميس · ٨ مساءً',c:'احجز مقعدك'}};
+const msgNames={launch:'إطلاق منتج',offer:'عرض محدود',trust:'بناء ثقة',event:'دعوة لحدث'};
+const feels={
+ lux:{n:'فخامة',bg:'#0E0C0A',fg:'#F2E8D5',ac:'#C9A24A',hs:'2.6rem',hw:'normal',gap:'18px',pad:'40px',deco:'radial-gradient(circle at 70% 20%, rgba(201,162,74,.18), transparent 55%)',ctaStyle:'outline',align:'center',
+   d:['ذهبي وأسود وقليل جدًا من الألوان','العنوان كبير لكن هادئ، لا يصرخ','فراغ كبير، الكلام قليل','إيقاع بطيء ومتماثل']},
+ energy:{n:'طاقة',bg:'#E3262D',fg:'#FFFFFF',ac:'#FFD23F',hs:'4.2rem',hw:'bold',gap:'4px',pad:'22px',deco:'linear-gradient(115deg, transparent 55%, rgba(0,0,0,.25) 55%)',ctaStyle:'solid',align:'start',
+   d:['أحمر مع أصفر: مكمّلان شبه متقابلين','العنوان ضخم يملأ الإطار','فراغ قليل، كل شيء قريب','إيقاع سريع، غير متماثل']},
+ calm:{n:'هدوء',bg:'#E6EEE8',fg:'#263A31',ac:'#6FA38F',hs:'2.2rem',hw:'normal',gap:'14px',pad:'36px',deco:'radial-gradient(circle at 30% 80%, rgba(111,163,143,.25), transparent 50%)',ctaStyle:'soft',align:'start',
+   d:['أخضر فاتح وما يجاوره: انسجام','العنوان متوسط، لا ثقل','فراغ واسع مريح','إيقاع منتظم ومتدفّق']},
+ myst:{n:'غموض',bg:'#07080D',fg:'#AEB4CC',ac:'#6A5DF0',hs:'1.9rem',hw:'normal',gap:'10px',pad:'44px',deco:'radial-gradient(circle at 50% 110%, rgba(106,93,240,.35), transparent 50%)',ctaStyle:'outline',align:'center',
+   d:['أزرق ليلي وبنفسجي على أسود عميق','العنوان صغير في بحر من الظلام','فراغ كبير جدًا وداكن','إيقاع بطيء، توقّع قبل الكشف']},
+ joy:{n:'فرح',bg:'#FFE66D',fg:'#1B1B1B',ac:'#FF6B6B',hs:'3.2rem',hw:'bold',gap:'8px',pad:'26px',deco:'radial-gradient(circle at 80% 15%, #FF6B6B 0 60px, transparent 61px), radial-gradient(circle at 15% 70%, #4ECDC4 0 36px, transparent 37px)',ctaStyle:'solid',align:'start',
+   d:['أصفر مع مرجاني وتركواز: ألوان مشبعة','العنوان كبير ومستدير','فراغ متوسط مع أشكال تلعب','إيقاع حيوي وغير متماثل']},
+ trustF:{n:'ثقة',bg:'#0F2A44',fg:'#F5F1EE',ac:'#4FB0C6',hs:'2.4rem',hw:'bold',gap:'12px',pad:'34px',deco:'linear-gradient(180deg, transparent 70%, rgba(79,176,198,.15))',ctaStyle:'solid',align:'start',
+   d:['كحلي وأزرق سماوي: متجاوران','العنوان واضح ومحاذاة حادة','فراغ منظّم على شبكة','إيقاع منتظم ومتماثل تقريبًا']}
+};
+let curMsg='launch',curFeel='lux';
+const mc=$('#msgChips'),fc=$('#feelChips');
+Object.keys(msgs).forEach(k=>{const b=document.createElement('button');b.className='btn'+(k===curMsg?' on':'');b.textContent=msgNames[k];b.onclick=()=>{curMsg=k;Array.from(mc.children).forEach(x=>x.classList.toggle('on',x===b));renderPoster();};mc.appendChild(b);});
+Object.keys(feels).forEach(k=>{const b=document.createElement('button');b.className='btn'+(k===curFeel?' on':'');b.textContent=feels[k].n;b.onclick=()=>{curFeel=k;Array.from(fc.children).forEach(x=>x.classList.toggle('on',x===b));renderPoster();};fc.appendChild(b);});
+function renderPoster(){
+  const m=msgs[curMsg],f=feels[curFeel],p=$('#poster');
+  p.style.background=f.bg;p.style.color=f.fg;p.style.gap=f.gap;p.style.padding=f.pad;p.style.alignItems=f.align==='center'?'center':'flex-start';p.style.textAlign=f.align==='center'?'center':'right';
+  $('#pdeco').style.background=f.deco;
+  $('#pk').textContent=m.k;$('#pk').style.color=f.ac;
+  const hl=$('#phl');hl.textContent=m.h;hl.style.fontSize=f.hs;hl.style.color=f.fg;
+  $('#psub').textContent=m.s;$('#psub').style.color=f.fg;$('#psub').style.opacity=.85;
+  const c=$('#pcta');c.textContent=m.c;c.style.alignSelf=f.align==='center'?'center':'flex-start';
+  if(f.ctaStyle==='solid'){c.style.background=f.ac;c.style.color=f.bg;c.style.border='0';}
+  else if(f.ctaStyle==='outline'){c.style.background='transparent';c.style.color=f.ac;c.style.border='1px solid '+f.ac;}
+  else{c.style.background=f.ac+'33';c.style.color=f.fg;c.style.border='0';}
+  $('#decis').innerHTML=`<tr><th>الرسالة</th><td>${m.h} — ${m.s}</td></tr><tr><th>الشعور</th><td>${f.n}</td></tr><tr><th>اللون</th><td>${f.d[0]}</td></tr><tr><th>الحجم والهرم</th><td>${f.d[1]}</td></tr><tr><th>الفراغ</th><td>${f.d[2]}</td></tr><tr><th>الإيقاع والتوازن</th><td>${f.d[3]}</td></tr>`;
+  setStatus('#st-q','ok',`${msgNames[curMsg]} بشعور ${f.n}`);
+}
+renderPoster();
+
+/* ---------------- 2. balance lab ---------------- */
+const NS='http://www.w3.org/2000/svg';
+const bsvg=$('#bsvg'); let shapes=[],bsel=-1,mirror=false,bid=0;
+const COLS=['#C4BCB4','#E3B23C','#2A8C85','#5BA7D6'];
+function addShape(x,y,r,kind,red){shapes.push({id:bid++,x,y,r,kind:kind||'c',red:!!red});}
+function presetB(name){
+  shapes=[];bsel=-1;mirror=false;
+  if(name==='sym'){addShape(250,200,48,'c');addShape(550,200,48,'c');mirror=true;}
+  else if(name==='asym'){addShape(290,215,62,'c',false);addShape(660,205,34,'s',true);}
+  else if(name==='radial'){addShape(400,200,70,'c',true);for(let i=0;i<6;i++){const a=i*Math.PI/3;addShape(400+Math.cos(a)*150,200+Math.sin(a)*150,20,'c');}}
+  else if(name==='off'){addShape(610,210,66,'c',true);addShape(500,160,30,'s');}
+  $('#bMirror').classList.toggle('on',mirror);
+  drawB();
+}
+function torque(){let L=0,R=0,tot=0;shapes.forEach(s=>{const w=(s.kind==='s'?4*s.r*s.r:Math.PI*s.r*s.r)*(s.red?1.4:1);const d=Math.abs(s.x-400)+30;tot+=w;if(s.x<400)L+=w*d;else R+=w*d;});return{L,R,tot};}
+function isSym(){ // every shape has a mirrored twin
+  return shapes.length>1&&shapes.every(s=>shapes.some(t=>t!==s&&Math.abs(t.x-(800-s.x))<14&&Math.abs(t.y-s.y)<14&&Math.abs(t.r-s.r)<6&&t.kind===s.kind&&t.red===s.red)||Math.abs(s.x-400)<10);
+}
+function drawB(){
+  const {L,R,tot}=torque(); const diff=(R-L)/Math.max(1,(L+R));
+  const tilt=clamp(diff*22,-9,9);
+  let html=`<defs><pattern id="gridp" width="40" height="40" patternUnits="userSpaceOnUse"><path d="M40 0H0V40" fill="none" stroke="#2A2A2F" stroke-width="1"/></pattern></defs>
+  <rect width="800" height="420" fill="url(#gridp)"/>
+  <line x1="400" y1="20" x2="400" y2="345" stroke="#E3262D" stroke-dasharray="6 6" stroke-width="1.5" opacity=".7"/>
+  <text x="408" y="36" fill="#8C857F" font-size="13" font-family="Expo,Cairo,sans-serif">المحور</text>
+  <g transform="rotate(${tilt} 400 350)"><rect x="70" y="344" width="660" height="10" rx="5" fill="#C4BCB4"/><circle cx="110" cy="349" r="16" fill="#1B1B1E" stroke="#C4BCB4" stroke-width="3"/><circle cx="690" cy="349" r="16" fill="#1B1B1E" stroke="#C4BCB4" stroke-width="3"/></g>
+  <path d="M370 410 L430 410 L400 356 Z" fill="#E3262D"/>`;
+  shapes.forEach((s,i)=>{const col=s.red?'#E3262D':COLS[i%COLS.length];const st=i===bsel?'stroke="#fff" stroke-width="3"':'';
+    html+=s.kind==='s'?`<rect data-i="${i}" x="${s.x-s.r}" y="${s.y-s.r}" width="${s.r*2}" height="${s.r*2}" rx="6" fill="${col}" ${st} style="cursor:grab"/>`:`<circle data-i="${i}" cx="${s.x}" cy="${s.y}" r="${s.r}" fill="${col}" ${st} style="cursor:grab"/>`;});
+  bsvg.innerHTML=html;
+  const balanced=Math.abs(diff)<0.12, sym=isSym();
+  if(!shapes.length) setStatus('#st-b','warn','أضف شكلًا');
+  else if(balanced&&sym) setStatus('#st-b','ok','متوازن · متماثل');
+  else if(balanced) setStatus('#st-b','ok','متوازن · غير متماثل');
+  else setStatus('#st-b','bad',`غير متوازن · يميل ${diff>0?'يسارًا':'يمينًا'} (${Math.round(Math.abs(diff)*100)}٪)`);
+  if(bsel>=0)$('#bSize').value=shapes[bsel].r;
+}
+let bdrag=null;
+function svgPt(svg,e){const r=svg.getBoundingClientRect();const vb=svg.viewBox.baseVal;return{x:(e.clientX-r.left)/r.width*vb.width,y:(e.clientY-r.top)/r.height*vb.height};}
+bsvg.addEventListener('pointerdown',e=>{const t=e.target.closest('[data-i]');if(!t){bsel=-1;drawB();return;}bsel=+t.dataset.i;const p=svgPt(bsvg,e);bdrag={dx:shapes[bsel].x-p.x,dy:shapes[bsel].y-p.y};bsvg.setPointerCapture(e.pointerId);drawB();});
+bsvg.addEventListener('pointermove',e=>{if(!bdrag||bsel<0)return;const p=svgPt(bsvg,e);const s=shapes[bsel];s.x=clamp(p.x+bdrag.dx,20,780);s.y=clamp(p.y+bdrag.dy,20,320);
+  if(mirror){const tw=shapes.find((t,i)=>i!==bsel&&t.kind===s.kind&&Math.abs(t.r-s.r)<6&&t.red===s.red&&Math.abs(t.y-s.y)<60); if(tw){tw.x=800-s.x;tw.y=s.y;tw.r=s.r;}}
+  drawB();});
+bsvg.addEventListener('pointerup',()=>bdrag=null);bsvg.addEventListener('pointercancel',()=>bdrag=null);
+$$('[data-bp]').forEach(b=>b.onclick=()=>presetB(b.dataset.bp));
+$('#bMirror').onclick=()=>{mirror=!mirror;$('#bMirror').classList.toggle('on',mirror);if(mirror&&bsel>=0){const s=shapes[bsel];addShape(800-s.x,s.y,s.r,s.kind,s.red);}drawB();};
+$('#bAddC').onclick=()=>{addShape(200+Math.random()*400,100+Math.random()*180,40,'c');bsel=shapes.length-1;drawB();};
+$('#bAddS').onclick=()=>{addShape(200+Math.random()*400,100+Math.random()*180,36,'s');bsel=shapes.length-1;drawB();};
+$('#bRed').onclick=()=>{if(bsel>=0){shapes[bsel].red=!shapes[bsel].red;drawB();}};
+$('#bSize').oninput=e=>{if(bsel>=0){shapes[bsel].r=+e.target.value;if(mirror){const s=shapes[bsel];const tw=shapes.find((t,i)=>i!==bsel&&Math.abs(t.x-(800-s.x))<14&&Math.abs(t.y-s.y)<14);if(tw)tw.r=s.r;}drawB();}};
+$('#bDel').onclick=()=>{if(bsel>=0){shapes.splice(bsel,1);bsel=-1;drawB();}};
+presetB('sym');
+
+/* ---------------- 3. color lab ---------------- */
+let hue=0,scheme='comp';
+const wheel=$('#wheel');
+function hslHex(h,s,l){h=((h%360)+360)%360;s/=100;l/=100;const k=n=>(n+h/30)%12;const a=s*Math.min(l,1-l);const f=n=>l-a*Math.max(-1,Math.min(k(n)-3,Math.min(9-k(n),1)));return '#'+[f(0),f(8),f(4)].map(v=>Math.round(v*255).toString(16).padStart(2,'0')).join('').toUpperCase();}
+function lum(hex){const c=[1,3,5].map(i=>parseInt(hex.substr(i,2),16)/255).map(v=>v<=.03928?v/12.92:Math.pow((v+.055)/1.055,2.4));return .2126*c[0]+.7152*c[1]+.0722*c[2];}
+function ratio(a,b){const A=lum(a),B=lum(b);return (Math.max(A,B)+.05)/(Math.min(A,B)+.05);}
+const schemeInfo={comp:{name:'مكمّل',off:[0,180],kind:'bad',txt:'تباين أقصى: اللونان متقابلان'},ana:{name:'متجاور',off:[0,30,-30],kind:'ok',txt:'انسجام: ألوان متجاورة على العجلة'},split:{name:'مكمّل منقسم',off:[0,150,-150],kind:'warn',txt:'تباين مع هدوء: مقابل اللون لكن من جانبيه'},tri:{name:'ثلاثي',off:[0,120,-120],kind:'warn',txt:'توازن حيوي: ثلاثة ألوان متساوية البعد'},mono:{name:'أحادي',off:[0,0,0],kind:'ok',txt:'انسجام تام: درجة واحدة بإضاءات مختلفة'}};
+function pinPos(h){const a=(h-90)*Math.PI/180;return{left:50+Math.cos(a)*42+'%',top:50+Math.sin(a)*42+'%'};}
+function renderWheel(){
+  const inf=schemeInfo[scheme];
+  const cols=inf.off.map((o,i)=>scheme==='mono'?hslHex(hue,70,[50,30,78][i]):hslHex(hue+o,80,50));
+  wheel.querySelectorAll('.pin').forEach(p=>p.remove());
+  inf.off.forEach((o,i)=>{if(scheme==='mono'&&i>0)return;const p=document.createElement('div');p.className='pin '+(i===0?'main':'sec');const pos=pinPos(hue+o);p.style.left=pos.left;p.style.top=pos.top;p.style.background=cols[i];wheel.appendChild(p);});
+  $('#hueVal').textContent=Math.round(hue)+'°';
+  $('#swatches').innerHTML=cols.map(c=>`<div class="sw" style="background:${c};color:${lum(c)>.4?'#000':'#fff'}">${c}</div>`).join('');
+  const bg=cols[0],ac=cols[1]||cols[0];const txt=lum(bg)>.4?'#111111':'#FFFFFF';
+  const cp=$('#cposter');cp.style.background=bg;cp.style.color=txt;const tag=$('#cptag');tag.style.background=ac;tag.style.color=lum(ac)>.4?'#000':'#fff';
+  const r=ratio(bg,txt);$('#cratio').textContent=r.toFixed(1)+' : 1 '+(r>=4.5?'(مقروء)':'(ضعيف)');
+  setStatus('#st-c',inf.kind,inf.txt);
+}
+let wdrag=false;
+function wheelAngle(e){const r=wheel.getBoundingClientRect();const x=e.clientX-(r.left+r.width/2),y=e.clientY-(r.top+r.height/2);let a=Math.atan2(y,x)*180/Math.PI+90;return (a+360)%360;}
+wheel.addEventListener('pointerdown',e=>{wdrag=true;wheel.setPointerCapture(e.pointerId);hue=wheelAngle(e);renderWheel();});
+wheel.addEventListener('pointermove',e=>{if(!wdrag)return;hue=wheelAngle(e);renderWheel();});
+wheel.addEventListener('pointerup',()=>wdrag=false);wheel.addEventListener('pointercancel',()=>wdrag=false);
+$$('[data-scheme]').forEach(b=>b.onclick=()=>{scheme=b.dataset.scheme;$$('[data-scheme]').forEach(x=>x.classList.toggle('on',x===b));renderWheel();});
+renderWheel();
+$$('.ct').forEach(ct=>{ct.querySelector('.btn').onclick=()=>{ct.classList.toggle('on');const on=ct.classList.contains('on');const k=ct.dataset.ct;const d=ct.querySelector('.demo');
+  if(k==='size'){d.lastElementChild.style.width=on?'54px':'22px';d.lastElementChild.style.height=on?'54px':'22px';}
+  if(k==='weight'){d.lastElementChild.style.fontWeight=on?'700':'400';d.lastElementChild.textContent=on?'ثقيل':'خفيف';}
+  const n=$$('.ct.on').length;setStatus('#st-ct',n?'ok':'warn',n?`${n} من ٣: العين تذهب للمختلف`:'بلا تباين: لا شيء يبرز');};});
+
+/* ---------------- 4. hierarchy lab ---------------- */
+const hEls=$$('#hposter .el'); const hNames=['العنوان','العنوان الفرعي','النص','الزر'];
+let hState=[{s:64,b:true,r:true},{s:24,b:false,r:false},{s:16,b:false,r:false},{s:18,b:true,r:false}];let showEye=false;
+const hctl=$('#hctl');
+hState.forEach((st,i)=>{const row=document.createElement('div');row.className='hrow';row.innerHTML=`<label>${hNames[i]}</label><input type="range" min="12" max="96" value="${st.s}" data-hs="${i}" style="width:100%"><button class="btn" data-hb="${i}">عريض</button><button class="btn" data-hr="${i}">أحمر</button>`;hctl.appendChild(row);});
+function renderH(){
+  hEls.forEach((el,i)=>{const st=hState[i];el.style.fontSize=st.s+'px';el.style.fontWeight=st.b?'800':'400';el.style.fontFamily=i===0?'var(--display)':'var(--body)';if(!el.classList.contains('cta'))el.style.color=st.r?'#E3262D':'#111';else el.classList.toggle('red',st.r);
+    $(`[data-hs="${i}"]`).value=st.s;$(`[data-hb="${i}"]`).classList.toggle('on',st.b);$(`[data-hr="${i}"]`).classList.toggle('on',st.r);});
+  const w=hState.map((st,i)=>st.s*(st.b?1.25:1)*(st.r?1.6:1)*(i===0?1.05:1));
+  const order=w.map((v,i)=>[v,i]).sort((a,b)=>b[0]-a[0]);
+  order.forEach(([v,i],rank)=>{hEls[i].querySelector('.rank').textContent=rank+1;hEls[i].classList.toggle('r1',rank===0);});
+  const sorted=[...w].sort((a,b)=>b-a);
+  const flat=sorted[0]/sorted[sorted.length-1]<1.6;
+  const inverted=w[2]>w[0];
+  if(flat) setStatus('#st-h','bad','الكل يصرخ: لا شيء يُقرأ أولًا');
+  else if(inverted) setStatus('#st-h','bad','هرم مقلوب: النص يسبق العنوان');
+  else if(sorted[0]/sorted[1]>=1.6) setStatus('#st-h','ok','هرم واضح: بطل واحد ثم مساعد ثم تفاصيل');
+  else setStatus('#st-h','warn','البطل ضعيف: العنوان والمساعد يتنافسان');
+  const eye=$('#eyePath');eye.innerHTML='';
+  if(showEye){const P=$('#hposter').getBoundingClientRect();let d='';order.forEach(([v,i],k)=>{const r=hEls[i].getBoundingClientRect();const x=(r.left+r.width/2-P.left)/P.width*100,y=(r.top+r.height/2-P.top)/P.height*100;d+=(k?'L':'M')+x+' '+y+' ';});eye.innerHTML=`<path d="${d}" fill="none" stroke="#E3262D" stroke-width="1.2" stroke-dasharray="2 2" vector-effect="non-scaling-stroke"/>`;}
+}
+hctl.addEventListener('input',e=>{if(e.target.dataset.hs){hState[+e.target.dataset.hs].s=+e.target.value;renderH();}});
+hctl.addEventListener('click',e=>{const b=e.target.closest('button');if(!b)return;if(b.dataset.hb){hState[+b.dataset.hb].b^=1;}if(b.dataset.hr){hState[+b.dataset.hr].r^=1;}renderH();});
+$$('[data-hp]').forEach(b=>b.onclick=()=>{const p=b.dataset.hp;hState=p==='good'?[{s:64,b:1,r:1},{s:24,b:0,r:0},{s:16,b:0,r:0},{s:18,b:1,r:0}]:p==='flat'?[{s:34,b:1,r:1},{s:34,b:1,r:1},{s:30,b:1,r:0},{s:30,b:1,r:1}]:[{s:18,b:0,r:0},{s:22,b:0,r:0},{s:40,b:1,r:1},{s:16,b:0,r:0}];hState=hState.map(s=>({s:s.s,b:!!s.b,r:!!s.r}));renderH();});
+$('#hEye').onclick=()=>{showEye=!showEye;$('#hEye').classList.toggle('on',showEye);renderH();};
+renderH();window.addEventListener('resize',()=>{if(showEye)renderH();});
+
+/* ---------------- 5. alignment lab ---------------- */
+const board=$('#aboard'),blks=$$('#aboard .blk');let magnet=false;
+function W(){return board.clientWidth;}
+function setBlk(b,leftPx,topPx){b.style.left=leftPx+'px';if(topPx!=null)b.style.top=topPx+'px';}
+function layout(mode){blks.forEach(b=>{const w=b.dataset.w/100*W();let l;if(mode==='right')l=W()*0.94-w;else if(mode==='center')l=(W()-w)/2;else if(mode==='left')l=W()*0.06;else l=Math.random()*(W()-w);setBlk(b,l);});setTimeout(checkA,380);}
+function checkA(){
+  const w=W();const edges=blks.map(b=>{const l=parseFloat(b.style.left)||0;const bw=b.dataset.w/100*w;return{L:l,R:l+bw,C:l+bw/2};});
+  const tol=5;const keys=['L','R','C'];let best=0;
+  keys.forEach(k=>{const ref=edges[0][k];const n=edges.filter(e=>Math.abs(e[k]-ref)<tol).length;best=Math.max(best,n);});
+  const off=blks.length-best;
+  if(off===0)setStatus('#st-a','ok','محاذاة منضبطة: كل الحواف على خط واحد');
+  else if(off<=1)setStatus('#st-a','warn',`عنصر واحد خارج الخط: العين تلتقطه`);
+  else setStatus('#st-a','bad',`فوضى: ${off} عناصر بلا خط مشترك`);
+}
+let adrag=null;
+board.addEventListener('pointerdown',e=>{const b=e.target.closest('.blk');if(!b)return;const r=board.getBoundingClientRect();adrag={b,dx:e.clientX-r.left-parseFloat(b.style.left||0),dy:e.clientY-r.top-parseFloat(b.style.top||0)};b.classList.add('dragging');board.setPointerCapture(e.pointerId);});
+board.addEventListener('pointermove',e=>{if(!adrag)return;const r=board.getBoundingClientRect();const w=W();const bw=adrag.b.dataset.w/100*w;let l=clamp(e.clientX-r.left-adrag.dx,0,w-bw),t=clamp(e.clientY-r.top-adrag.dy,0,board.clientHeight-adrag.b.offsetHeight);
+  if(magnet){const snaps=[w*0.06,w*0.5,w*0.94];for(const s of snaps){if(Math.abs(l-s)<12)l=s;if(Math.abs(l+bw-s)<12)l=s-bw;if(Math.abs(l+bw/2-s)<12)l=s-bw/2;}}
+  setBlk(adrag.b,l,t);checkA();});
+const endA=()=>{if(adrag){adrag.b.classList.remove('dragging');adrag=null;}};board.addEventListener('pointerup',endA);board.addEventListener('pointercancel',endA);
+$$('[data-al]').forEach(b=>b.onclick=()=>layout(b.dataset.al));$('#aScatter').onclick=()=>layout('scatter');
+$('#aGuides').onclick=()=>{board.classList.toggle('guides');$('#aGuides').classList.toggle('on');};
+$('#aGrid').onclick=()=>{board.classList.toggle('grid');$('#aGrid').classList.toggle('on');};
+$('#aMagnet').onclick=()=>{magnet=!magnet;$('#aMagnet').classList.toggle('on',magnet);};
+setTimeout(()=>layout('scatter'),50);window.addEventListener('resize',()=>checkA());
+
+/* ---------------- 6. rhythm lab ---------------- */
+const rsvg=$('#rsvg');let rMode='reg',rGap=55,rBreak=false,rPlay=false,rT=0,rTimer=null;
+const rInfo={reg:['ok','منتظم: نظام وثبات، العين تنساب دون توقف'],prog:['ok','متدرّج: العين تُقاد في اتجاه واحد، شعور نموّ'],flow:['ok','متدفّق: موجة ناعمة، شعور طبيعة وأناقة'],rand:['warn','عشوائي: طاقة أو ضجيج، لا مسار للعين']};
+const rSeed=[0.6,0.2,0.9,0.4,0.75,0.15,0.55,0.95,0.3,0.7,0.45,0.85,0.25,0.65,0.5,0.8];
+function drawR(){
+  const n=Math.floor(760/rGap);const bars=[];
+  for(let i=0;i<n;i++){let h;const t=i/(n-1||1);if(rMode==='reg')h=.55;else if(rMode==='prog')h=.2+t*.75;else if(rMode==='flow')h=.5+.4*Math.sin(t*Math.PI*2.2);else h=.15+rSeed[i%rSeed.length]*.8;bars.push(h);}
+  const bi=Math.floor(n*0.62);
+  let html='<rect width="800" height="240" fill="#121214"/>';
+  bars.forEach((h,i)=>{const x=30+i*rGap,bw=Math.max(8,rGap*.42);let H=h*170;let fill=i===Math.floor(rT)%n&&rPlay?'#F5F1EE':'#C4BCB4';let extra='';
+    if(rBreak&&i===bi){fill='#E3262D';H=Math.min(190,H*1.5+30);extra=`<text x="${x+bw/2}" y="${200-H-10}" text-anchor="middle" fill="#E3262D" font-size="13" font-family="Expo,Cairo,sans-serif">هنا تتوقف العين</text>`;}
+    html+=`<rect x="${x}" y="${200-H}" width="${bw}" height="${H}" rx="3" fill="${fill}"/>${extra}`;});
+  html+='<line x1="20" y1="202" x2="780" y2="202" stroke="#3A3A41"/>';
+  rsvg.innerHTML=html;
+  if(rBreak)setStatus('#st-r','bad','الإيقاع انكسر: العنصر المختلف يسرق الانتباه');
+  else{const [k,t]=rInfo[rMode];setStatus('#st-r',k,t+(rGap<40?' · سريع (طاقة)':rGap>70?' · بطيء (هدوء/فخامة)':''));}
+}
+$$('[data-rm]').forEach(b=>b.onclick=()=>{rMode=b.dataset.rm;$$('[data-rm]').forEach(x=>x.classList.toggle('on',x===b));drawR();});
+$('#rGap').oninput=e=>{rGap=+e.target.value;drawR();};
+$('#rBreak').onclick=()=>{rBreak=!rBreak;$('#rBreak').classList.toggle('on',rBreak);drawR();};
+$('#rPlay').onclick=()=>{rPlay=!rPlay;$('#rPlay').classList.toggle('on',rPlay);$('#rPlay').textContent=rPlay?'⏸ أوقف':'▶ شغّل النبض';clearInterval(rTimer);if(rPlay){rTimer=setInterval(()=>{rT++;drawR();},rGap*6);}else drawR();};
+drawR();
+
+/* ---------------- 7. repetition lab ---------------- */
+const rg=$('#rgrid');let pCols=7,brk='none',brkIdx=9;
+function drawP(){
+  const rows=4,n=pCols*rows;rg.style.gridTemplateColumns=`repeat(${pCols},1fr)`;rg.innerHTML='';
+  for(let i=0;i<n;i++){const m=document.createElement('div');m.className='m'+(brk!=='none'&&i===brkIdx%n?' brk '+brk:'');m.innerHTML='<i></i>';rg.appendChild(m);}
+  const names={color:'اللون',shape:'الشكل',size:'الحجم',dir:'الاتجاه',gap:'الموضع'};
+  if(brk==='none')setStatus('#st-p','ok','تكرار منتظم: هوية ووحدة، لا نقطة تركيز');else setStatus('#st-p','warn',`نمط مكسور بـ${names[brk]}: نقطة تركيز واحدة`);
+}
+$('#pCols').oninput=e=>{pCols=+e.target.value;drawP();};
+$$('[data-brk]').forEach(b=>b.onclick=()=>{brk=b.dataset.brk;$$('[data-brk]').forEach(x=>x.classList.toggle('on',x===b));drawP();});
+$('#pMove').onclick=()=>{brkIdx=Math.floor(Math.random()*pCols*4);drawP();};
+drawP();
+
+/* ---------------- 8. proportion lab ---------------- */
+const vsvg=$('#vsvg');let vp={x:400,y:170},vDepth=.2,vLines=true,vThirds=false,vGolden=false,vdrag=false;
+function persp(x0,d){const s=1/(1+5*d);return{x:vp.x+(x0-vp.x)*s,y:vp.y+(420-vp.y)*s,s};}
+function drawV(){
+  let h=`<rect width="800" height="440" fill="#121214"/><rect y="${vp.y}" width="800" height="${440-vp.y}" fill="#17171A"/>`;
+  h+=`<line x1="0" y1="${vp.y}" x2="800" y2="${vp.y}" stroke="#8C857F" stroke-dasharray="4 6"/><text x="12" y="${vp.y-8}" fill="#8C857F" font-size="13" font-family="Expo,Cairo,sans-serif">خط الأفق</text>`;
+  if(vLines){for(let i=0;i<=8;i++){const x0=i*100;h+=`<line x1="${x0}" y1="440" x2="${vp.x}" y2="${vp.y}" stroke="#E3262D" stroke-opacity=".28"/>`;}}
+  // road
+  const rl=persp(250,0),rr=persp(550,0);h+=`<path d="M${rl.x} 440 L${vp.x} ${vp.y} L${rr.x} 440 Z" fill="#242428"/>`;
+  for(let d=0.02;d<1.2;d*=1.6){const a=persp(390,d),b=persp(410,d),c=persp(390,d*1.25),e=persp(410,d*1.25);h+=`<path d="M${a.x} ${a.y} L${b.x} ${b.y} L${e.x} ${e.y} L${c.x} ${c.y}Z" fill="#E3B23C" opacity=".9"/>`;}
+  // posts along left side at depths
+  [0.05,0.18,0.38,0.7].forEach(d=>{const p=persp(150,d);const H=180*p.s;h+=`<rect x="${p.x-4*p.s}" y="${p.y-H}" width="${8*p.s}" height="${H}" fill="#C4BCB4"/><circle cx="${p.x}" cy="${p.y-H}" r="${9*p.s}" fill="#E3B23C"/>`;});
+  // person
+  const P=persp(640,vDepth);const Hp=200*P.s;
+  h+=`<g><ellipse cx="${P.x}" cy="${P.y}" rx="${20*P.s}" ry="${5*P.s}" fill="#000" opacity=".4"/><rect x="${P.x-16*P.s}" y="${P.y-Hp*0.62}" width="${32*P.s}" height="${Hp*0.62}" rx="${8*P.s}" fill="#E3262D"/><circle cx="${P.x}" cy="${P.y-Hp*0.78}" r="${16*P.s}" fill="#F5F1EE"/></g>`;
+  h+=`<text x="${P.x}" y="${P.y-Hp-10}" text-anchor="middle" fill="#F5F1EE" font-size="14" font-family="Expo,Cairo,sans-serif">${Math.round(P.s*100)}٪ من الحجم</text>`;
+  if(vThirds){h+=`<g stroke="#5BA7D6" stroke-opacity=".8" stroke-dasharray="5 5">${[1,2].map(i=>`<line x1="${800*i/3}" y1="0" x2="${800*i/3}" y2="440"/><line x1="0" y1="${440*i/3}" x2="800" y2="${440*i/3}"/>`).join('')}</g>`;[1,2].forEach(i=>[1,2].forEach(j=>h+=`<circle cx="${800*i/3}" cy="${440*j/3}" r="6" fill="#5BA7D6"/>`));}
+  if(vGolden){const g=0.618;h+=`<g stroke="#E3B23C" stroke-opacity=".9" stroke-dasharray="6 4" fill="none"><rect x="0" y="0" width="${800*g}" height="440"/><rect x="${800*g}" y="0" width="${800*(1-g)}" height="${440*g}"/><rect x="${800*g}" y="${440*g}" width="${800*(1-g)*(1-g)}" height="${440*(1-g)}"/></g><text x="${800*g+8}" y="${440*g-8}" fill="#E3B23C" font-size="13" font-family="Expo,Cairo,sans-serif">1 : 1.618</text>`;}
+  h+=`<circle id="vpH" cx="${vp.x}" cy="${vp.y}" r="22" fill="#E3262D" fill-opacity=".15" stroke="#E3262D" style="cursor:grab"/><circle cx="${vp.x}" cy="${vp.y}" r="6" fill="#E3262D" pointer-events="none"/><text x="${vp.x+28}" y="${vp.y+5}" fill="#E3262D" font-size="13" font-family="Expo,Cairo,sans-serif">نقطة التلاشي</text>`;
+  vsvg.innerHTML=h;
+  const angle=vp.y<130?'نظرة من الأسفل: الموضوع يبدو عظيمًا':vp.y>230?'نظرة من الأعلى: الموضوع يبدو صغيرًا':'نظرة بمستوى العين: حيادية وواقعية';
+  setStatus('#st-v',vDepth>.6?'warn':'ok',`الشخص على ${Math.round(P.s*100)}٪ · البعيد أصغر من القريب · ${angle}`);
+}
+vsvg.addEventListener('pointerdown',e=>{if(e.target.id==='vpH'){vdrag=true;vsvg.setPointerCapture(e.pointerId);}});
+vsvg.addEventListener('pointermove',e=>{if(!vdrag)return;const p=svgPt(vsvg,e);vp.x=clamp(p.x,60,740);vp.y=clamp(p.y,60,330);drawV();});
+vsvg.addEventListener('pointerup',()=>vdrag=false);vsvg.addEventListener('pointercancel',()=>vdrag=false);
+$('#vDepth').oninput=e=>{vDepth=e.target.value/100;drawV();};
+$('#vLines').onclick=()=>{vLines=!vLines;$('#vLines').classList.toggle('on',vLines);drawV();};
+$('#vThirds').onclick=()=>{vThirds=!vThirds;$('#vThirds').classList.toggle('on',vThirds);drawV();};
+$('#vGolden').onclick=()=>{vGolden=!vGolden;$('#vGolden').classList.toggle('on',vGolden);drawV();};
+$('#vReset').onclick=()=>{vp={x:400,y:170};drawV();};
+drawV();
+
+/* ---------------- 9. space lab ---------------- */
+const sp=$('#sposter');
+function spaceUpdate(){
+  const v=+$('#sAmt').value;
+  sp.style.setProperty('--p',(14+v*0.9)+'px');sp.style.setProperty('--g',(4+v*0.4)+'px');sp.style.setProperty('--lh',(1.15+v*0.006).toFixed(2));sp.style.setProperty('--hs',(1.6+v*0.014)+'rem');sp.style.setProperty('--mw',(100-v*0.45)+'%');
+  const ex=$('#sExtra');Array.from(ex.children).forEach((c,i)=>c.style.display=i<Math.round(6-v/17)?'':'none');ex.style.display=v>88?'none':'';
+  const txt=$('#sText');txt.textContent=v>70?'مصنوع يدويًا من صوف الكشمير المنغولي.':'مصنوع يدويًا من صوف الكشمير المنغولي، بقصّة تحتفي بالخطوط الطويلة والهدوء. يناسب المساء البارد والمدينة التي لا تنام.';
+  const area=sp.clientWidth*sp.clientHeight;let used=0;sp.querySelectorAll('.box').forEach(b=>{if(b.offsetParent)used+=b.offsetWidth*b.offsetHeight;});const pct=clamp(Math.round((1-used/area)*100),0,100);$('#sPct').textContent=pct+'٪';
+  if(pct<30)setStatus('#st-s','bad','مزدحم: كل شيء يتنافس والعين تتعب');else if(pct<60)setStatus('#st-s','ok','متوازن: محتوى واضح مع راحة');else setStatus('#st-s','ok','يتنفّس: فخامة وتركيز على شيء واحد');
+}
+$('#sAmt').oninput=spaceUpdate;$('#sNeg').onclick=()=>{sp.classList.toggle('neg');$('#sNeg').classList.toggle('on');};
+spaceUpdate();window.addEventListener('resize',spaceUpdate);
+
+/* ---------------- 10. summary ---------------- */
+const sumData=[['التوازن','Balance','الأوزان تتعادل حول المحور، بالمرآة أو بالتعويض.'],['التباين','Contrast','متقابلان على العجلة: توقّف العين على ما يهم.'],['الانسجام','Harmony','متجاوران على العجلة: راحة ووحدة.'],['الهرم البصري','Hierarchy','شيء واحد يُقرأ أولًا، ثم الثاني، ثم الثالث.'],['المحاذاة','Alignment','كل حافة تلتقي بحافة؛ لا شيء في مكان عشوائي.'],['الإيقاع','Rhythm','نبض الفواصل؛ الكسر هو نقطة الانتباه.'],['التكرار','Repetition','يبني الهوية؛ الاستثناء الواحد يبني التركيز.'],['التناسب','Proportion','الحجم لغة: أهمية أو مسافة؛ البعيد أصغر.'],['الفراغ','Space','يرفع قيمة ما يبقى؛ الفخامة تُفرغ.']];
+$('#sum').innerHTML=sumData.map((d,i)=>`<div class="card"><b>${d[0]}</b><small>${d[1]}</small><p>${d[2]}</p></div>`).join('');
+
+/* ---------------- 11. quiz ---------------- */
+const Q=[
+ {q:'قبل أن تفتح أي برنامج تصميم، ما أول سؤالين تطرحهما؟',o:['ما الخط وما اللون؟','ما الرسالة وما الشعور؟','ما المقاس وما المنصة؟','ما الميزانية وما الموعد؟'],a:1,e:'الرسالة تحدّد ماذا يُقال، والشعور يحدّد كيف يُقال. كل القرارات التقنية تأتي بعدهما.'},
+ {q:'دائرة كبيرة قريبة من المحور على اليمين، ومربع صغير بعيد عن المحور على اليسار، والميزان مستقيم. هذا التوازن:',o:['متماثل','غير متماثل','شعاعي','مختل'],a:1,e:'الأوزان تعادلت بالتعويض (كبير قريب = صغير بعيد) لا بالمرآة، فهو توازن غير متماثل.'},
+ {q:'أي زوج لوني يصنع أقصى تباين على عجلة الألوان؟',o:['الأزرق والأزرق المخضرّ','الأحمر والأخضر','الأصفر والبرتقالي','الأخضر والأزرق'],a:1,e:'الأحمر والأخضر متقابلان على العجلة (مكمّلان)، لذلك يصنعان أقصى تباين.'},
+ {q:'الألوان المتجاورة على العجلة تمنحك:',o:['تباينًا وصراخًا','انسجامًا وراحة','فوضى','مقروئية أعلى للنص'],a:1,e:'المتجاوران يتشاركان صبغة واحدة فتهدأ العين. المقروئية تحتاج تباينًا في الإضاءة لا في الصبغة.'},
+ {q:'أقل نسبة تباين مقبولة بين النص وخلفيته ليبقى مقروءًا:',o:['1.5 : 1','3 : 1','4.5 : 1','10 : 1'],a:2,e:'المعيار العالمي للنصوص العادية 4.5 : 1. تحت ذلك يتعب القارئ أو يتجاهل النص.'},
+ {q:'في تصميم كل عناصره بالحجم نفسه والوزن نفسه، ماذا يحدث؟',o:['يبدو متوازنًا وراقيًا','لا يُقرأ شيء أولًا: الكل يصرخ','تزداد المقروئية','يصبح الهرم أوضح'],a:1,e:'الهرم البصري يحتاج فرقًا واضحًا بين المستويات. التساوي يلغي ترتيب القراءة.'},
+ {q:'أقوى أداة لصناعة الهرم البصري عادةً هي:',o:['الحجم','نوع الخط','الظل','الحدود'],a:0,e:'الحجم أول ما تلتقطه العين، يليه اللون ثم الوزن ثم الموضع.'},
+ {q:'العنوان على يمين الصفحة والنص في وسطها والزر على يسارها. ما المشكلة؟',o:['لا مشكلة، التنوع جميل','خلط ثلاث محاذاة في مساحة واحدة','الزر يجب أن يكون أكبر','اللون غير مناسب'],a:1,e:'كل كتلة يجب أن تلتزم محاذاة واحدة. الخلط يكسر الخط غير المرئي الذي يربط العناصر.'},
+ {q:'كسر الإيقاع في مكان واحد يفيد في:',o:['إراحة العين','توجيه الانتباه إلى نقطة محددة','زيادة الانسجام','تقليل التباين'],a:1,e:'الإيقاع ينوّم العين في مسار، والكسر يوقظها حيث تريد أن تُرى.'},
+ {q:'شبكة من ٢٨ دائرة رمادية وبينها دائرة حمراء واحدة. ما الذي صنعه التصميم؟',o:['تكرارًا بلا هدف','هوية + نقطة تركيز بكسر النمط','فوضى بصرية','توازنًا متماثلًا'],a:1,e:'التكرار بنى القاعدة (الهوية)، والاستثناء الواحد استغلّها ليوجّه العين.'},
+ {q:'في المنظور، الخطوط المتوازية في المشهد تتقارب نحو:',o:['مركز الإطار دائمًا','نقطة التلاشي على خط الأفق','أعلى الصورة','أقرب عنصر'],a:1,e:'نقطة التلاشي تقع على خط الأفق، وهي قد تكون في أي موضع من الإطار حسب زاوية النظر.'},
+ {q:'إعلان عطر فاخر: أي نسبة فراغ تتوقّعها؟',o:['٠–٣٠٪ مزدحم','٣٠–٦٠٪ متوازن','٦٠–١٠٠٪ يتنفّس','لا علاقة للفراغ بالفخامة'],a:2,e:'الفخامة تُفرغ. الفراغ الكبير حول عنصر واحد يرفع قيمته ويمنحه الهيبة.'}
+];
+let qi=0,qScore=0,qAns=false;const quiz=$('#quiz');
+function renderQ(){
+  if(qi>=Q.length){quiz.innerHTML=`<div class="qn">النتيجة</div><div class="score">${qScore} / ${Q.length}</div><p style="color:var(--muted)">${qScore>=10?'عين مدرّبة. أنت جاهز لدرس المونتاج.':qScore>=7?'جيد جدًا. راجع الأسئلة التي أخطأت فيها من الخريطة.':'عُد إلى المختبرات وحرّك العناصر بنفسك؛ الفهم يأتي من اليد لا من القراءة.'}</p><div class="controls" style="padding:14px 0 0;border:0"><button class="btn primary" id="qRestart" style="background:var(--red);border-color:var(--red);color:#fff">أعد الاختبار</button><button class="btn" id="qMap">إلى الخريطة</button></div>`;
+    $('#qRestart').onclick=()=>{qi=0;qScore=0;renderQ();};$('#qMap').onclick=()=>go(ids.indexOf('summary'));return;}
+  const q=Q[qi];qAns=false;
+  quiz.innerHTML=`<div class="qn">السؤال ${qi+1} من ${Q.length}</div><h2>${q.q}</h2><div class="opts">${q.o.map((o,i)=>`<button data-o="${i}">${o}</button>`).join('')}</div><div class="expl" id="expl"></div><div class="qbar"><i style="width:${qi/Q.length*100}%"></i></div><div class="controls" style="padding:14px 0 0;border:0;justify-content:space-between"><button class="btn ghost" id="qShow">أظهر الإجابة</button><button class="btn primary" id="qNext" style="background:var(--red);border-color:var(--red);color:#fff;visibility:hidden">التالي</button></div>`;
+  quiz.querySelectorAll('[data-o]').forEach(b=>b.onclick=()=>answer(+b.dataset.o));
+  $('#qShow').onclick=()=>answer(-1);$('#qNext').onclick=()=>{qi++;renderQ();};
+}
+function answer(i){if(qAns)return;qAns=true;const q=Q[qi];quiz.querySelectorAll('[data-o]').forEach((b,k)=>{b.disabled=true;if(k===q.a)b.classList.add('right');else if(k===i)b.classList.add('wrong');});if(i===q.a)qScore++;const ex=$('#expl');ex.textContent=(i===q.a?'صحيح. ':i<0?'':'ليس تمامًا. ')+q.e;ex.classList.add('on');$('#qNext').style.visibility='visible';}
+renderQ();
+})();
+</script>
+
+</body></html>
